@@ -11,8 +11,8 @@ Développer répertoire en fenêtre pour le 10 mars (flex : 5j)
 - Fermer tous les flux ouverts (lecture / écriture en fichier / BDD)
 - Code commenté répondant à des normes de programmation (à définir)
 - Respecter points du cours :
-> Types génériques (templates)
-> API collection (conteneurs) 
+> Types génériques (templates)  
+> API collection (conteneurs)  
 > MVC 
 
 ## Structure de BDD proposée (prof) : table « contacts » unique
