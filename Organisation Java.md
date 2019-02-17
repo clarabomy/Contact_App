@@ -47,17 +47,17 @@ Développer répertoire en fenêtre pour le 10 mars (flex : 5j)
 
 ## Objectifs du projet
 
-*Court terme :*
+**Court terme :**
 - Esquisser le rendu visuel sur papier ou power point (Mathilde)
 - Créer la bdd et le projet (Clara)
 - Créer structure des requêtes préparées (Corentin)
 
-*Moyen terme :*
+**Moyen terme :**
 - Créer le minimum requis pour l’affichage (Mathilde)
 - Créer classes minimales requises pour le fonctionnement (Clara)
 - Créer requêtes SQL + développer tests unitaires (Corentin)
 
-*Long terme :*
+**Long terme :**
 - Développer modules supplémentaires pour l’affichage (Mathilde)
 - Développer modules supplémentaires pour le fonctionnement (Clara)
 - Continuer tests unitaires (Corentin)
@@ -65,7 +65,7 @@ Développer répertoire en fenêtre pour le 10 mars (flex : 5j)
 
 
 ## Modules complémentaires (propositions)
-**Attention - privilégier la qualité à la quantité**
+*Attention - privilégier la qualité à la quantité*
 
 Modules ajoutable avant développement : 
 > Associer plusieurs numéros ou mails à un contact -> approuvé
@@ -99,7 +99,7 @@ Modules ajoutable en fin de développement :
 >> Exécution : gestion d’un fichier image + intégration aux vCard
 
 ## Structure de BDD adoptée : 
-*Table « person »*
+**Table « person »**
 - Id (primaire)
 - name
 - surname 
@@ -108,45 +108,45 @@ Modules ajoutable en fin de développement :
 - birth date 
 - category_id
 
-*Table « category »*
+**Table « category »**
 - Id (primaire)
 - name
 
-*Table « phone »*
+**Table « phone »**
 - id (primaire)
 - person_id
 - phone
 - type
 
-*Table « mail »*
+**Table « mail »**
 - id (primaire)
 - Person_id
 - Mail
 
 ## Arborescence fichiers
-> Src
->> Tests
->>> Db.dao
->>>> *Test des classes du dossier associé*
->>> Ressources
->>>> *Test des classes du dossier associé*
->> Main
->>> Ressources
->>>> Fxml files (vérifier nom)
->>>>> *Fichiers de vue*
->>>> SQL
->>>>> *Script bdd*
->>> Java
->>>> Contact_app
->>>>> *Main (lanceur du projet)*
->>>> Services
->>>>> *En lien avec la fenêtre et son contenu (confirmation Mathilde ?)*
->>>> View
->>>>> *controleurs associés au fichiers fxml (confirmation Mathilde ?)*
->>>> Model
->>>>> Db.dao
->>>>>> *Connexion et requêtes à la bdd*
->>>>> Db.entities
->>>>>> *Entitées (classes matérialisant les tables)*
->>>>> File.manager (vérifier nom)
->>>>>> *Gestion des fichiers*
+> Src  
+>> Tests  
+>>> Db.dao  
+>>>> **Test des classes du dossier associé**  
+>>> Ressources  
+>>>> **Test des classes du dossier associé**  
+>> Main  
+>>> Ressources  
+>>>> Fxml files (vérifier nom)  
+>>>>> **Fichiers de vue**  
+>>>> SQL  
+>>>>> **Script bdd**  
+>>> Java  
+>>>> Contact_app  
+>>>>> **Main (lanceur du projet)**  
+>>>> Services  
+>>>>> **En lien avec la fenêtre et son contenu (confirmation Mathilde ?)**  
+>>>> View  
+>>>>> **controleurs associés au fichiers fxml (confirmation Mathilde ?)**  
+>>>> Model  
+>>>>> Db.dao  
+>>>>>> **Connexion et requêtes à la bdd**  
+>>>>> Db.entities  
+>>>>>> **Entitées (classes matérialisant les tables)**  
+>>>>> File.manager (vérifier nom)  
+>>>>>> **Gestion des fichiers**  
