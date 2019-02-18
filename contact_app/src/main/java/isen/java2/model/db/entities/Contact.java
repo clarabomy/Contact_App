@@ -1,40 +1,39 @@
 package isen.java2.model.db.entities;
 
 import java.time.LocalDate;
-import java.util.SortedSet;
-import java.util.Map;
-
 
 public class Contact {
 
-	protected short id;
+	protected int id;
 	protected String lastname;
 	protected String firstname;
 	protected String nickname;
+	protected String address;
 	protected LocalDate birthdate;
 	protected CategoryType category;
-	protected SortedSet <String> mail;
-	protected Map <String, String> phones;
-	
-	
-	public Contact(short id, String lastname, String firstname, String nickname, LocalDate birthdate,
-			CategoryType category, SortedSet<String> mail, Map<String, String> phones) {
-		super();
+	protected String mail;
+	protected String phone;
+	protected String notes;
+
+	public Contact(int id, String lastname, String firstname, String nickname, String address, LocalDate birthdate,
+			CategoryType category, String mail, String phone, String notes) {
 		this.id = id;
 		this.lastname = lastname;
 		this.firstname = firstname;
 		this.nickname = nickname;
+		this.address = address;
 		this.birthdate = birthdate;
 		this.category = category;
 		this.mail = mail;
-		this.phones = phones;
+		this.phone = phone;
+		this.notes = notes;
 	}
 
-	public short getId() {
+	public int getId() {
 		return id;
 	}
 	
-	public void setId(short id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	
@@ -62,6 +61,14 @@ public class Contact {
 		this.nickname = nickname;
 	}
 	
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
 	public LocalDate getBirthdate() {
 		return birthdate;
 	}
@@ -78,20 +85,28 @@ public class Contact {
 		this.category = category;
 	}
 	
-	public SortedSet<String> getMail() {
+	public String getMail() {
 		return mail;
 	}
-	
-	public void setMail(SortedSet<String> mail) {
+
+	public void setMail(String mail) {
 		this.mail = mail;
 	}
-	
-	public Map<String, String> getPhones() {
-		return phones;
+
+	public String getPhone() {
+		return phone;
 	}
-	
-	public void setPhones(Map<String, String> phones) {
-		this.phones = phones;
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getNotes() {
+		return notes;
+	}
+
+	public void setNotes(String notes) {
+		this.notes = notes;
 	}
 	
 	

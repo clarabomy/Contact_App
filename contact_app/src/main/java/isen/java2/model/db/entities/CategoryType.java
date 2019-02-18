@@ -1,15 +1,15 @@
 package isen.java2.model.db.entities;
 
 public class CategoryType {
-	protected short id;
+	protected int id;
 	protected String name;
 	
-	public CategoryType(short id, String name) {
+	public CategoryType(int id, String name) {
 		this.id = id;
 		this.name = name;
 	}
 	
-	public short getId() {
+	public int getId() {
 		return id;
 	}
 	public void setId(short id) {

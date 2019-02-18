@@ -30,23 +30,9 @@ SET time_zone = "+00:00";
 
 DROP TABLE IF EXISTS `category`;
 CREATE TABLE IF NOT EXISTS `category` (
-  `id_category` int(11) NOT NULL AUTO_INCREMENT,
-  `type_category` varchar(45) NOT NULL,
-  PRIMARY KEY (`id_category`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `email`
---
-
-DROP TABLE IF EXISTS `email`;
-CREATE TABLE IF NOT EXISTS `email` (
-  `id_mail` int(11) NOT NULL AUTO_INCREMENT,
-  `contact_id` int(11) DEFAULT NULL,
-  `email_address` varchar(150) DEFAULT NULL,
-  PRIMARY KEY (`id_mail`)
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -57,32 +43,18 @@ CREATE TABLE IF NOT EXISTS `email` (
 
 DROP TABLE IF EXISTS `contact`;
 CREATE TABLE IF NOT EXISTS `contact` (
-  `id_contact` int(11) NOT NULL AUTO_INCREMENT,
-  `lastname` varchar(45) NOT NULL,
-  `firstname` varchar(45) NOT NULL,
-  `nickname` varchar(45) DEFAULT NULL,
-  `address` varchar(200) DEFAULT NULL,
-  `birth_date` date DEFAULT NULL,
-  `category_id` int(11) DEFAULT NULL,
-  `note` text DEFAULT NULL,
-  PRIMARY KEY (`id_contact`)
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `lastname` varchar(40) NOT NULL,
+  `firstname` varchar(40) NOT NULL,
+  `nickname` varchar(45) NOT NULL,
+  `phone` varchar(15) NOT NULL,
+  `id_category` int(11) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `address` varchar(200) NOT NULL,
+  `birthday` date NOT NULL,
+  `notes` text NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `phone`
---
-
-DROP TABLE IF EXISTS `phone`;
-CREATE TABLE IF NOT EXISTS `phone` (
-  `id_phone` int(11) NOT NULL AUTO_INCREMENT,
-  `contact_id` int(11) NOT NULL,
-  `phone_number` varchar(15) DEFAULT NULL,
-  `type` varchar(45) NOT NULL,
-  PRIMARY KEY (`id_phone`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
