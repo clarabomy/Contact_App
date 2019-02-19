@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="29.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <SplitPane prefHeight="40.0" prefWidth="483.0">
+         <items>
+            <TextArea prefHeight="38.0" prefWidth="456.0" text="Mathilde Christiaens (Nickname)" />
+         </items>
+      </SplitPane>
+      <TextArea layoutX="481.0" prefHeight="39.0" prefWidth="219.0" text="+33750889070" />
+   </children>
+</AnchorPane>

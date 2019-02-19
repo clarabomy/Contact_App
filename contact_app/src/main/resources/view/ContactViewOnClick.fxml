@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="544.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TextArea layoutX="53.0" layoutY="88.0" prefHeight="32.0" prefWidth="200.0" text="Name" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="350.0" />
+      <TextArea layoutX="350.0" layoutY="88.0" prefHeight="38.0" prefWidth="200.0" text="Prénom" AnchorPane.leftAnchor="350.0" AnchorPane.rightAnchor="25.0" />
+      <TextArea layoutX="53.0" layoutY="142.0" prefHeight="38.0" prefWidth="594.0" text="Nickname" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" />
+      <TextArea layoutX="53.0" layoutY="199.0" prefHeight="38.0" prefWidth="594.0" text="Number" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" />
+      <TextArea layoutX="53.0" layoutY="260.0" prefHeight="38.0" prefWidth="594.0" text="Email" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" />
+      <TextArea layoutX="53.0" layoutY="320.0" prefHeight="38.0" prefWidth="594.0" text="Adresse" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" />
+      <TextArea layoutX="53.0" layoutY="376.0" prefHeight="38.0" prefWidth="594.0" text="BirthDate" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" />
+      <TextArea layoutX="53.0" layoutY="431.0" prefHeight="86.0" prefWidth="594.0" text="Notes" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" />
+      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="89.0" text="Retour" />
+      <Button layoutX="586.0" layoutY="14.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="89.0" text="Valider" />
+   </children>
+</AnchorPane>
