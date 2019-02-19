@@ -5,24 +5,10 @@ Développer répertoire en fenêtre pour le 10 mars (flex : 5j)
 
 ### Pré requis : 
 - Projet Maven
-- Appels MySQL
 - Interface utilisateur graphique claire et efficace
-- Code modularisé en plusieurs classes dédiées
+- Code modularisé en plusieurs classes dédiées, commentées et claires
 - Fermer tous les flux ouverts (lecture / écriture en fichier / BDD)
-- Code commenté répondant à des normes de programmation (à définir)
-- Respecter points du cours :
-> Types génériques (templates)  
-> API collection (conteneurs)  
-> MVC 
-
-### Structure de BDD proposée (prof) : table « contacts » unique
-- Nom 
-- Prénom 
-- Surnom
-- numéro de téléphone
-- adresse
-- mail 
-- date de naissance
+- Utiliser points du cours : templates, conteneurs, MVC & DAO
 
 ### Minimum attendu :
 - Lister tous les contacts de la base de données
@@ -35,93 +21,69 @@ Développer répertoire en fenêtre pour le 10 mars (flex : 5j)
 # Organisation d'équipe
 
 ### Répartition des rôles :
-- Corentin : requêtes SQL + tests unitaires
-- Clara : partie modèle (hors requêtes)
-- Mathilde : partie vue et contrôleur (lien entre vue et modèle)
-
-### Opérations court terme :
-- Mise en accord sur les modules (améliorations) à développer (Clara ok)
-- Définition de la base de données (Clara ok)
-- Répartition des taches (Clara ok) 
-- Définition des objectifs courts, moyen et long terme en accord avec l’équipe
+- Corentin : tests unitaires + flux fichiers
+- Clara : partie modèle et requêtes
+- Mathilde : partie vue et contrôleur (complémentaires)
 
 ### Objectifs du projet
 
 **Court terme :**
-- Esquisser le rendu visuel sur papier ou power point (Mathilde)
-- Créer la bdd et le projet (Clara)
-- Créer structure des requêtes préparées (Corentin)
+- Esquisser le rendu visuel sur power point (Mathilde)
+- Créer la bdd et le projet, réfléchir aux classes du modèle (Clara)
+- Recherches sur les vCards (Corentin)
 
 **Moyen terme :**
-- Créer le minimum requis pour l’affichage (Mathilde)
-- Créer classes minimales requises pour le fonctionnement (Clara)
-- Créer requêtes SQL + développer tests unitaires bdd (Corentin)
+- Développer affichage "minimum attendu" (Mathilde)
+- Développer fonctionnalités "minimum attendues" (Clara)
+- Développer exportation en vCard + tests unitaires bdd ? (Corentin)
 
 **Long terme :**
 - Développer modules supplémentaires pour l’affichage (Mathilde)
 - Développer modules supplémentaires pour le fonctionnement (Clara)
-- Etendre tests unitaires au reste du projet (Corentin)
-- Recherches vCards, images… (Corentin, Mathilde)
+- Développer importation de vCard + Etendre tests unitaires au reste du projet ? (Corentin)
 
 
 ### Modules complémentaires (propositions)
 *Attention - privilégier la qualité à la quantité*
 
-Modules ajoutable avant développement : 
-> Associer plusieurs numéros ou mails à un contact -> approuvé
->> Requêtes : table numéros et mails  
->> Affichage : formulaires & affichage dynamique
-
-> Ajouter des notes à un contact -> approuvé
->> Requêtes : champ notes
-
-> Regrouper des contacts (favoris, black & white list, pro…) -> approuvé
->> Requêtes : table category  
->> Affichage : selon la catégorie
+Modules ajoutable avant développement (impact bdd) : 
+> Associer plusieurs numéros ou mails à un contact
+>> Abandon : trop complexe avec le modèle DAO  
+> Ajouter des notes à un contact
+>> Implémenté : ajout d'un champ "notes" en BDD  
+> Catégoriser les contacts -> approuvé
+>> Implémenté : ajout d'une table "category", regroupements par catégorie possible
 
 Modules ajoutable en cours de développement : 
-> Exporter ou supprimer seulement une partie des contacts en même temps -> à voir
->>Affichage : sélection des contacts (case à cocher ?)
-
-> Chercher un contact -> approuvé (requête sql de site web)
->> Requêtes : requête associée  
->> Affichage : barre de recherche
+> Exporter ou supprimer seulement une partie des contacts en même temps
+>> Réalisable ? sélection des contacts  
+> Chercher un contact
+>> Réalisable ? barre de recherche en vue, requête associée  
 
 Modules ajoutable en fin de développement :
 > Trier les contacts par nom, prénom, surnom, mail, naissance… -> approuvé
->> Affichage : critère de tri  
->> Exécution : tri des données selon le critère
-
-> Importer un ou plusieurs contacts sous forme de vCard -> à voir / secondaire
->> Exécution : décodage des vCard
-
-> Ajouter une photo à un contact -> implique recherches donc à la fin
->> Exécution : gestion d’un fichier image + intégration aux vCard
+>> Réalisable ? critère de tri en vue, requête associée  
+> Importer un ou plusieurs contacts sous forme de vCard (secondaire)
+>> Réalisable ? récupération de ficier en vue, décodage des vCard  
+> Ajouter une photo à un contact (nécessite recherches)
+>> Réalisable ? gestion d’un fichier image, intégration aux vCard
 
 ### Structure de BDD adoptée : 
 **Table « person »**
-- Id (primaire)
-- name
-- surname 
+- id (primaire)
+- lastname
+- firstname 
 - nickname
+- phone
+- id_category
+- email
 - adress 
-- birth date 
-- category_id
+- birthday 
+- notes
 
 **Table « category »**
-- Id (primaire)
+- id (primaire)
 - name
-
-**Table « phone »**
-- id (primaire)
-- person_id
-- phone
-- type
-
-**Table « mail »**
-- id (primaire)
-- Person_id
-- Mail
 
 ### Arborescence fichiers
 > Src  
