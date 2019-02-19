@@ -4,14 +4,13 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="63.0" prefWidth="400.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.1">
+<AnchorPane prefHeight="29.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <SplitPane prefHeight="63.0" prefWidth="243.0">
+      <SplitPane prefHeight="40.0" prefWidth="483.0">
          <items>
-            <TextArea prefHeight="47.0" prefWidth="241.0" text="Mathilde Christiaens" />
+            <TextArea prefHeight="38.0" prefWidth="456.0" text="Mathilde Christiaens (Nickname)" />
          </items>
       </SplitPane>
-      <TextArea layoutX="241.0" prefHeight="63.0" prefWidth="159.0" text="+33750889070" />
+      <TextArea layoutX="481.0" prefHeight="39.0" prefWidth="219.0" text="+33750889070" />
    </children>
 </AnchorPane>
