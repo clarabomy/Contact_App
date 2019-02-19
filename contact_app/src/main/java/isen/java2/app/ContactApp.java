@@ -24,7 +24,7 @@ public class ContactApp extends Application
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
 		
-		primaryStage.setTitle("primaryScene");
+		primaryStage.setTitle("Homescreen");
 		StageService.getInstance().setPrimaryStage(primaryStage);
 		showHomeScreen();
 		
