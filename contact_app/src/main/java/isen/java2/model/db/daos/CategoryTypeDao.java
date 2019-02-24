@@ -19,8 +19,8 @@ public class CategoryTypeDao {
 				try (ResultSet results = statement.executeQuery("SELECT * FROM category")) {
 					while (results.next()) {
 						CategoryType category = new CategoryType(
-								results.getInt("id_category"),
-								results.getString("type_category"));
+								results.getInt("id"),
+								results.getString("name"));
 						
 						listOfCategories.add(category);
 					}
@@ -36,13 +36,13 @@ public class CategoryTypeDao {
 	public CategoryType getCategoryType(String name) {
 		try (Connection connection = DataSourceFactory.getDataSource().getConnection()) {
 			try (PreparedStatement statement = connection.prepareStatement(
-					"SELECT * FROM category WHERE type_category=?")) {
+					"SELECT * FROM category WHERE name=?")) {
 				statement.setString(1, name);
 				try (ResultSet results = statement.executeQuery()) {
 					if (results.next()) {
 						return new CategoryType(
-								results.getInt("id_category"),
-								results.getString("type_category"));
+								results.getInt("id"),
+								results.getString("name"));
 					}
 				}
 			}
@@ -55,7 +55,7 @@ public class CategoryTypeDao {
 
 	public void addCategoryType(String name) {
 		try (Connection connection = DataSourceFactory.getDataSource().getConnection()) {
-			String sqlQuery = "INSERT INTO category(type_category) VALUES(?)";
+			String sqlQuery = "INSERT INTO category(name) VALUES(?)";
 			try (PreparedStatement statement = connection.prepareStatement(sqlQuery, Statement.RETURN_GENERATED_KEYS)) {
 				statement.setString(1, name);
 				statement.executeUpdate();
