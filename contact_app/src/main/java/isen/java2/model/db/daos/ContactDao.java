@@ -70,7 +70,7 @@ public class ContactDao {
 		
 	}
 	
-	public List<Contact> search(String search) {
+	public List<Contact> searchContact(String search) {
 		List<Contact> resultSearch = new ArrayList<>();
 		try (Connection connection = DataSourceFactory.getDataSource().getConnection()) {
 			String sqlQuery = "SELECT * FROM contact JOIN category ON contact.category_id = category.id WHERE LOWER(lastname) LIKE ? OR LOWER(firstname) LIKE ? OR LOWER(nickname) LIKE ? OR LOWER(phone) LIKE ? OR LOWER(email) LIKE ? OR LOWER(address) LIKE ? OR birthday LIKE ? OR LOWER(notes) LIKE ?";
