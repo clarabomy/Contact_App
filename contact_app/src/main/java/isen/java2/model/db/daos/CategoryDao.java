@@ -8,17 +8,17 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import isen.java2.model.db.entities.CategoryType;
+import isen.java2.model.db.entities.Category;
 
-public class CategoryTypeDao {
+public class CategoryDao {
 	
-	public List<CategoryType> getCategoryList() {
-		List<CategoryType> listOfCategories = new ArrayList<>();
+	public List<Category> getCategoryList() {
+		List<Category> listOfCategories = new ArrayList<>();
 		try (Connection connection = DataSourceFactory.getDataSource().getConnection()) {
 			try (Statement statement = connection.createStatement()) {
 				try (ResultSet results = statement.executeQuery("SELECT * FROM category")) {
 					while (results.next()) {
-						CategoryType category = new CategoryType(
+						Category category = new Category(
 								results.getInt("id"),
 								results.getString("name"));
 						
@@ -33,14 +33,14 @@ public class CategoryTypeDao {
 		return listOfCategories;	
 	}
 	
-	public CategoryType getCategoryType(String name) {
+	public Category getCategory(String name) {
 		try (Connection connection = DataSourceFactory.getDataSource().getConnection()) {
 			try (PreparedStatement statement = connection.prepareStatement(
 					"SELECT * FROM category WHERE name=?")) {
 				statement.setString(1, name);
 				try (ResultSet results = statement.executeQuery()) {
 					if (results.next()) {
-						return new CategoryType(
+						return new Category(
 								results.getInt("id"),
 								results.getString("name"));
 					}
@@ -53,7 +53,7 @@ public class CategoryTypeDao {
 		return null;
 	}
 
-	public void addCategoryType(String name) {
+	public void addCategory(String name) {
 		try (Connection connection = DataSourceFactory.getDataSource().getConnection()) {
 			String sqlQuery = "INSERT INTO category(name) VALUES(?)";
 			try (PreparedStatement statement = connection.prepareStatement(sqlQuery, Statement.RETURN_GENERATED_KEYS)) {
@@ -64,7 +64,6 @@ public class CategoryTypeDao {
 		} 
 		catch (SQLException e) {
 			e.printStackTrace();
-		}
-		
+		}	
 	}
 }

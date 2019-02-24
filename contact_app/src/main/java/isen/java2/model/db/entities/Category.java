@@ -1,10 +1,10 @@
 package isen.java2.model.db.entities;
 
-public class CategoryType {
+public class Category {
 	protected int id;
 	protected String name;
 	
-	public CategoryType(int id, String name) {
+	public Category(int id, String name) {
 		this.id = id;
 		this.name = name;
 	}

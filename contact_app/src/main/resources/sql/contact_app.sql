@@ -46,13 +46,13 @@ CREATE TABLE IF NOT EXISTS `contact` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `lastname` varchar(40) NOT NULL,
   `firstname` varchar(40) NOT NULL,
-  `nickname` varchar(45) NOT NULL,
+  `nickname` varchar(45) DEFAULT NULL,
   `phone` varchar(15) NOT NULL,
-  `id_category` int(11) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `address` varchar(200) NOT NULL,
-  `birthday` date NOT NULL,
-  `notes` text NOT NULL,
+  `id_category` int(11) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `address` varchar(200) DEFAULT NULL,
+  `birthday` date DEFAULT NULL,
+  `notes` text DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 

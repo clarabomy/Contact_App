@@ -10,14 +10,27 @@ public class Contact {
 	protected String nickname;
 	protected String address;
 	protected LocalDate birthdate;
-	protected CategoryType category;
+	protected Category category;
 	protected String mail;
 	protected String phone;
 	protected String notes;
 
 	public Contact(int id, String lastname, String firstname, String nickname, String address, LocalDate birthdate,
-			CategoryType category, String mail, String phone, String notes) {
+			Category category, String mail, String phone, String notes) {
 		this.id = id;
+		this.lastname = lastname;
+		this.firstname = firstname;
+		this.nickname = nickname;
+		this.address = address;
+		this.birthdate = birthdate;
+		this.category = category;
+		this.mail = mail;
+		this.phone = phone;
+		this.notes = notes;
+	}
+	
+	public Contact(String lastname, String firstname, String nickname, String address, LocalDate birthdate,
+			Category category, String mail, String phone, String notes) {
 		this.lastname = lastname;
 		this.firstname = firstname;
 		this.nickname = nickname;
@@ -77,11 +90,11 @@ public class Contact {
 		this.birthdate = birthDate;
 	}
 	
-	public CategoryType getCategory() {
+	public Category getCategory() {
 		return category;
 	}
 	
-	public void setCategory(CategoryType category) {
+	public void setCategory(Category category) {
 		this.category = category;
 	}
 	

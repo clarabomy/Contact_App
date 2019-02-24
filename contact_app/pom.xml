@@ -2,8 +2,8 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>contact_app</groupId>
-  <artifactId>isen.java2</artifactId>
+  <groupId>isen.java2</groupId>
+  <artifactId>contact_app</artifactId>
   <version>0.0.1</version>
   <packaging>jar</packaging>
 
@@ -15,7 +15,7 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>3.8.1</version>
+      <version>4.12</version>
     </dependency>
     <dependency>
     	<groupId>org.assertj</groupId>
