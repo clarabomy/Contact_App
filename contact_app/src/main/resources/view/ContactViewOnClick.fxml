@@ -30,7 +30,7 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <Text layoutX="180.0" layoutY="267.0" strokeType="OUTSIDE" strokeWidth="0.0" text="59 rue de la rivière, 59000 Lille, France" wrappingWidth="244.99998211860657" AnchorPane.rightAnchor="275.00001788139343">
+      <Text layoutX="180.0" layoutY="317.0" strokeType="OUTSIDE" strokeWidth="0.0" text="59 rue de la rivière, 59000 Lille, France" wrappingWidth="244.99998211860657" AnchorPane.rightAnchor="275.00001788139343">
          <font>
             <Font size="18.0" />
          </font>
@@ -50,17 +50,28 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="39.0" layoutY="247.0" prefHeight="24.0" prefWidth="150.0" text="Adresse :">
+      <Label layoutX="39.0" layoutY="297.0" prefHeight="24.0" prefWidth="150.0" text="Adresse :">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="39.0" layoutY="364.0" prefHeight="24.0" prefWidth="150.0" text="Notes :">
+      <Label layoutX="39.0" layoutY="363.0" prefHeight="24.0" prefWidth="150.0" text="Notes :">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Text layoutX="180.0" layoutY="384.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Blablabla" wrappingWidth="244.99998211860657">
+      <Text layoutX="183.0" layoutY="383.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Blablabla" wrappingWidth="244.99998211860657">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Button layoutX="305.0" layoutY="453.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="89.0" text="Supprimer" />
+      <Label layoutX="39.0" layoutY="245.0" prefHeight="24.0" prefWidth="150.0" text="Groupe :">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Text layoutX="180.0" layoutY="265.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amis etc" wrappingWidth="244.99998211860657">
          <font>
             <Font size="18.0" />
          </font>

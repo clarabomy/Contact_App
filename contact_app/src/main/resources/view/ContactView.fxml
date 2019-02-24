@@ -5,21 +5,38 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="29.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="40.0" prefWidth="479.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <SplitPane prefHeight="40.0" prefWidth="483.0">
+      <SplitPane dividerPositions="0.5" prefHeight="40.0" prefWidth="700.0">
          <items>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Mathilde Christiaens" wrappingWidth="481.13671875">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Mathilde Christiaens" wrappingWidth="201.13671875">
                <font>
                   <Font size="18.0" />
                </font>
             </Text>
+            <SplitPane dividerPositions="0.563265306122449" prefHeight="38.0" prefWidth="231.0">
+              <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                     <children>
+                        <Text layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="blalabla@gmail.com" textAlignment="RIGHT" wrappingWidth="273.0000004172325">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="38.0" prefWidth="177.0">
+                     <children>
+                        <Text layoutX="5.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="+33750889070" textAlignment="RIGHT" wrappingWidth="201.13671720027924">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </AnchorPane>
+              </items>
+            </SplitPane>
          </items>
       </SplitPane>
-      <Text layoutX="484.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="+33750889070" textAlignment="RIGHT" wrappingWidth="221.13671875">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Text>
    </children>
 </AnchorPane>

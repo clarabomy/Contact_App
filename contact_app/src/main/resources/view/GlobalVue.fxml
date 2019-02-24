@@ -27,5 +27,11 @@
             <Font size="18.0" />
          </font>
       </Label>
+      <Label layoutX="14.0" layoutY="74.0" text="Flitrer par groupe :">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <ChoiceBox layoutX="192.0" layoutY="75.0" prefWidth="150.0" />
    </children>
 </AnchorPane>
