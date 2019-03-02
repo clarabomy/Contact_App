@@ -27,7 +27,7 @@ public class ContactDao {
 				contactStmt.setInt(5, contact.getCategory().getId());
 				contactStmt.setString(6, contact.getMail());
 				contactStmt.setString(7, contact.getAddress());
-				contactStmt.setDate(8, Date.valueOf(contact.getBirthdate()));
+				contactStmt.setDate(8, contact.getBirthdateKnown()? Date.valueOf(contact.getBirthdate()) : null);
 				contactStmt.setString(9,  contact.getNotes());
 				contactStmt.executeUpdate();
 				
@@ -57,7 +57,7 @@ public class ContactDao {
 				contactStmt.setInt(5, contact.getCategory().getId());
 				contactStmt.setString(6, contact.getMail());
 				contactStmt.setString(7, contact.getAddress());
-				contactStmt.setDate(8, Date.valueOf(contact.getBirthdate()));
+				contactStmt.setDate(8, contact.getBirthdateKnown()? Date.valueOf(contact.getBirthdate()) : null);
 				contactStmt.setString(9,  contact.getNotes());
 				contactStmt.setInt(10,  contact.getId());
 				contactStmt.executeUpdate();
@@ -73,9 +73,9 @@ public class ContactDao {
 	public List<Contact> searchContact(String search) {
 		List<Contact> resultSearch = new ArrayList<>();
 		try (Connection connection = DataSourceFactory.getDataSource().getConnection()) {
-			String sqlQuery = "SELECT * FROM contact JOIN category ON contact.category_id = category.id WHERE LOWER(lastname) LIKE ? OR LOWER(firstname) LIKE ? OR LOWER(nickname) LIKE ? OR LOWER(phone) LIKE ? OR LOWER(email) LIKE ? OR LOWER(address) LIKE ? OR birthday LIKE ? OR LOWER(notes) LIKE ?";
+			String sqlQuery = "SELECT * FROM contact JOIN category ON contact.id_category = category.id WHERE LOWER(lastname) LIKE ? OR LOWER(firstname) LIKE ? OR LOWER(nickname) LIKE ? OR LOWER(phone) LIKE ? OR LOWER(category.name) LIKE ? OR LOWER(email) LIKE ? OR LOWER(address) LIKE ? OR birthday LIKE ? OR LOWER(notes) LIKE ?";
 			try (PreparedStatement statement = connection.prepareStatement(sqlQuery)) {
-				for (int i = 1; i < 9; i++) {
+				for (int i = 1; i < 10; i++) {
 					statement.setString(i, "%" + search + "%");
 				}
 				try (ResultSet results = statement.executeQuery()) {
@@ -85,7 +85,7 @@ public class ContactDao {
 								results.getString("firstname"), 
 								results.getString("nickname"), 
 								results.getString("address"),
-								results.getDate("birthday").toLocalDate(), 
+								(results.getDate("birthday") == null)? null : results.getDate("birthday").toLocalDate(), 
 								new Category(results.getInt("id_category"), results.getString("name")),
 								results.getString("email"), results.getString("phone"),
 								results.getString("notes"));
@@ -114,38 +114,28 @@ public class ContactDao {
 		
 		catch (SQLException e) {
 			e.printStackTrace();
-		}
-			
+		}			
 	}
-	
+
 	public List<Contact> listAllContacts(String sortItem) {
 		List<Contact> listOfContacts = new ArrayList<>();
+		
+		if (!sortItem.contentEquals("lastname") && !sortItem.contentEquals("firstname")) {
+			sortItem = "lastname";
+		}
+		
 		try (Connection connection = DataSourceFactory.getDataSource().getConnection()) {
-			String sqlQuery = "SELECT * FROM contact JOIN category ON contact.category_id = category.id ORDER BY ?";
-			try (PreparedStatement statement = connection.prepareStatement(sqlQuery)) {
-				if (sortItem.contentEquals("category")) {
-					sortItem = "category.name";
-				}
-				
-				else if (sortItem.contentEquals("lastname") || sortItem.contentEquals("firstname") || sortItem.contentEquals("nickname") || sortItem.contentEquals("email") || sortItem.contentEquals("phone")) {
-					sortItem = "contact." + sortItem;
-				}
-				
-				else {
-					sortItem = "contact.lastname";
-				}
-				
-				statement.setString(1, sortItem);
-				
-				try (ResultSet results = statement.executeQuery()) {
-					
+			String sqlQuery = "SELECT * FROM contact LEFT JOIN category ON contact.id_category = category.id ORDER BY " + sortItem;
+			try (Statement statement = connection.createStatement()) {
+				try (ResultSet results =
+						statement.executeQuery(sqlQuery)) {
 					while (results.next()) {
 						Contact contact = new Contact(results.getInt("contact.id"), 
 								results.getString("lastname"),
 								results.getString("firstname"), 
 								results.getString("nickname"), 
 								results.getString("address"),
-								results.getDate("birthday").toLocalDate(), 
+								(results.getDate("birthday") == null)? null : results.getDate("birthday").toLocalDate(), 
 								new Category(results.getInt("category.id"), results.getString("name")),
 								results.getString("email"), results.getString("phone"),
 								results.getString("notes"));
@@ -165,19 +155,15 @@ public class ContactDao {
 	
 	public List<Contact> listContactsByCategory(String category, String sortItem) {
 		List<Contact> listOfFilteredContacts = new ArrayList<>();
+
+		if (!sortItem.contentEquals("lastname") && !sortItem.contentEquals("firstname")) {
+			sortItem = "lastname";
+		}
+		
 		try (Connection connection = DataSourceFactory.getDataSource().getConnection()) {
-			try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM contact JOIN category ON contact.id_category = category.id WHERE category.name = ? ORDER BY ?")) {
-	
-				if (sortItem.contentEquals("lastname") || sortItem.contentEquals("firstname") || sortItem.contentEquals("nickname") || sortItem.contentEquals("email") || sortItem.contentEquals("phone")) {
-					sortItem = "contact." + sortItem;
-				}
-				
-				else {
-					sortItem = "contact.lastname";
-				}
-				
+			String sqlQuery = "SELECT * FROM contact LEFT JOIN category ON contact.id_category = category.id WHERE category.name = ? ORDER BY " + sortItem;
+			try (PreparedStatement statement = connection.prepareStatement(sqlQuery)) {			
 				statement.setString(1, category);
-				statement.setString(2, sortItem);
 				
 				try (ResultSet results = statement.executeQuery()) {
 					while (results.next()) {
@@ -186,7 +172,7 @@ public class ContactDao {
 								results.getString("firstname"), 
 								results.getString("nickname"), 
 								results.getString("address"),
-								results.getDate("birthday").toLocalDate(), 
+								(results.getDate("birthday") == null)? null : results.getDate("birthday").toLocalDate(), 
 								new Category(results.getInt("category.id"), results.getString("name")),
 								results.getString("email"), results.getString("phone"),
 								results.getString("notes"));

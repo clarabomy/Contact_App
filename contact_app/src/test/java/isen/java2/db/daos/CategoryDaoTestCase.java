@@ -24,7 +24,7 @@ public class CategoryDaoTestCase {
 		Connection connection = DataSourceFactory.getDataSource().getConnection();
 		Statement stmt = connection.createStatement();
 		stmt.executeUpdate("DELETE FROM category");
-		stmt.executeUpdate("INSERT INTO category(id,name) VALUES (1,'Famille')");
+		stmt.executeUpdate("INSERT INTO category(id,name) VALUES (1,'Sans catégorie')");
 		stmt.executeUpdate("INSERT INTO category(id,name) VALUES (2,'Amis')");
 		stmt.executeUpdate("INSERT INTO category(id,name) VALUES (3,'Pro')");
 		stmt.close();
@@ -39,7 +39,7 @@ public class CategoryDaoTestCase {
 		
 		// THEN
 		assertThat(categories).hasSize(3);
-		assertThat(categories).extracting("id", "name").containsOnly(tuple(1, "Famille"), tuple(2, "Amis"),
+		assertThat(categories).extracting("id", "name").containsOnly(tuple(1, "Sans catégorie"), tuple(2, "Amis"),
 				tuple(3, "Pro"));
 	}
 	
