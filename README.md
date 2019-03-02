@@ -21,25 +21,25 @@ Développer répertoire en fenêtre pour le 10 mars (flex : 5j)
 # Organisation d'équipe
 
 ### Répartition des rôles :
-- Corentin : tests unitaires + flux fichiers
-- Clara : partie modèle et requêtes
-- Mathilde : partie vue et contrôleur (complémentaires)
+- Corentin : flux fichiers
+- Clara : partie modèle et requêtes + tests unitaires associés
+- Mathilde : partie vue et contrôleur (lien entre vue et modèle) + tests unitaires associés (facultatif)
 
 ### Objectifs du projet
 
-**Court terme :**
-- Esquisser le rendu visuel sur power point (Mathilde)
-- Créer la bdd et le projet, réfléchir aux classes du modèle (Clara)
-- Recherches sur les vCards (Corentin)
+**Première étape :**
+- Esquisser le rendu visuel (Mathilde) - ok
+- Créer la bdd et le projet, réfléchir aux classes du modèle (Clara) - ok
+- Recherches sur les vCards (Corentin) - ?
 
-**Moyen terme :**
-- Développer affichage "minimum attendu" (Mathilde)
-- Développer fonctionnalités "minimum attendues" (Clara)
-- Développer exportation en vCard + tests unitaires bdd ? (Corentin)
+**Seconde étape :**
+- Développer affichage "minimum attendu" (Mathilde) - vue ok, contrôleurs ?
+- Développer fonctionnalités "minimum attendues" + tests unitaires BDD (Clara) - ok
+- Développer exportation en vCard (Corentin) - ?
 
-**Long terme :**
-- Développer modules supplémentaires pour l’affichage (Mathilde)
-- Développer modules supplémentaires pour le fonctionnement (Clara)
+**Troisième étape :**
+- Développer modules supplémentaires pour l’affichage (Mathilde) - ?
+- Développer modules supplémentaires pour le fonctionnement (Clara) - 
 - Développer importation de vCard + Etendre tests unitaires au reste du projet ? (Corentin)
 
 
@@ -61,11 +61,11 @@ Modules ajoutable en cours de développement :
 >> Réalisable ? sélection des contacts  
 
 > Chercher un contact
->> Réalisable ? barre de recherche en vue, requête associée  
+>> Implémenté : barre de recherche, requête associée  
 
 Modules ajoutable en fin de développement :
-> Trier les contacts par nom, prénom, surnom, mail, naissance… -> approuvé
->> Réalisable ? critère de tri en vue, requête associée  
+> Trier les contacts par nom, prénom ou catégorie
+>> Modèle implémenté, vue ok ? : critère de tri, requête associée
 
 > Importer un ou plusieurs contacts sous forme de vCard (secondaire)
 >> Réalisable ? récupération de ficier en vue, décodage des vCard  
@@ -89,40 +89,3 @@ Modules ajoutable en fin de développement :
 **Table « category »**
 - id (primaire)
 - name
-
-### Arborescence fichiers
-> Src  
->> Tests  
->>> Db.dao  
->>>> **Test des classes du dossier associé**  
-
->>> Ressources  
->>>> **Test des classes du dossier associé**  
-
->> Main  
->>> Ressources  
->>>> Fxml files (vérifier nom)  
->>>>> **Fichiers de vue**  
-
->>>> SQL  
->>>>> **Script bdd**  
-
->>> Java  
->>>> Contact_app  
->>>>> **Main (lanceur du projet)**  
-
->>>> Services  
->>>>> **En lien avec la fenêtre et son contenu (confirmation Mathilde ?)**  
-
->>>> View  
->>>>> **controleurs associés au fichiers fxml (confirmation Mathilde ?)**  
-
->>>> Model  
->>>>> Db.dao  
->>>>>> **Connexion et requêtes à la bdd**  
-
->>>>> Db.entities  
->>>>>> **Entitées (classes matérialisant les tables)**  
-
->>>>> File.manager (vérifier nom)  
->>>>>> **Gestion des fichiers**  
