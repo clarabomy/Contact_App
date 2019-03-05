@@ -31,17 +31,11 @@ public class ContactViewController extends ListCell<Contact> {
 	protected void updateItem(Contact contact, boolean empty) {
 		super.updateItem(contact, empty);
 		
-		if (empty||contact==null) {
-			setText(null);
-			setGraphic(null);
-			
-		}
-		
-		else {
+		if (contact!=null){
 			if (loader == null) {
 				loader = new FXMLLoader();
 				loader.setLocation(ContactApp.class.getResource("/view/ContactView.fxml"));
-				
+				loader.setController(this);
 				try {
 					loader.load();
 				}
@@ -49,8 +43,9 @@ public class ContactViewController extends ListCell<Contact> {
 					e.printStackTrace();
 				}
 			}
+			
+			nameSurname.setText(contact.getFirstname()+ " "+ contact.getLastname());
 			System.out.println(nameSurname);
-			nameSurname.setText(contact.getFirstname()+ " "+ contact.getFirstname());
 			email.setText(contact.getMail());
 			number.setText(contact.getPhone());
 			setText(null);

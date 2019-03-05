@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.util.Callback;
+
 import isen.java2.model.db.daos.ContactDao;
 import isen.java2.model.db.entities.Category;
 import isen.java2.model.db.entities.Contact;
@@ -16,6 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -56,7 +59,15 @@ public class GlobalVueController implements Initializable{
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		listView.setItems(observableContacts);
-		listView.setCellFactory(observableContacts -> new ContactViewController());
+		listView.setCellFactory(new Callback<ListView<Contact>, javafx.scene.control.ListCell<Contact>>()
+        {
+
+			@Override
+			public ListCell<Contact> call(ListView<Contact> arg0) {
+				// TODO Auto-generated method stub
+				return new ContactViewController();
+			}
+        });
 	}
 	
 
