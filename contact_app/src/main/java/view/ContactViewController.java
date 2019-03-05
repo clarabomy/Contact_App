@@ -2,6 +2,7 @@ package view;
 
 import java.io.IOException;
 
+import isen.java2.app.ContactApp;
 import isen.java2.model.db.entities.Contact;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,7 +14,7 @@ import javafx.scene.text.Text;
 
 public class ContactViewController extends ListCell<Contact> {
 	@FXML
-	private Label NameSurname;
+	private Label nameSurname;
 	
 	@FXML
 	private Label email;
@@ -24,21 +25,22 @@ public class ContactViewController extends ListCell<Contact> {
 	@FXML
 	private GridPane gridPane;
 	
-	private FXMLLoader loader;
+	public FXMLLoader loader;
 	
 	@Override
 	protected void updateItem(Contact contact, boolean empty) {
 		super.updateItem(contact, empty);
 		
-		if (empty || contact==null) {
+		if (empty||contact==null) {
 			setText(null);
 			setGraphic(null);
+			
 		}
 		
 		else {
 			if (loader == null) {
-				loader = new FXMLLoader(getClass().getResource("/view/ContactView.fxml"));
-				loader.setController(this);
+				loader = new FXMLLoader();
+				loader.setLocation(ContactApp.class.getResource("/view/ContactView.fxml"));
 				
 				try {
 					loader.load();
@@ -47,16 +49,13 @@ public class ContactViewController extends ListCell<Contact> {
 					e.printStackTrace();
 				}
 			}
-			
-			NameSurname.setText(contact.getFirstname()+ " "+ contact.getFirstname());
+			System.out.println(nameSurname);
+			nameSurname.setText(contact.getFirstname()+ " "+ contact.getFirstname());
 			email.setText(contact.getMail());
 			number.setText(contact.getPhone());
-			
-			
 			setText(null);
 			setGraphic(gridPane);
 			
-		
 		}
 	}
 }
