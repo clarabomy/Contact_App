@@ -1,4 +1,4 @@
-package isen.java2.service;
+package isen.java2.model.services;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 

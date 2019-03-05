@@ -2,7 +2,7 @@ package isen.java2.app;
 
 import java.io.IOException;
 
-import isen.java2.service.StageService;
+import isen.java2.model.services.StageService;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -32,8 +32,8 @@ public class ContactApp extends Application
 	
 	public void showHomeScreen() {
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(
-		ContactApp.class.getResource("/view/GlobalVue.fxml"));
+		loader.setLocation(ContactApp.class.getResource("view/GlobalVue.fxml"));
+		System.out.println(loader.getLocation().toString());
 		try {
 			AnchorPane rootLayout = loader.load();
 			Scene scene = new Scene(rootLayout);
@@ -43,6 +43,5 @@ public class ContactApp extends Application
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
 }
