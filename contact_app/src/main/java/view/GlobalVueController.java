@@ -5,11 +5,13 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.util.Callback;
-
+import isen.java2.app.ContactApp;
 import isen.java2.model.db.daos.ContactDao;
 import isen.java2.model.db.entities.Category;
 import isen.java2.model.db.entities.Contact;
 import isen.java2.model.services.StageService;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -28,6 +30,9 @@ public class GlobalVueController implements Initializable{
 	private AnchorPane homeScreenAnchorPane;
 	
 	@FXML
+	private AnchorPane detailedView;
+	
+	@FXML
 	private ListView<Contact> listView;
 	
 	@FXML
@@ -42,7 +47,12 @@ public class GlobalVueController implements Initializable{
 	@FXML
 	private ChoiceBox<Category> groupFilter;
 	
+	@FXML
+	private Button findButton;
+	
+	
 	private ObservableList<Contact> observableContacts;
+	private CVOnClickController controllerOnClick;
 	
 	
 	public GlobalVueController() {
@@ -68,7 +78,48 @@ public class GlobalVueController implements Initializable{
 				return new ContactViewController();
 			}
         });
+		
+		listView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Contact>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Contact> arg0, Contact arg1, Contact arg2) {
+				// TODO Auto-generated method stub
+				showContactDetails(arg2);
+			}
+			
+		});
+		
+		FXMLLoader loader = new  FXMLLoader();
+		loader.setLocation(ContactApp.class.getResource("/view/ContactViewOnClick.fxml"));
+		try {
+			AnchorPane pane = loader.load();
+			detailedView.getChildren().add(pane);
+			detailedView.setVisible(false);
+		}
+		catch (IOException e ) {
+			e.printStackTrace();
+		}
+		
+		controllerOnClick = loader.getController();
+		
+		
+		listView.refresh();
+		listView.getSelectionModel().clearSelection();
+		
 	}
+	
+	@FXML
+	private void showContactDetails(Contact contact) {
+		if (contact==null) {
+			detailedView.setVisible(false);
+		}
+		else {
+			detailedView.setVisible(true);
+			controllerOnClick.setText(contact);
+		}
+	}
+	
+	
 	
 
 }

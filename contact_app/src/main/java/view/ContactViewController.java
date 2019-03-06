@@ -2,25 +2,28 @@ package view;
 
 import java.io.IOException;
 
+import controllers.QuizApp;
 import isen.java2.app.ContactApp;
 import isen.java2.model.db.entities.Contact;
+import isen.quiz.service.StageService;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
 public class ContactViewController extends ListCell<Contact> {
 	@FXML
-	private Label nameSurname;
+	private Label label1;
 	
 	@FXML
-	private Label email;
-	
-	@FXML
-	private Label number;
+	private Label label2;
 	
 	@FXML
 	private GridPane gridPane;
@@ -44,12 +47,13 @@ public class ContactViewController extends ListCell<Contact> {
 				}
 			}
 			
-			nameSurname.setText(contact.getFirstname()+ " "+ contact.getLastname());
-			System.out.println(nameSurname);
-			email.setText(contact.getMail());
-			number.setText(contact.getPhone());
+			label2.setText(contact.getFirstname());
+//			System.out.println(label1);
+			label1.setText(contact.getLastname());
+//			number.setText(contact.getPhone());
 			setText(null);
 			setGraphic(gridPane);
+			
 			
 		}
 	}

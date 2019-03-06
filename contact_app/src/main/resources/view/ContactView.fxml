@@ -6,29 +6,23 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane fx:id="gridPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="685.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane fx:id="gridPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" prefWidth="285.33" />
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="285.33" />
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="285.33" />
+    <ColumnConstraints hgrow="SOMETIMES" prefWidth="153.0" />
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="153.0" />
   </columnConstraints>
   <rowConstraints>
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Label fx:id="nameSurname" maxWidth="228.33" text="Name Surname ">
+      <Label fx:id="label1" maxWidth="228.33" text="Name ">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <Label fx:id="number" maxWidth="228.33" prefHeight="17.0" prefWidth="107.0" text="number" GridPane.columnIndex="1">
+      <Label fx:id="label2" text="Label" GridPane.columnIndex="1">
          <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <Label fx:id="email" maxWidth="228.33" prefHeight="17.0" prefWidth="102.0" text="blabla@gmail.com" GridPane.columnIndex="2">
-         <font>
-            <Font name="System Italic" size="12.0" />
+            <Font size="15.0" />
          </font>
       </Label>
    </children>
