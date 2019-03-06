@@ -119,6 +119,11 @@ public class GlobalVueController implements Initializable{
 		}
 	}
 	
+	@FXML
+	private void handleSaveButton() {
+		
+	}
+	
 	
 	
 
