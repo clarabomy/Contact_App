@@ -119,10 +119,23 @@ public class GlobalVueController implements Initializable{
 		}
 	}
 	
-	@FXML
-	private void handleSaveButton() {
-		
-	}
+	
+	 @FXML
+	    private void handleNewButton() {
+		 	FXMLLoader loader = new  FXMLLoader();
+			loader.setLocation(ContactApp.class.getResource("/view/AddView.fxml"));
+			try {
+				homeScreenAnchorPane = loader.load();
+				Scene scene = new Scene(homeScreenAnchorPane);
+				StageService.getInstance().getPrimaryStage().setScene(scene);
+				StageService.getInstance().getPrimaryStage().show();
+				
+			}
+			catch (IOException e ) {
+				e.printStackTrace();
+			}
+	    }
+
 	
 	
 	
