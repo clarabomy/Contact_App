@@ -127,8 +127,8 @@ public class GlobalVueController implements Initializable{
 			try {
 				homeScreenAnchorPane = loader.load();
 				Scene scene = new Scene(homeScreenAnchorPane);
-				StageService.getInstance().getPrimaryStage().setScene(scene);
-				StageService.getInstance().getPrimaryStage().show();
+				StageService.getPrimaryStage().setScene(scene);
+				StageService.getPrimaryStage().show();
 				
 			}
 			catch (IOException e ) {

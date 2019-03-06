@@ -1,7 +1,11 @@
 package view;
 
+import isen.java2.model.db.daos.CategoryDao;
+import isen.java2.model.db.daos.ContactDao;
+import isen.java2.model.db.entities.Category;
 import isen.java2.model.db.entities.Contact;
 import isen.java2.model.services.StageService;
+import isen.java2.model.services.ViewService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -32,7 +36,7 @@ public class AddViewController {
 	private void handleValidateButton() {
 		boolean formulaireValide = true;
 		Alert alert = new Alert(Alert.AlertType.INFORMATION);
-		alert.initOwner(StageService.getInstance().getPrimaryStage());
+		alert.initOwner(StageService.getPrimaryStage());
 		
 		if (addNom.getText().equals("") || addNom==null) {
 			alert.setTitle("Erreur formulaire");
@@ -67,7 +71,18 @@ public class AddViewController {
 		}}
 		
 		if(formulaireValide) {
+			CategoryDao cdao = new CategoryDao();
+			Category category = null;
+			if (addGroupe.getSelectionModel().getSelectedItem()!="" || addGroupe!=null) {
+				category = cdao.getCategory(addGroupe.getSelectionModel().getSelectedItem());
+				
+			}
 			
+			Contact contact = new Contact(addNom.getText(), addPrenom.getText(), addSurnom.getText(), addAddress.getText(), addBirthDate.getValue(), category, addEmail.getText(), addTelephone.getText(), addNotes.getText()  );
+			
+			ContactDao contDao = new ContactDao();
+			contDao.addContact(contact);
+			StageService.showView(ViewService.getView("GlobalVue"));
 		}
 		
 	}
