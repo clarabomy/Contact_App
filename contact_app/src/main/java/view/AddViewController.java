@@ -1,5 +1,8 @@
 package view;
 
+import java.io.IOException;
+
+import isen.java2.app.ContactApp;
 import isen.java2.model.db.daos.CategoryDao;
 import isen.java2.model.db.daos.ContactDao;
 import isen.java2.model.db.entities.Category;
@@ -7,11 +10,14 @@ import isen.java2.model.db.entities.Contact;
 import isen.java2.model.services.StageService;
 import isen.java2.model.services.ViewService;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 
 public class AddViewController {
 	@FXML
@@ -36,7 +42,7 @@ public class AddViewController {
 	private void handleValidateButton() {
 		boolean formulaireValide = true;
 		Alert alert = new Alert(Alert.AlertType.INFORMATION);
-		alert.initOwner(StageService.getPrimaryStage());
+		alert.initOwner(StageService.getInstance().getPrimaryStage());
 		
 		if (addNom.getText().equals("") || addNom==null) {
 			alert.setTitle("Erreur formulaire");
@@ -82,7 +88,20 @@ public class AddViewController {
 			
 			ContactDao contDao = new ContactDao();
 			contDao.addContact(contact);
-			StageService.showView(ViewService.getView("GlobalVue"));
+			
+			FXMLLoader loader = new  FXMLLoader();
+			loader.setLocation(ContactApp.class.getResource("/view/GlobalView.fxml"));
+			try {
+				AnchorPane homeScreenAnchorPane = loader.load();
+				Scene scene = new Scene(homeScreenAnchorPane);
+				StageService.getInstance().getPrimaryStage().setScene(scene);
+				StageService.getInstance().getPrimaryStage().show();
+				
+			}
+			catch (IOException e ) {
+				e.printStackTrace();
+			}
+			
 		}
 		
 	}
