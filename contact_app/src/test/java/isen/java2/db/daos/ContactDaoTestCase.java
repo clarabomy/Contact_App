@@ -38,43 +38,12 @@ public class ContactDaoTestCase {
 		stmt.executeUpdate("INSERT INTO contact(id,lastname,firstname,phone,id_category,email,notes) VALUES (5,'Jarosset','Corentin','0723435465',3,'coco_du_59@kikoo.fr','where is corentin?')");
 		stmt.close();
 		connection.close();
-	}
-	
-	 @Test
-	 public void shouldListContactsOrderByLastnames() {
-		// WHEN
-		List<Contact> contacts = contactDao.listAllContacts("lastname");
-			
-		// THEN
-		assertThat(contacts).hasSize(5);
-		assertThat(contacts).extracting("id", "lastname", "firstname", "nickname", "address", "birthdate", "category.id", "mail", "phone", "notes").containsExactly(
-			tuple(1, "Bomy", "Clara", "Clawawa", "Loos", LocalDate.of(1997, Month.SEPTEMBER, 13), 2, "clara.bomy@isen.yncrea.fr", "0642398475", "aime les IA"),
-			tuple(4, "Bomy", "Corinne", null, null, null, 2, null, "0432129467", null),
-			tuple(3, "Christiaens", "Mathilde", null, "LaMadeleine",  null, 1, "mathilde.christiaens@isen.yncrea.fr", "0943582113", "chat addict"),
-			tuple(5, "Jarosset", "Corentin", null, null, null, 3, "coco_du_59@kikoo.fr", "0723435465", "where is corentin?"),
-			tuple(2, "Juzeau", "Thibaut", "Thichef", "Lille", LocalDate.of(1998, Month.AUGUST, 31), 2, "thibaut.juzeau@isen.yncrea.fr", "0623405698", null));
-	 }
-	 
-	 @Test
-	 public void shouldListContactsOrderByFirstnames() {
-		// WHEN
-		List<Contact> contacts = contactDao.listAllContacts("firstname");
-			
-		// THEN
-		assertThat(contacts).hasSize(5);
-		assertThat(contacts).extracting("id", "lastname", "firstname", "nickname", "address", "birthdate", "category.id", "mail", "phone", "notes").containsExactly(
-				tuple(1, "Bomy", "Clara", "Clawawa", "Loos", LocalDate.of(1997, Month.SEPTEMBER, 13), 2, "clara.bomy@isen.yncrea.fr", "0642398475", "aime les IA"),
-				tuple(5, "Jarosset", "Corentin", null, null, null, 3, "coco_du_59@kikoo.fr", "0723435465", "where is corentin?"),
-				tuple(4, "Bomy", "Corinne", null, null, null, 2, null, "0432129467", null),
-				tuple(3, "Christiaens", "Mathilde", null, "LaMadeleine",  null, 1, "mathilde.christiaens@isen.yncrea.fr", "0943582113", "chat addict"),
-				tuple(2, "Juzeau", "Thibaut", "Thichef", "Lille", LocalDate.of(1998, Month.AUGUST, 31), 2, "thibaut.juzeau@isen.yncrea.fr", "0623405698", null));
-	 }
-	
+	}	
 	
 	@Test
 	 public void shouldListContacts() {
 		// WHEN
-		List<Contact> contacts = contactDao.listAllContacts("test");
+		List<Contact> contacts = contactDao.listAllContacts();
 			
 		// THEN
 		assertThat(contacts).hasSize(5);
@@ -85,38 +54,12 @@ public class ContactDaoTestCase {
 			tuple(5, "Jarosset", "Corentin", null, null, null, 3, "coco_du_59@kikoo.fr", "0723435465", "where is corentin?"),
 			tuple(2, "Juzeau", "Thibaut", "Thichef", "Lille", LocalDate.of(1998, Month.AUGUST, 31), 2, "thibaut.juzeau@isen.yncrea.fr", "0623405698", null));
 
-	}
-	
-	 @Test
-	 public void shouldListContactsByGenreOrderByFirstnames() {
-		// WHEN
-		List<Contact> contacts = contactDao.listContactsByCategory("Amis", "firstname");
-
-		// THEN
-		assertThat(contacts).hasSize(3);
-		assertThat(contacts).extracting("id", "lastname", "firstname", "nickname", "address", "birthdate", "category.id", "mail", "phone", "notes").containsExactly(
-			tuple(1, "Bomy", "Clara", "Clawawa", "Loos", LocalDate.of(1997, Month.SEPTEMBER, 13), 2, "clara.bomy@isen.yncrea.fr", "0642398475", "aime les IA"),
-			tuple(4, "Bomy", "Corinne", null, null, null, 2, null, "0432129467", null),
-			tuple(2, "Juzeau", "Thibaut", "Thichef", "Lille", LocalDate.of(1998, Month.AUGUST, 31), 2, "thibaut.juzeau@isen.yncrea.fr", "0623405698", null));	
-	}
-	 
-	 @Test
-	 public void shouldListContactsByGenreOrderByLastnames() {
-		// WHEN
-		List<Contact> contacts = contactDao.listContactsByCategory("Amis", "lastname");
-
-		// THEN
-		assertThat(contacts).hasSize(3);
-		assertThat(contacts).extracting("id", "lastname", "firstname", "nickname", "address", "birthdate", "category.id", "mail", "phone", "notes").containsExactly(
-			tuple(1, "Bomy", "Clara", "Clawawa", "Loos", LocalDate.of(1997, Month.SEPTEMBER, 13), 2, "clara.bomy@isen.yncrea.fr", "0642398475", "aime les IA"),
-			tuple(4, "Bomy", "Corinne", null, null, null, 2, null, "0432129467", null),
-			tuple(2, "Juzeau", "Thibaut", "Thichef", "Lille", LocalDate.of(1998, Month.AUGUST, 31), 2, "thibaut.juzeau@isen.yncrea.fr", "0623405698", null));	
 	}
 	 
 	 @Test
 	 public void shouldListContactsByGenre() {
 		// WHEN
-		List<Contact> contacts = contactDao.listContactsByCategory("Amis", "test");
+		List<Contact> contacts = contactDao.listContactsByCategory("Amis");
 
 		// THEN
 		assertThat(contacts).hasSize(3);
@@ -240,91 +183,3 @@ public class ContactDaoTestCase {
 	 }
 		 
 }
-/*
-
-
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.time.LocalDate;
-import java.time.Month;
-import java.util.List;
-
-import fr.isen.java2.db.daos.DataSourceFactory;
-import org.junit.Before;
-import org.junit.Test;
-
-import fr.isen.java2.db.daos.FilmDao;
-import fr.isen.java2.db.entities.Film;
-import fr.isen.java2.db.entities.Genre;
-
-
-public class FilmDaoTestCase {
-	
-	private FilmDao filmDao = new FilmDao();
-
-	@Before
-	public void initDb() throws Exception {
-		Connection connection = DataSourceFactory.getDataSource().getConnection();
-		Statement stmt = connection.createStatement();
-		stmt.executeUpdate("DELETE FROM film");
-		stmt.executeUpdate("DELETE FROM genre");
-		stmt.executeUpdate("INSERT INTO genre(idgenre,name) VALUES (1,'Drama')");
-		stmt.executeUpdate("INSERT INTO genre(idgenre,name) VALUES (2,'Comedy')");
-		stmt.executeUpdate("INSERT INTO film(idfilm,title, release_date, genre_id, duration, director, summary) "
-				+ "VALUES (1, 'Title 1', '2015-11-26', 1, 120, 'director 1', 'summary of the first film')");
-		stmt.executeUpdate("INSERT INTO film(idfilm,title, release_date, genre_id, duration, director, summary) "
-				+ "VALUES (2, 'My Title 2', '2015-11-14', 2, 114, 'director 2', 'summary of the second film')");
-		stmt.executeUpdate("INSERT INTO film(idfilm,title, release_date, genre_id, duration, director, summary) "
-				+ "VALUES (3, 'Third title', '2015-12-12', 2, 176, 'director 3', 'summary of the third film')");
-		stmt.close();
-		connection.close();
-	}
-	
-	 @Test
-	 public void shouldListFilms() {
-		// WHEN
-		List<Film> films = filmDao.listFilms();
-		// THEN
-		assertThat(films).hasSize(3);
-		assertThat(films).extracting("id", "title", "releaseDate", "genre.id", "duration", "director", "summary").containsOnly(tuple(1, "Title 1", LocalDate.of(2015, Month.NOVEMBER, 26), 1, 120, "director 1", "summary of the first film"),
-				tuple(2, "My Title 2", LocalDate.of(2015, Month.NOVEMBER, 14), 2, 114, "director 2", "summary of the second film"),
-				tuple(3, "Third title", LocalDate.of(2015, Month.DECEMBER, 12), 2, 176, "director 3", "summary of the third film"));
-	 }
-	
-	 @Test
-	 public void shouldListFilmsByGenre() {
-		// WHEN
-		List<Film> films = filmDao.listFilmsByGenre("Comedy");
-
-		assertThat(films).hasSize(2);
-		assertThat(films).extracting("id", "title", "releaseDate", "genre.id", "duration", "director", "summary").containsOnly(
-				tuple(2, "My Title 2", LocalDate.of(2015, Month.NOVEMBER, 14), 2, 114, "director 2", "summary of the second film"),
-				tuple(3, "Third title", LocalDate.of(2015, Month.DECEMBER, 12), 2, 176, "director 3", "summary of the third film"));
-	}
-	
-	 @Test
-	 public void shouldAddFilm() throws Exception {
-			// WHEN 
-		Film film = new Film(4, "ISEN the movie", LocalDate.of(2016, Month.NOVEMBER, 14), new Genre(1, "Drama"), 114, "Clara B.", "summary of ISEN the movie");
-		filmDao.addFilm(film);
-		
-		// THEN
-		Connection connection = DataSourceFactory.getDataSource().getConnection();
-		Statement statement = connection.createStatement();
-		ResultSet resultSet = statement.executeQuery("SELECT * FROM film WHERE title='ISEN the movie'");
-		assertThat(resultSet.next()).isTrue();
-		assertThat(resultSet.getInt("idfilm")).isNotNull();
-		assertThat(resultSet.getString("title")).isEqualTo("ISEN the movie");
-		assertThat(resultSet.getDate("release_date").toLocalDate()).isEqualTo(LocalDate.of(2016, Month.NOVEMBER, 14));
-		assertThat(resultSet.getInt("genre_id")).isEqualTo(1);
-		assertThat(resultSet.getInt("duration")).isEqualTo(114);
-		assertThat(resultSet.getString("director")).isEqualTo("Clara B.");
-		assertThat(resultSet.getString("summary")).isEqualTo("summary of ISEN the movie");
-		resultSet.close();
-		statement.close();
-		connection.close();
-
-	 }
-}
-*/

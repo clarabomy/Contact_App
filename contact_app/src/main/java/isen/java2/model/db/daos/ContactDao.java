@@ -117,15 +117,11 @@ public class ContactDao {
 		}			
 	}
 
-	public List<Contact> listAllContacts(String sortItem) {
+	public List<Contact> listAllContacts() {
 		List<Contact> listOfContacts = new ArrayList<>();
 		
-		if (!sortItem.contentEquals("lastname") && !sortItem.contentEquals("firstname")) {
-			sortItem = "lastname";
-		}
-		
 		try (Connection connection = DataSourceFactory.getDataSource().getConnection()) {
-			String sqlQuery = "SELECT * FROM contact LEFT JOIN category ON contact.id_category = category.id ORDER BY " + sortItem;
+			String sqlQuery = "SELECT * FROM contact LEFT JOIN category ON contact.id_category = category.id ORDER BY lastname";
 			try (Statement statement = connection.createStatement()) {
 				try (ResultSet results =
 						statement.executeQuery(sqlQuery)) {
@@ -153,15 +149,11 @@ public class ContactDao {
 		return listOfContacts;
 	}
 	
-	public List<Contact> listContactsByCategory(String category, String sortItem) {
+	public List<Contact> listContactsByCategory(String category) {
 		List<Contact> listOfFilteredContacts = new ArrayList<>();
-
-		if (!sortItem.contentEquals("lastname") && !sortItem.contentEquals("firstname")) {
-			sortItem = "lastname";
-		}
 		
 		try (Connection connection = DataSourceFactory.getDataSource().getConnection()) {
-			String sqlQuery = "SELECT * FROM contact LEFT JOIN category ON contact.id_category = category.id WHERE category.name = ? ORDER BY " + sortItem;
+			String sqlQuery = "SELECT * FROM contact LEFT JOIN category ON contact.id_category = category.id WHERE category.name = ? ORDER BY lastname";
 			try (PreparedStatement statement = connection.prepareStatement(sqlQuery)) {			
 				statement.setString(1, category);
 				
