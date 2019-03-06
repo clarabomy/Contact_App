@@ -8,7 +8,8 @@ import isen.java2.model.db.daos.ContactDao;
 import isen.java2.model.db.entities.Category;
 import isen.java2.model.db.entities.Contact;
 import isen.java2.model.services.StageService;
-import isen.java2.model.services.ViewService;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -24,7 +25,7 @@ public class AddViewController {
 	private TextField addNom, addAddress, addPrenom, addNotes, addTelephone, addEmail, addSurnom;
 	
 	@FXML
-	private ChoiceBox<String> addGroupe;
+	private ChoiceBox addGroupe;
 	
 	@FXML
 	private DatePicker addBirthDate;
@@ -32,10 +33,18 @@ public class AddViewController {
 	@FXML
 	private Button validateButton, backToGlobalVue;
 	
+	private ObservableList<String> obsvList;
 	
 	@FXML
-	public void init() {
+	public void initialize() {
 		
+		CategoryDao catd = new CategoryDao();
+		obsvList = FXCollections.observableArrayList();
+		catd.getCategoryList().forEach(e ->{ 
+			obsvList.add(e.getName());
+			System.out.println(e.getName());});
+		addGroupe.getItems().addAll(obsvList);
+		addGroupe.getSelectionModel().select(0);
 	}
 	
 	@FXML
@@ -78,9 +87,9 @@ public class AddViewController {
 		
 		if(formulaireValide) {
 			CategoryDao cdao = new CategoryDao();
-			Category category = null;
-			if (addGroupe.getSelectionModel().getSelectedItem()!="" || addGroupe!=null) {
-				category = cdao.getCategory(addGroupe.getSelectionModel().getSelectedItem());
+			Category category = cdao.getCategory("Sans catégorie");
+			if (addGroupe.getValue().toString()!="" || addGroupe.getValue()!=null) {
+				category = cdao.getCategory(addGroupe.getValue().toString());
 				
 			}
 			
@@ -90,7 +99,7 @@ public class AddViewController {
 			contDao.addContact(contact);
 			
 			FXMLLoader loader = new  FXMLLoader();
-			loader.setLocation(ContactApp.class.getResource("/view/GlobalView.fxml"));
+			loader.setLocation(ContactApp.class.getResource("/view/GlobalVue.fxml"));
 			try {
 				AnchorPane homeScreenAnchorPane = loader.load();
 				Scene scene = new Scene(homeScreenAnchorPane);

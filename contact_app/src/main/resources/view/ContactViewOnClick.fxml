@@ -87,7 +87,7 @@
             </Text>
          </children>
       </GridPane>
-      <Label fx:id="title" layoutX="180.0" layoutY="25.0" prefHeight="27.0" prefWidth="204.0" text="NOM Prénom (Surnom)" textAlignment="CENTER" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="179.0" AnchorPane.topAnchor="25.0">
+      <Label fx:id="title" alignment="CENTER" layoutX="180.0" layoutY="25.0" prefHeight="27.0" prefWidth="204.0" text="NOM Prénom (Surnom)" textAlignment="RIGHT" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>

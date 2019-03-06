@@ -60,7 +60,7 @@ public class GlobalVueController implements Initializable{
 		observableContacts = FXCollections.observableArrayList();
 		
 		ContactDao daoContact = new ContactDao();
-		daoContact.listAllContacts("").forEach( e-> observableContacts.add(e));
+		daoContact.listAllContacts().forEach( e-> observableContacts.add(e));
 		
 	}
 

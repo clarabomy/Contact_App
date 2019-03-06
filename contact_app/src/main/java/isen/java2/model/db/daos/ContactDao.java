@@ -27,7 +27,7 @@ public class ContactDao {
 				contactStmt.setInt(5, contact.getCategory().getId());
 				contactStmt.setString(6, contact.getMail());
 				contactStmt.setString(7, contact.getAddress());
-				contactStmt.setDate(8, contact.getBirthdateKnown()? Date.valueOf(contact.getBirthdate()) : null);
+				contactStmt.setDate(8, contact.getBirthdate()!=null? Date.valueOf(contact.getBirthdate()) : null);
 				contactStmt.setString(9,  contact.getNotes());
 				contactStmt.executeUpdate();
 				
