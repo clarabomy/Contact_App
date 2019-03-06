@@ -143,5 +143,4 @@ public class Contact {
 		this.notes = notes;
 	}
 	
-	
 }

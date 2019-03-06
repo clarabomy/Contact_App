@@ -157,7 +157,7 @@ public class ContactDaoTestCase {
 		 // WHEN 
 		Contact contact = new Contact(5, "Jarosset", "Corentin", "", "Lille", LocalDate.of(1998, Month.FEBRUARY, 18), new Category(2, "Ami"), "coco_du_59@kikoo.fr", "0723435465", "He is here !");
 		contactDao.updateContact(contact);
-		
+
 		// THEN
 		Connection connection = DataSourceFactory.getDataSource().getConnection();
 		Statement statement = connection.createStatement();
