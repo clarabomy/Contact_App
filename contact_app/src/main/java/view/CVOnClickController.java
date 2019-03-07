@@ -34,7 +34,7 @@ public class CVOnClickController {
 	
 	
 	public void setText(Contact contact) {
-		if(contact.getNickname()==null) {
+		if(contact.getNickname()==null||contact.getNickname()=="") {
 			title.setText(contact.getLastname().toUpperCase()+ " "+ contact.getFirstname());
 		}
 		else {

@@ -1,6 +1,7 @@
 package view;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import isen.java2.app.ContactApp;
 import isen.java2.model.db.daos.CategoryDao;
@@ -22,7 +23,7 @@ import javafx.scene.layout.AnchorPane;
 
 public class AddViewController {
 	@FXML
-	private TextField addNom, addAddress, addPrenom, addNotes, addTelephone, addEmail, addSurnom;
+	private TextField addNom, ville, cp, numRue, addPrenom, addNotes, addTelephone, addEmail, addSurnom, pays;
 	
 	@FXML
 	private ChoiceBox addGroupe;
@@ -45,6 +46,32 @@ public class AddViewController {
 			System.out.println(e.getName());});
 		addGroupe.getItems().addAll(obsvList);
 		addGroupe.getSelectionModel().select(0);
+	}
+	
+	@FXML
+	public void setText(Contact contact) {
+		System.out.println(addNom);
+		addNom.setText(contact.getLastname()==null?"":contact.getLastname());
+		addPrenom.setText(contact.getFirstname()==null?"":contact.getFirstname());
+		addNotes.setText(contact.getNotes()==null?"":contact.getNotes());
+		addTelephone.setText(contact.getPhone()==null?"":contact.getPhone());
+		addEmail.setText(contact.getMail()==null?"":contact.getMail());
+		addSurnom.setText(contact.getNickname()==null?"":contact.getNickname());
+		addGroupe.getSelectionModel().select(contact.getCategory().getId());
+		addBirthDate.setValue(contact.getBirthdate());
+		if (contact.getAddress()!= null || contact.getAddress()!= "") {
+			String[] address = contact.getAddress().split("&&");
+			ArrayList<TextField> addressTF = new ArrayList<TextField>();
+			addressTF.add(numRue);
+			addressTF.add(ville);
+			addressTF.add(cp);
+			addressTF.add(pays);
+			for (int i =0; i<address.length; i++) {
+				addressTF.get(i).setText(address[i]);
+			}
+		}
+		
+		
 	}
 	
 	@FXML
@@ -93,26 +120,33 @@ public class AddViewController {
 				
 			}
 			
-			Contact contact = new Contact(addNom.getText(), addPrenom.getText(), addSurnom.getText(), addAddress.getText(), addBirthDate.getValue(), category, addEmail.getText(), addTelephone.getText(), addNotes.getText()  );
+			String address = numRue.getText()+"&&"+ville.getText()+"&&"+cp.getText()+"&&"+pays.getText();
+			
+			Contact contact = new Contact(addNom.getText(), addPrenom.getText(), addSurnom.getText(), address, addBirthDate.getValue(), category, addEmail.getText(), addTelephone.getText(), addNotes.getText()  );
 			
 			ContactDao contDao = new ContactDao();
 			contDao.addContact(contact);
 			
-			FXMLLoader loader = new  FXMLLoader();
-			loader.setLocation(ContactApp.class.getResource("/view/GlobalVue.fxml"));
-			try {
-				AnchorPane homeScreenAnchorPane = loader.load();
-				Scene scene = new Scene(homeScreenAnchorPane);
-				StageService.getInstance().getPrimaryStage().setScene(scene);
-				StageService.getInstance().getPrimaryStage().show();
-				
-			}
-			catch (IOException e ) {
-				e.printStackTrace();
-			}
+			handleReturnButton();
 			
 		}
 		
+	}
+	
+	@FXML
+	private void handleReturnButton() {
+		FXMLLoader loader = new  FXMLLoader();
+		loader.setLocation(ContactApp.class.getResource("/view/GlobalVue.fxml"));
+		try {
+			AnchorPane homeScreenAnchorPane = loader.load();
+			Scene scene = new Scene(homeScreenAnchorPane);
+			StageService.getInstance().getPrimaryStage().setScene(scene);
+			StageService.getInstance().getPrimaryStage().show();
+			
+		}
+		catch (IOException e ) {
+			e.printStackTrace();
+		}
 	}
 	
 }

@@ -53,6 +53,7 @@ public class GlobalVueController implements Initializable{
 	
 	private ObservableList<Contact> observableContacts;
 	private CVOnClickController controllerOnClick;
+	public Contact contactClick;
 	
 	
 	public GlobalVueController() {
@@ -84,6 +85,7 @@ public class GlobalVueController implements Initializable{
 			@Override
 			public void changed(ObservableValue<? extends Contact> arg0, Contact arg1, Contact arg2) {
 				// TODO Auto-generated method stub
+				contactClick = arg2;
 				showContactDetails(arg2);
 			}
 			
@@ -135,6 +137,27 @@ public class GlobalVueController implements Initializable{
 				e.printStackTrace();
 			}
 	    }
+	 
+	 
+	 @FXML
+	 private void handleChangeButton() {
+		 FXMLLoader loader = new  FXMLLoader();
+		 loader.setLocation(ContactApp.class.getResource("/view/AddView.fxml"));
+		 
+		 
+			try {
+				homeScreenAnchorPane = loader.load();
+				Scene scene = new Scene(homeScreenAnchorPane);
+				StageService.getInstance().getPrimaryStage().setScene(scene);
+				StageService.getInstance().getPrimaryStage().show();
+				AddViewController controller = loader.getController();
+				controller.setText(contactClick);
+					
+			}
+			catch (IOException e ) {
+				e.printStackTrace();
+			}
+	 }
 
 	
 	

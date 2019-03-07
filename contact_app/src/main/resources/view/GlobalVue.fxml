@@ -23,14 +23,15 @@
         <items>
           <AnchorPane>
                <children>
-                  <ListView fx:id="listView" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <ListView fx:id="listView" minWidth="120.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                </children>
             </AnchorPane>
           <AnchorPane fx:id="detailedView" />
         </items>
       </SplitPane>
-      <Button fx:id="changeButtonHS" layoutX="416.0" layoutY="14.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="75.0" text="Change" AnchorPane.leftAnchor="416.0" AnchorPane.topAnchor="14.0" />
+      <Button fx:id="changeButtonHS" layoutX="416.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleChangeButton" prefHeight="40.0" prefWidth="75.0" text="Change" AnchorPane.leftAnchor="416.0" AnchorPane.topAnchor="14.0" />
       <TextField fx:id="searchBar" layoutX="9.0" layoutY="14.0" prefHeight="40.0" prefWidth="306.0" AnchorPane.leftAnchor="9.0" AnchorPane.topAnchor="14.0" />
       <Button fx:id="findButton" layoutX="314.0" layoutY="14.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="75.0" text="Find" AnchorPane.leftAnchor="314.0" AnchorPane.topAnchor="14.0" />
+      <Button fx:id="importVcard" layoutX="493.0" layoutY="68.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="115.0" text="Import Vcard" />
    </children>
 </AnchorPane>
