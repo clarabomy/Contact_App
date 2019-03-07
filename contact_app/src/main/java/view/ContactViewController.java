@@ -48,5 +48,10 @@ public class ContactViewController extends ListCell<Contact> {
 			
 			
 		}
+		else if(loader!=null) {
+			label2.setText("");
+			label1.setText("");
+		}
+		
 	}
 }

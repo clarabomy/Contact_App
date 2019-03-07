@@ -17,15 +17,15 @@ public class ContactApp extends Application
     public static void main( String[] args )
     {
     	launch(args);
-    	String address = "&&&&&&";
-		String[] addressParts = address.split("&&");
-		String street = addressParts[0]; 
-		String town = addressParts[1];
-		String postalCode = addressParts[2];
-		String country = addressParts[3];
-		for (String item : addressParts) {
-			System.out.println("'" + item+ "'");
-		}
+//    	String address = "&&&&&&";
+//		String[] addressParts = address.split("&&");
+//		String street = addressParts[0]; 
+//		String town = addressParts[1];
+//		String postalCode = addressParts[2];
+//		String country = addressParts[3];
+//		for (String item : addressParts) {
+//			System.out.println("'" + item+ "'");
+//		}
     }
 
 	@Override

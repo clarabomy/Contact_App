@@ -25,7 +25,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
-public class GlobalVueController implements Initializable{
+public class GlobalVueController {
 	@FXML
 	private AnchorPane homeScreenAnchorPane;
 	
@@ -66,8 +66,8 @@ public class GlobalVueController implements Initializable{
 	}
 
 
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
+	@FXML
+	public void initialize() {
 		// TODO Auto-generated method stub
 		listView.setItems(observableContacts);
 		listView.setCellFactory(new Callback<ListView<Contact>, javafx.scene.control.ListCell<Contact>>()
@@ -157,6 +157,27 @@ public class GlobalVueController implements Initializable{
 			catch (IOException e ) {
 				e.printStackTrace();
 			}
+	 }
+	 
+	 @FXML
+	 private void handleSupprButton() {
+		 ContactDao dao = new ContactDao();
+		 dao.deleteContact(contactClick.getId());
+		 listView.getItems().remove(listView.getSelectionModel().getSelectedIndex());
+		 System.out.println(listView.getItems());
+		 this.listView.refresh();
+		 listView.getSelectionModel().clearSelection();
+//		 forceRefresh(listView);
+		 
+		 this.listView.refresh();
+		 
+	 }
+	 
+	 
+	 private <T> void forceRefresh(ListView list) {
+		 ObservableList<T> items = list.<T>getItems();
+		    list.<T>setItems(null);
+		    list.<T>setItems(items);
 	 }
 
 	
