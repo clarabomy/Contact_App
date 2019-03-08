@@ -46,7 +46,12 @@ public class CVOnClickController {
 		detailedViewEmail.setText(contact.getMail()==null?"":contact.getMail());
 		detailedViewGroup.setText(contact.getCategory().getName()==null?"":contact.getCategory().getName());
 		detailedViewNotes.setText(contact.getNotes()==null?"":contact.getNotes());
-		detailedViewAddress.setText(contact.getAddress()==null?"":contact.getAddress());
+		
+		if (contact.getAddress()!=null) {
+		String address = contact.getAddress().replace("&&", " ");
+		
+		detailedViewAddress.setText(address);
+		}
 		
 	}
 	

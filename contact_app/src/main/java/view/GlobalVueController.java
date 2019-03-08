@@ -54,14 +54,13 @@ public class GlobalVueController {
 	private ObservableList<Contact> observableContacts;
 	private CVOnClickController controllerOnClick;
 	public Contact contactClick;
+	private ContactDao dao = new ContactDao();
 	
 	
 	public GlobalVueController() {
 		
 		observableContacts = FXCollections.observableArrayList();
-		
-		ContactDao daoContact = new ContactDao();
-		daoContact.listAllContacts().forEach( e-> observableContacts.add(e));
+		dao.listAllContacts().forEach( e-> observableContacts.add(e));
 		
 	}
 
@@ -90,6 +89,17 @@ public class GlobalVueController {
 			}
 			
 		});
+		
+		searchBar.textProperty().addListener(new ChangeListener<String>() {
+
+			@Override
+			public void changed(ObservableValue<? extends String> arg0, String arg1, String arg2) {
+				// TODO Auto-generated method stub
+				handleSearchButton();
+			}
+			
+		});
+		
 		
 		FXMLLoader loader = new  FXMLLoader();
 		loader.setLocation(ContactApp.class.getResource("/view/ContactViewOnClick.fxml"));
@@ -161,7 +171,7 @@ public class GlobalVueController {
 	 
 	 @FXML
 	 private void handleSupprButton() {
-		 ContactDao dao = new ContactDao();
+		 
 		 dao.deleteContact(contactClick.getId());
 		 listView.getItems().remove(listView.getSelectionModel().getSelectedIndex());
 		 System.out.println(listView.getItems());
@@ -169,15 +179,17 @@ public class GlobalVueController {
 		 listView.getSelectionModel().clearSelection();
 //		 forceRefresh(listView);
 		 
-		 this.listView.refresh();
+//		 this.listView.refresh();
 		 
 	 }
 	 
 	 
-	 private <T> void forceRefresh(ListView list) {
-		 ObservableList<T> items = list.<T>getItems();
-		    list.<T>setItems(null);
-		    list.<T>setItems(items);
+	 @FXML
+	 private void handleSearchButton() {
+		 listView.getSelectionModel().clearSelection();
+		 listView.getItems().removeAll(observableContacts);
+		 listView.getItems().addAll(dao.searchContact(this.searchBar.getText()));
+		 listView.refresh();
 	 }
 
 	

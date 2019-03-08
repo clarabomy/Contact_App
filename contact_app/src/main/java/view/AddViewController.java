@@ -35,6 +35,8 @@ public class AddViewController {
 	private Button validateButton, backToGlobalVue;
 	
 	private ObservableList<String> obsvList;
+	private boolean update = false;
+	private Contact previousContact;
 	
 	@FXML
 	public void initialize() {
@@ -70,12 +72,15 @@ public class AddViewController {
 				addressTF.get(i).setText(address[i]);
 			}
 		}
+		update=true;
+		previousContact=contact;
 		
 		
 	}
 	
 	@FXML
 	private void handleValidateButton() {
+		ContactDao contDao = new ContactDao();
 		boolean formulaireValide = true;
 		Alert alert = new Alert(Alert.AlertType.INFORMATION);
 		alert.initOwner(StageService.getInstance().getPrimaryStage());
@@ -121,12 +126,17 @@ public class AddViewController {
 			}
 			
 			String address = numRue.getText()+"&&"+ville.getText()+"&&"+cp.getText()+"&&"+pays.getText();
-			
 			Contact contact = new Contact(addNom.getText(), addPrenom.getText(), addSurnom.getText(), address, addBirthDate.getValue(), category, addEmail.getText(), addTelephone.getText(), addNotes.getText()  );
 			
-			ContactDao contDao = new ContactDao();
-			contDao.addContact(contact);
 			
+			if(!this.update) {
+			
+			contDao.addContact(contact);
+			}
+			else {
+				contact.setId(previousContact.getId());
+				contDao.updateContact(contact);
+			}
 			handleReturnButton();
 			
 		}
