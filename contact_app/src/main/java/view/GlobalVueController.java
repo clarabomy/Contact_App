@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import javafx.util.Callback;
 import isen.java2.app.ContactApp;
+import isen.java2.model.db.daos.CategoryDao;
 import isen.java2.model.db.daos.ContactDao;
 import isen.java2.model.db.entities.Category;
 import isen.java2.model.db.entities.Contact;
@@ -45,7 +46,7 @@ public class GlobalVueController {
 	private Button supprButtonHS;
 	
 	@FXML
-	private ChoiceBox<Category> groupFilter;
+	private ChoiceBox<String> groupFilter;
 	
 	@FXML
 	private Button findButton;
@@ -55,7 +56,7 @@ public class GlobalVueController {
 	private CVOnClickController controllerOnClick;
 	public Contact contactClick;
 	private ContactDao dao = new ContactDao();
-	
+	private CategoryDao catDao = new CategoryDao();
 	
 	public GlobalVueController() {
 		
@@ -79,6 +80,8 @@ public class GlobalVueController {
 			}
         });
 		
+		catDao.getCategoryList().forEach(e -> groupFilter.getItems().add(e.getName()));
+		
 		listView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Contact>() {
 
 			@Override
@@ -96,6 +99,26 @@ public class GlobalVueController {
 			public void changed(ObservableValue<? extends String> arg0, String arg1, String arg2) {
 				// TODO Auto-generated method stub
 				handleSearchButton();
+			}
+			
+		});
+		groupFilter.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>(){
+
+			@Override
+			public void changed(ObservableValue<? extends String> arg0, String arg1, String arg2) {
+				// TODO Auto-generated method stub
+				listView.getItems().removeAll(observableContacts);
+				if (!arg2.equals("")) {
+					listView.getSelectionModel().clearSelection();
+					listView.getItems().addAll(dao.listContactsByCategory(arg2));
+					listView.refresh();
+				}
+				else {
+					listView.getSelectionModel().clearSelection();
+					listView.getItems().addAll(dao.listAllContacts());
+					listView.refresh();
+					
+				}
 			}
 			
 		});
