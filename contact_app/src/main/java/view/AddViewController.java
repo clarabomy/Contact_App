@@ -61,7 +61,8 @@ public class AddViewController {
 		addSurnom.setText(contact.getNickname()==null?"":contact.getNickname());
 		addGroupe.getSelectionModel().select(contact.getCategory().getId());
 		addBirthDate.setValue(contact.getBirthdate());
-		if (contact.getAddress()!= null || contact.getAddress()!= "") {
+		System.out.println(contact.getAddress());
+		if (contact.getAddress()!= null && contact.getAddress()!= "") {
 			String[] address = contact.getAddress().split("&&");
 			ArrayList<TextField> addressTF = new ArrayList<TextField>();
 			addressTF.add(numRue);
@@ -128,10 +129,9 @@ public class AddViewController {
 			String address = numRue.getText()+"&&"+ville.getText()+"&&"+cp.getText()+"&&"+pays.getText();
 			Contact contact = new Contact(addNom.getText(), addPrenom.getText(), addSurnom.getText(), address, addBirthDate.getValue(), category, addEmail.getText(), addTelephone.getText(), addNotes.getText()  );
 			
-			
+			System.out.println(update);
 			if(!this.update) {
-			
-			contDao.addContact(contact);
+				contDao.addContact(contact);
 			}
 			else {
 				contact.setId(previousContact.getId());
