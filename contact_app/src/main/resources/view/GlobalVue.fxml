@@ -32,6 +32,6 @@
       <Button fx:id="changeButtonHS" layoutX="416.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleChangeButton" prefHeight="40.0" prefWidth="75.0" text="Change" AnchorPane.leftAnchor="416.0" AnchorPane.topAnchor="14.0" />
       <TextField fx:id="searchBar" layoutX="9.0" layoutY="14.0" prefHeight="40.0" prefWidth="306.0" AnchorPane.leftAnchor="9.0" AnchorPane.topAnchor="14.0" />
       <Button fx:id="findButton" layoutX="315.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleSearchButton" prefHeight="40.0" prefWidth="75.0" text="Find" AnchorPane.leftAnchor="315.0" AnchorPane.topAnchor="14.0" />
-      <Button fx:id="importVcard" layoutX="493.0" layoutY="68.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="115.0" text="Import Vcard" />
+      <Button fx:id="importVcard" layoutX="493.0" layoutY="68.0" mnemonicParsing="false" onAction="#handleImportButton" prefHeight="40.0" prefWidth="115.0" text="Import Vcard" />
    </children>
 </AnchorPane>

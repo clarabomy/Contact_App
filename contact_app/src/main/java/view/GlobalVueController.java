@@ -11,6 +11,8 @@ import isen.java2.model.db.daos.ContactDao;
 import isen.java2.model.db.entities.Category;
 import isen.java2.model.db.entities.Contact;
 import isen.java2.model.services.StageService;
+import isen.java2.model.vcard.ContactVcard;
+import isen.java2.model.vcard.NotEnoughDataException;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -215,7 +217,22 @@ public class GlobalVueController {
 		 listView.refresh();
 	 }
 
-	
+	 @FXML
+		private void handleImportButton() throws IOException {
+			ContactVcard cVcard = new ContactVcard("D:/ISEN/Cours/M1/Projets/Contact_App/contact_app/src/main");
+			try {
+				cVcard.importAllContacts();
+			} catch (NotEnoughDataException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			listView.getItems().clear();
+			observableContacts.clear();
+			observableContacts.addAll(dao.listAllContacts());
+			listView.getItems().addAll(dao.listAllContacts());
+			listView.refresh();
+		}
+		
 	
 	
 
