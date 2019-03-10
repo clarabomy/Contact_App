@@ -219,7 +219,7 @@ public class GlobalVueController {
 
 	 @FXML
 		private void handleImportButton() throws IOException {
-			ContactVcard cVcard = new ContactVcard("D:/ISEN/Cours/M1/Projets/Contact_App/contact_app/src/main");
+			ContactVcard cVcard = new ContactVcard("../");
 			try {
 				cVcard.importAllContacts();
 			} catch (NotEnoughDataException e) {

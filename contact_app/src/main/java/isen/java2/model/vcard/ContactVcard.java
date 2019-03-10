@@ -84,36 +84,40 @@ public class ContactVcard {
 		System.out.println(address);
 		String[] addressParts = address.split("&&");
 		String street = addressParts[0]; 
-		String town = addressParts[1];
-		String postalCode = addressParts[2];
+		String postalCode = addressParts[1];
+		String town = addressParts[2];
 		String country = addressParts[3];
 				
 		try (BufferedWriter br = Files.newBufferedWriter(this.contactsExportDir.resolve(filename), StandardCharsets.UTF_8);) {
-			br.write("BEGIN:VCARD\nVERSION:2.1");
-			br.write("FN:" + filename);
-			br.write("N:" + contact.getLastname() + ";" + contact.getFirstname() + ";;;");			
+			br.write("BEGIN:VCARD\nVERSION:2.1\n");
+			br.write("FN:" + filename + "\n");
+			br.write("N:" + contact.getLastname() + ";" + contact.getFirstname() + ";;;\n");			
 			
-			if (contact.getNickname() != null) {
-				br.write("NICKNAME:" + contact.getNickname());
+			if (!contact.getNickname().contentEquals("")) {
+				br.write("NICKNAME:" + contact.getNickname() + "\n");
 			}
 			
-			br.write("CATEGORIES:" + contact.getCategory().getName());
-			br.write("TEL;CELL:" + contact.getPhone());
-			br.write("ADR;HOME:;;" + street + ";" + town + ";;" + postalCode + ";" + country);
+			br.write("CATEGORIES:" + contact.getCategory().getName() + "\n");
+			br.write("TEL;CELL:" + contact.getPhone() + "\n");
 			
-			if (contact.getMail() != null) {
-				br.write("EMAIL;INTERNET:" + contact.getMail());
+			if (!contact.getAddress().equals("&&&&&&")) {
+				br.write("ADR;HOME:;;" + street + ";" + town + ";;" + postalCode + ";" + country + "\n");
 			}
 			
-			if (contact.getBirthdateKnown()!=null) {
-				br.write("BDAY:" + contact.getBirthdate().toString());
+			if (!contact.getMail().equals("")) {
+				br.write("EMAIL;INTERNET:" + contact.getMail() + "\n");
 			}
 			
-			if (contact.getNotes() != null) {
-				br.write("NOTE:" + contact.getNotes());
+			if (contact.getBirthdateKnown() == true) {
+				System.out.println(contact.getBirthdateKnown());
+				br.write("BDAY:" + contact.getBirthdate().toString() + "\n");
 			}
 			
-			br.write("END:VCARD");
+			if (!contact.getNotes().equals("")) {
+				br.write("NOTE:" + contact.getNotes() + "\n");
+			}
+			
+			br.write("END:VCARD\n");
 		}
 	}
 	
@@ -143,7 +147,9 @@ public class ContactVcard {
 			String line;
 			while ((line = br.readLine()) != null) {
 				String[] content = line.split(":");
-				fileContent.put(content[0], content[1]);
+				if (content.length == 2) {
+					fileContent.put(content[0], content[1]);
+				}
 			}
 			
 			if (!fileContent.containsKey("N") || !fileContent.containsKey("TEL;CELL")) {
@@ -190,7 +196,9 @@ public class ContactVcard {
 	public void importAllContacts() throws IOException, NotEnoughDataException {
 		try (DirectoryStream<Path> contactsToImport = Files.newDirectoryStream(this.contactsImportDir)) {
 			for(Path contact : contactsToImport) {
-				String filename = contact.getFileName().toString();
+				System.out.println(contact.toString());
+				String filename = contact.getFileName().getFileName().toString();
+				System.out.println(contact.toString());
 				importContact(filename);
 				Files.delete(contact);
 			}

@@ -62,7 +62,7 @@ public class CVOnClickController {
 	
 	@FXML
 	private void handleVcardExport() throws IOException {
-		ContactVcard cVcard = new ContactVcard("D:/ISEN/Cours/M1/Projets/Contact_App/contact_app/src/main");
+		ContactVcard cVcard = new ContactVcard("../");
 		cVcard.exportContact(detailedContact);
 	}
 	
