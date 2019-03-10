@@ -44,6 +44,13 @@ public class Contact {
 		this.mail = mail;
 		this.notes = notes;
 	}
+
+	public Contact(String lastname, String firstname, String nickname, String address, LocalDate birthdate, Boolean birthdateKnown,
+			Category category, String mail, String phone, String notes) {
+		this(lastname, firstname, nickname, address, birthdate, category, mail, phone, notes);
+
+		this.birthdateKnown = birthdateKnown;
+	}
 	
 	public Contact(int id, String lastname, String firstname, String nickname, String address, LocalDate birthdate,
 			Category category, String mail, String phone, String notes) {
@@ -53,7 +60,7 @@ public class Contact {
 	}
 	
 	
-
+	
 	public int getId() {
 		return id;
 	}

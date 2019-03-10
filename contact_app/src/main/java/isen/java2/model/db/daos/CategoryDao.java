@@ -33,6 +33,24 @@ public class CategoryDao {
 		return listOfCategories;	
 	}
 	
+	public int getIdCategory(String name) {
+		try (Connection connection = DataSourceFactory.getDataSource().getConnection()) {
+			try (PreparedStatement statement = connection.prepareStatement(
+					"SELECT * FROM category WHERE name=?")) {
+				statement.setString(1, name);
+				try (ResultSet results = statement.executeQuery()) {
+					if (results.next()) {
+						return results.getInt("id");
+					}
+				}
+			}
+		} 
+		catch (SQLException e) {
+			e.printStackTrace();
+		}	
+		return 0;
+	}
+	
 	public Category getCategory(String name) {
 		try (Connection connection = DataSourceFactory.getDataSource().getConnection()) {
 			try (PreparedStatement statement = connection.prepareStatement(
@@ -53,17 +71,24 @@ public class CategoryDao {
 		return null;
 	}
 
-	public void addCategory(String name) {
+	public int addCategory(String name) {
 		try (Connection connection = DataSourceFactory.getDataSource().getConnection()) {
 			String sqlQuery = "INSERT INTO category(name) VALUES(?)";
+			
 			try (PreparedStatement statement = connection.prepareStatement(sqlQuery, Statement.RETURN_GENERATED_KEYS)) {
 				statement.setString(1, name);
 				statement.executeUpdate();
+				
+				try (ResultSet keys = statement.getGeneratedKeys()) {
+					keys.next();
+					return keys.getInt(1);	
+				}	
 			}
 			
 		} 
 		catch (SQLException e) {
 			e.printStackTrace();
-		}	
+		}
+		return 0;
 	}
 }
