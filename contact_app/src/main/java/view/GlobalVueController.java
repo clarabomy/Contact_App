@@ -228,7 +228,6 @@ public class GlobalVueController {
 			}
 			listView.getItems().clear();
 			observableContacts.clear();
-			observableContacts.addAll(dao.listAllContacts());
 			listView.getItems().addAll(dao.listAllContacts());
 			listView.refresh();
 		}

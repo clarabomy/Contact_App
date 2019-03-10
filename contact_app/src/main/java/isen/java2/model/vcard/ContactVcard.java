@@ -16,8 +16,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import isen.java2.library.ItemAlreadyBorrowedException;
 import isen.java2.model.db.daos.ContactDao;
 import isen.java2.model.db.entities.Category;
 import isen.java2.model.db.entities.Contact;
@@ -103,7 +101,7 @@ public class ContactVcard {
 				br.write("ADR;HOME:;;" + street + ";" + town + ";;" + postalCode + ";" + country + "\n");
 			}
 			
-			if (!contact.getMail().equals("")) {
+			if (!contact.getMail().equals("")||contact.getMail()!=null) {
 				br.write("EMAIL;INTERNET:" + contact.getMail() + "\n");
 			}
 			
