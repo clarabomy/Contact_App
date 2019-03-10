@@ -92,6 +92,6 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Button fx:id="exVCardButton" layoutX="419.0" layoutY="385.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="130.0" text="Export to Vcard" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+      <Button fx:id="exportVCard" layoutX="419.0" layoutY="385.0" mnemonicParsing="false" onAction="#handleVcardExport" prefHeight="48.0" prefWidth="130.0" text="Export to Vcard" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
    </children>
 </AnchorPane>

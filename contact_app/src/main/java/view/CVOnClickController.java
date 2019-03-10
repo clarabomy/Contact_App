@@ -1,6 +1,9 @@
 package view;
 
+import java.io.IOException;
+
 import isen.java2.model.db.entities.Contact;
+import isen.java2.model.vcard.ContactVcard;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -9,7 +12,7 @@ import javafx.scene.text.Text;
 public class CVOnClickController {
 	
 	@FXML
-	private Button exVCardButton;
+	private Button exportVCard;
 	
 	@FXML
 	private Label title;
@@ -32,8 +35,11 @@ public class CVOnClickController {
 	@FXML
 	private Text detailedViewNotes;
 	
+	private Contact detailedContact;
 	
+	@FXML
 	public void setText(Contact contact) {
+		detailedContact = contact;
 		if(contact.getNickname()==null||contact.getNickname()=="") {
 			title.setText(contact.getLastname().toUpperCase()+ " "+ contact.getFirstname());
 		}
@@ -48,11 +54,16 @@ public class CVOnClickController {
 		detailedViewNotes.setText(contact.getNotes()==null?"":contact.getNotes());
 		
 		if (contact.getAddress()!=null) {
-		String address = contact.getAddress().replace("&&", " ");
-		
-		detailedViewAddress.setText(address);
+			String address = contact.getAddress().replace("&&", " ");
+			detailedViewAddress.setText(address);
 		}
 		
+	}
+	
+	@FXML
+	private void handleVcardExport() throws IOException {
+		ContactVcard cVcard = new ContactVcard("D:/ISEN/Cours/M1/Projets/Contact_App/contact_app/src/main");
+		cVcard.exportContact(detailedContact);
 	}
 	
 	

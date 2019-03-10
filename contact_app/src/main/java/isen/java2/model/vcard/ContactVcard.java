@@ -76,6 +76,7 @@ public class ContactVcard {
 		String filename = contact.getFirstname() + " " + contact.getLastname();
 		
 		String address = contact.getAddress() + "&&/";
+		System.out.println(address);
 		String[] addressParts = address.split("&&");
 		String street = addressParts[0]; 
 		String town = addressParts[1];
@@ -99,7 +100,7 @@ public class ContactVcard {
 				br.write("EMAIL;INTERNET:" + contact.getMail());
 			}
 			
-			if (contact.getBirthdateKnown()) {
+			if (contact.getBirthdateKnown()!=null) {
 				br.write("BDAY:" + contact.getBirthdate().toString());
 			}
 			
