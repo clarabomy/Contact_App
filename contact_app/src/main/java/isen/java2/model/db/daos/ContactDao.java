@@ -14,10 +14,37 @@ import isen.java2.model.db.entities.Contact;
 import java.sql.Date;
 
 public class ContactDao {
+	
+	public int existContact(Contact contact) {
+		try (Connection connection = DataSourceFactory.getDataSource().getConnection()) {
+			String sqlQuery = "SELECT contact.id FROM contact JOIN category ON contact.id_category = category.id WHERE LOWER(lastname) = ? AND LOWER(firstname) = ?";
+			try (PreparedStatement statement = connection.prepareStatement(sqlQuery)) {
+				statement.setString(1, contact.getLastname().toLowerCase());
+				statement.setString(2, contact.getFirstname().toLowerCase());
+				
+				try (ResultSet results = statement.executeQuery()) {
+					if (results.next()) {
+						return results.getInt("id");
+					}
+				}
+			}
+			
+		}
+		
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
 
 	public Contact addContact (Contact contact) {
-		try (Connection connection = DataSourceFactory.getDataSource().getConnection()) {
-			
+		
+		if (existContact(contact) != 0) {
+			return null;
+		}
+		
+		try (Connection connection = DataSourceFactory.getDataSource().getConnection()) {			
 			String sqlQuery = "INSERT INTO contact(lastname, firstname, nickname, phone, id_category, email, address, birthday, notes) VALUES(?,?,?,?,?,?,?,?,?)";
 			try (PreparedStatement contactStmt = connection.prepareStatement(sqlQuery, Statement.RETURN_GENERATED_KEYS)) {
 				contactStmt.setString(1, contact.getLastname());
@@ -47,6 +74,11 @@ public class ContactDao {
 	}
 	
 	public void updateContact(Contact contact) {
+		
+		if (existContact(contact) != contact.getId()) {
+			return;
+		}
+		
 		try (Connection connection = DataSourceFactory.getDataSource().getConnection()) {
 			String sqlQuery = "UPDATE contact SET lastname=?, firstname=?, nickname=?, phone=?, id_category=?, email=?, address=?, birthday=?, notes=? WHERE id=?";
 			try (PreparedStatement contactStmt = connection.prepareStatement(sqlQuery)) {

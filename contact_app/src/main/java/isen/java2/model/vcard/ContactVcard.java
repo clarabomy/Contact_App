@@ -196,9 +196,8 @@ public class ContactVcard {
 	public void importAllContacts() throws IOException, NotEnoughDataException {
 		try (DirectoryStream<Path> contactsToImport = Files.newDirectoryStream(this.contactsImportDir)) {
 			for(Path contact : contactsToImport) {
-				System.out.println(contact.toString());
-				String filename = contact.getFileName().getFileName().toString();
-				System.out.println(contact.toString());
+				String filename = contact.getFileName().toString();
+				System.out.println(filename.toString());
 				importContact(filename);
 				Files.delete(contact);
 			}
