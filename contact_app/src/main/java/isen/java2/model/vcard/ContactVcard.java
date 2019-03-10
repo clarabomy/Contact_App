@@ -81,7 +81,6 @@ public class ContactVcard {
 		String filename = contact.getFirstname() + " " + contact.getLastname();
 		
 		String address = contact.getAddress() + "&&/";
-		System.out.println(address);
 		String[] addressParts = address.split("&&");
 		String street = addressParts[0]; 
 		String postalCode = addressParts[1];
@@ -109,7 +108,6 @@ public class ContactVcard {
 			}
 			
 			if (contact.getBirthdateKnown() == true) {
-				System.out.println(contact.getBirthdateKnown());
 				br.write("BDAY:" + contact.getBirthdate().toString() + "\n");
 			}
 			
