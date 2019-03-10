@@ -105,7 +105,7 @@ public class ContactVcard {
 				br.write("EMAIL;INTERNET:" + contact.getMail() + "\n");
 			}
 			
-			if (contact.getBirthdateKnown() == true) {
+			if (contact.getBirthdate() != null) {
 				br.write("BDAY:" + contact.getBirthdate().toString() + "\n");
 			}
 			
