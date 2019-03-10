@@ -42,7 +42,7 @@ public class GlobalVueController {
 	private TextField searchBar;
 	
 	@FXML
-	private Button addButtonHS;
+	private Button addButtonHS, exportAllVcard;
 	
 	@FXML
 	private Button supprButtonHS;
@@ -54,6 +54,7 @@ public class GlobalVueController {
 	private Button findButton;
 	
 	
+	private ContactVcard cVcard;
 	private ObservableList<Contact> observableContacts;
 	private CVOnClickController controllerOnClick;
 	public Contact contactClick;
@@ -64,6 +65,12 @@ public class GlobalVueController {
 		
 		observableContacts = FXCollections.observableArrayList();
 		dao.listAllContacts().forEach( e-> observableContacts.add(e));
+		try {
+			cVcard = new ContactVcard("../");
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 	}
 
@@ -218,11 +225,14 @@ public class GlobalVueController {
 	 }
 
 	 @FXML
-		private void handleImportButton() throws IOException {
-			ContactVcard cVcard = new ContactVcard("../");
+		private void handleImportButton(){
+			
 			try {
 				cVcard.importAllContacts();
 			} catch (NotEnoughDataException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -231,6 +241,16 @@ public class GlobalVueController {
 			listView.getItems().addAll(dao.listAllContacts());
 			listView.refresh();
 		}
+	 
+	 @FXML
+	 private void handleExportAllButton() {
+		 try {
+			cVcard.exportAllContacts(observableContacts);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	 }
 		
 	
 	
