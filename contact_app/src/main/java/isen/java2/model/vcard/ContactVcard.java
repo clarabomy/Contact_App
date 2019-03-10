@@ -100,7 +100,7 @@ public class ContactVcard {
 				br.write("ADR;HOME:;;" + street + ";" + town + ";;" + postalCode + ";" + country + "\n");
 			}
 			
-			if (!contact.getMail().equals("")) {
+			if (!contact.getMail().equals("")||contact.getMail()!=null) {
 				br.write("EMAIL;INTERNET:" + contact.getMail() + "\n");
 			}
 			
