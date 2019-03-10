@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
 import java.nio.file.Path;
@@ -11,9 +12,13 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import isen.java2.library.ItemAlreadyBorrowedException;
+import isen.java2.model.db.daos.ContactDao;
 import isen.java2.model.db.entities.Category;
 import isen.java2.model.db.entities.Contact;
 
@@ -21,8 +26,8 @@ import isen.java2.model.db.entities.Contact;
 public class ContactVcard {
 
 	private static final String CONTACT_EXPORT = "contacts_export";
-	private static final String CONTACT_IMPORT = "contacts_import";
-
+	private static final String CONTACT_IMPORT = "contacts_import";	
+	private ContactDao contactDao = new ContactDao();
 	
 	protected Path root;
 	protected Path contactsExportDir;
@@ -105,14 +110,22 @@ public class ContactVcard {
 			}
 			
 			if (contact.getNotes() != null) {
-				br.write("NOTE:" + contact.getNotes() == null? contact.getNotes() : "");
+				br.write("NOTE:" + contact.getNotes());
 			}
 			
 			br.write("END:VCARD");
 		}
 	}
 	
-	public void importContact(String filename) throws IOException {
+	public void exportAllContacts(List<Contact> contactsToExport) throws IOException {
+		contactsToExport =  this.contactDao.listAllContacts();
+		
+		for (Contact contact : contactsToExport) {
+			exportContact(contact);
+		}
+	}
+	
+	private void importContact(String filename) throws IOException, NotEnoughDataException {
 		String firstname = "";
 		String lastname = "";
 		String nickname = "";
@@ -134,14 +147,13 @@ public class ContactVcard {
 			}
 			
 			if (!fileContent.containsKey("N") || !fileContent.containsKey("TEL;CELL")) {
-				//throw exception : not enough data
+				throw new NotEnoughDataException();
 			}
-			
-			if (fileContent.containsKey("N")) {
-				String[] fullName = fileContent.get("N").split(";");
-				lastname = fullName[0];
-				firstname = fullName[1];
-			}
+
+			String[] fullName = fileContent.get("N").split(";");
+			lastname = fullName[0];
+			firstname = fullName[1];
+			phone = fileContent.get("TEL;CELL");
 			
 			if (fileContent.containsKey("NICKNAME")) {
 				nickname = fileContent.get("NICKNAME");
@@ -151,7 +163,39 @@ public class ContactVcard {
 				category.setName(fileContent.get("CATEGORIES"));
 			}
 			
+			if (fileContent.containsKey("ADR;HOME")) {
+				String[] fullAddress =  fileContent.get("ADR;HOME").split(";");
+				address = fullAddress[2] + "&&" + fullAddress[3] + "&&" + fullAddress[5] + "&&" + fullAddress[6]; 
+			}
+			
+			if (fileContent.containsKey("EMAIL;INTERNET")) {
+				mail = fileContent.get("EMAIL;INTERNET"); 
+			}
+			
+			if (fileContent.containsKey("BDAY")) {
+				birthdate = LocalDate.parse(fileContent.get("BDAY"));
+				birthdateKnown = true;
+			}
+			
+			if (fileContent.containsKey("NOTE")) {
+				notes = fileContent.get("NOTE");
+			}
+			
+			Contact importedContact = new Contact(lastname, firstname, nickname, address, birthdate, birthdateKnown, category, mail, phone, notes);
+			this.contactDao.addContact(importedContact);
+			
 		}
 	}
+	
+	public void importAllContacts() throws IOException, NotEnoughDataException {
+		try (DirectoryStream<Path> contactsToImport = Files.newDirectoryStream(this.contactsImportDir)) {
+			for(Path contact : contactsToImport) {
+				String filename = contact.getFileName().toString();
+				importContact(filename);
+				Files.delete(contact);
+			}
+		}	
+	}
+			
 }
 	
