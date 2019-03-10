@@ -77,12 +77,6 @@ public class ContactVcard {
 		
 		String filename = contact.getFirstname() + " " + contact.getLastname();
 		
-		String address = contact.getAddress() + "&&/";
-		String[] addressParts = address.split("&&");
-		String street = addressParts[0]; 
-		String postalCode = addressParts[1];
-		String town = addressParts[2];
-		String country = addressParts[3];
 				
 		try (BufferedWriter br = Files.newBufferedWriter(this.contactsExportDir.resolve(filename), StandardCharsets.UTF_8);) {
 			br.write("BEGIN:VCARD\nVERSION:2.1\n");
@@ -97,10 +91,17 @@ public class ContactVcard {
 			br.write("TEL;CELL:" + contact.getPhone() + "\n");
 			
 			if (!contact.getAddress().equals("&&&&&&")) {
+				String address = contact.getAddress() + "&&/";
+				String[] addressParts = address.split("&&");
+				String street = addressParts[0]; 
+				String postalCode = addressParts[1];
+				String town = addressParts[2];
+				String country = addressParts[3];
+				
 				br.write("ADR;HOME:;;" + street + ";" + town + ";;" + postalCode + ";" + country + "\n");
 			}
 			
-			if (!contact.getMail().equals("")||contact.getMail()!=null) {
+			if (!contact.getMail().equals("")) {
 				br.write("EMAIL;INTERNET:" + contact.getMail() + "\n");
 			}
 			
