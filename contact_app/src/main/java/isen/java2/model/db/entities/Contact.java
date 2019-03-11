@@ -10,7 +10,6 @@ public class Contact {
 	protected String nickname;
 	protected String address;
 	protected LocalDate birthdate;
-	protected Boolean birthdateKnown;
 	protected Category category;
 	protected String mail;
 	protected String phone;
@@ -27,7 +26,6 @@ public class Contact {
 		this.nickname = null;
 		this.address = null;
 		this.birthdate = null;
-		this.birthdateKnown = false;
 		this.mail = null;
 		this.notes = null;
 		this.id = -1;
@@ -40,16 +38,8 @@ public class Contact {
 		this.nickname = nickname;
 		this.address = address;
 		this.birthdate = birthdate;
-		this.birthdateKnown = true;
 		this.mail = mail;
 		this.notes = notes;
-	}
-
-	public Contact(String lastname, String firstname, String nickname, String address, LocalDate birthdate, Boolean birthdateKnown,
-			Category category, String mail, String phone, String notes) {
-		this(lastname, firstname, nickname, address, birthdate, category, mail, phone, notes);
-
-		this.birthdateKnown = birthdateKnown;
 	}
 	
 	public Contact(int id, String lastname, String firstname, String nickname, String address, LocalDate birthdate,
@@ -102,22 +92,13 @@ public class Contact {
 	}
 
 	public LocalDate getBirthdate() {
-		return birthdateKnown? birthdate : null;
+		return birthdate;
 	}
 	
 	public void setBirthdate(LocalDate birthDate) {
 		this.birthdate = birthDate;
-		this.birthdateKnown = true;
 	}
 
-	public Boolean getBirthdateKnown() {
-		return birthdateKnown;
-	}
-	
-	public void setBirthdateKnown(Boolean birthDateKnown) {
-		this.birthdateKnown = birthDateKnown;
-	}
-	
 	public Category getCategory() {
 		return category;
 	}

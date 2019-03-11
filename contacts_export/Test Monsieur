@@ -1,8 +1,0 @@
-BEGIN:VCARD
-VERSION:2.1
-FN:Test Monsieur
-N:Monsieur;Test;;;
-CATEGORIES:Sans catégorie
-TEL;CELL:0987654321
-ADR;HOME:;;rue;ville;;89000;pays
-END:VCARD

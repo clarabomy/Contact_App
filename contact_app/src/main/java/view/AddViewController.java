@@ -131,8 +131,6 @@ public class AddViewController {
 			String address = numRue.getText()+"&&"+cp.getText()+"&&"+ville.getText()+"&&"+pays.getText();
 			//System.out.println(addBirthDate.getValue());
 			Contact contact = new Contact(addNom.getText(), addPrenom.getText(), addSurnom.getText(), address, addBirthDate.getValue(), category, addEmail.getText(), addTelephone.getText(), addNotes.getText()  );
-			if (addBirthDate.getValue()==null)contact.setBirthdateKnown(false);
-			else contact.setBirthdateKnown(true);
 			//System.out.println(update);
 			if((!this.update) && (contDao.existContact(contact)==0)) {
 				contDao.addContact(contact);
