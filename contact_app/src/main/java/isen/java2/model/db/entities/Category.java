@@ -39,15 +39,5 @@ public class Category {
 		
 		this.name = name;
 		this.id = id;
-		
-			
-		
-		// 1. vérifier si le name a un id associé en bdd
-			// cas 1. il existe : je passe à la suite
-			// cas 2. il n'existe pas : faut ajouter name dans table catégorie pour avoir id associé
-		// 2. je modifie id et name
-
 	}
-	
-	
 }

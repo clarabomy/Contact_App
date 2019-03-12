@@ -105,7 +105,7 @@ public class ContactVcard {
 				br.write("EMAIL;INTERNET:" + contact.getMail() + "\n");
 			}
 			
-			if (contact.getBirthdateKnown() == true) {
+			if (contact.getBirthdate() != null) {
 				br.write("BDAY:" + contact.getBirthdate().toString() + "\n");
 			}
 			
@@ -130,8 +130,7 @@ public class ContactVcard {
 		String lastname = "";
 		String nickname = "";
 		String address = "";
-		LocalDate birthdate = LocalDate.of(2000, Month.JANUARY, 1);
-		Boolean birthdateKnown = false;
+		LocalDate birthdate = null;
 		Category category = new Category("Sans Catégorie");
 		String mail = "";
 		String phone = "";
@@ -176,14 +175,13 @@ public class ContactVcard {
 			
 			if (fileContent.containsKey("BDAY")) {
 				birthdate = LocalDate.parse(fileContent.get("BDAY"));
-				birthdateKnown = true;
 			}
 			
 			if (fileContent.containsKey("NOTE")) {
 				notes = fileContent.get("NOTE");
 			}
 			
-			Contact importedContact = new Contact(lastname, firstname, nickname, address, birthdate, birthdateKnown, category, mail, phone, notes);
+			Contact importedContact = new Contact(lastname, firstname, nickname, address, birthdate, category, mail, phone, notes);
 			this.contactDao.addContact(importedContact);
 			
 		}
