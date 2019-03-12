@@ -25,6 +25,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
@@ -139,7 +140,7 @@ public class GlobalVueController {
 		FXMLLoader loader = new  FXMLLoader();
 		loader.setLocation(ContactApp.class.getResource("/view/ContactViewOnClick.fxml"));
 		try {
-			AnchorPane pane = loader.load();
+			ScrollPane pane = loader.load();
 			detailedView.getChildren().add(pane);
 			detailedView.setVisible(false);
 		}
