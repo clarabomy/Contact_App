@@ -56,6 +56,7 @@ public class GlobalVueController {
 	
 	private ContactVcard cVcard;
 	private ObservableList<Contact> observableContacts;
+	private ObservableList<String> obsvCat;
 	private CVOnClickController controllerOnClick;
 	public Contact contactClick;
 	private ContactDao dao = new ContactDao();
@@ -71,7 +72,9 @@ public class GlobalVueController {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		
+		obsvCat = FXCollections.observableArrayList();
+		catDao.getCategoryList().forEach(e -> obsvCat.add(e.getName()));
+		obsvCat.add("Tout afficher");
 	}
 
 
@@ -89,7 +92,7 @@ public class GlobalVueController {
 			}
         });
 		
-		catDao.getCategoryList().forEach(e -> groupFilter.getItems().add(e.getName()));
+		groupFilter.getItems().addAll(obsvCat);
 		
 		listView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Contact>() {
 
@@ -117,7 +120,7 @@ public class GlobalVueController {
 			public void changed(ObservableValue<? extends String> arg0, String arg1, String arg2) {
 				// TODO Auto-generated method stub
 				listView.getItems().removeAll(observableContacts);
-				if (!arg2.equals("")) {
+				if (!arg2.equals("Tout afficher")) {
 					listView.getSelectionModel().clearSelection();
 					listView.getItems().addAll(dao.listContactsByCategory(arg2));
 					listView.refresh();
