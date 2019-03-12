@@ -4,21 +4,24 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="homeScreenAnchorPane" prefHeight="544.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GlobalVueController">
+<AnchorPane fx:id="homeScreenAnchorPane" prefHeight="571.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GlobalVueController">
    <children>
-      <Button fx:id="addButtonHS" layoutX="513.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleNewButton" prefHeight="40.0" prefWidth="75.0" text="Add" AnchorPane.leftAnchor="513.0" AnchorPane.topAnchor="14.0" />
-      <Button fx:id="supprButtonHS" layoutX="613.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleSupprButton" prefHeight="40.0" prefWidth="75.0" text="Suppr" AnchorPane.leftAnchor="613.0" AnchorPane.topAnchor="14.0" />
-      <Label layoutX="14.0" layoutY="74.0" text="Flitrer par groupe :" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="74.0">
+      <Button fx:id="addButtonHS" layoutX="515.0" layoutY="34.0" mnemonicParsing="false" onAction="#handleNewButton" prefHeight="40.0" prefWidth="75.0" text="Add" AnchorPane.leftAnchor="515.0" AnchorPane.topAnchor="34.0" />
+      <Button fx:id="supprButtonHS" layoutX="615.0" layoutY="34.0" mnemonicParsing="false" onAction="#handleSupprButton" prefHeight="40.0" prefWidth="75.0" text="Suppr" AnchorPane.leftAnchor="615.0" AnchorPane.topAnchor="34.0" />
+      <Label layoutX="16.0" layoutY="94.0" text="Flitrer par groupe :" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="94.0">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <ChoiceBox fx:id="groupFilter" layoutX="192.0" layoutY="75.0" prefWidth="150.0" AnchorPane.leftAnchor="192.0" AnchorPane.topAnchor="75.0" />
+      <ChoiceBox fx:id="groupFilter" layoutX="194.0" layoutY="95.0" prefWidth="150.0" AnchorPane.leftAnchor="194.0" AnchorPane.topAnchor="95.0" />
       <SplitPane dividerPositions="0.44142857142857145" layoutY="137.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="137.0">
         <items>
           <AnchorPane>
@@ -29,10 +32,19 @@
           <AnchorPane fx:id="detailedView" />
         </items>
       </SplitPane>
-      <Button fx:id="changeButtonHS" layoutX="416.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleChangeButton" prefHeight="40.0" prefWidth="75.0" text="Change" AnchorPane.leftAnchor="416.0" AnchorPane.topAnchor="14.0" />
-      <TextField fx:id="searchBar" layoutX="9.0" layoutY="14.0" prefHeight="40.0" prefWidth="306.0" AnchorPane.leftAnchor="9.0" AnchorPane.topAnchor="14.0" />
-      <Button fx:id="findButton" layoutX="315.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleSearchButton" prefHeight="40.0" prefWidth="75.0" text="Find" AnchorPane.leftAnchor="315.0" AnchorPane.topAnchor="14.0" />
-      <Button fx:id="importVcard" layoutX="376.0" layoutY="68.0" mnemonicParsing="false" onAction="#handleImportButton" prefHeight="40.0" prefWidth="115.0" text="Import Vcard" />
-      <Button fx:id="exportAllVcard" layoutX="533.0" layoutY="68.0" mnemonicParsing="false" onAction="#handleExportAllButton" prefHeight="40.0" prefWidth="139.0" text="Export all Contacts " />
+      <Button fx:id="changeButtonHS" layoutX="418.0" layoutY="34.0" mnemonicParsing="false" onAction="#handleChangeButton" prefHeight="40.0" prefWidth="75.0" text="Change" AnchorPane.leftAnchor="418.0" AnchorPane.topAnchor="34.0" />
+      <TextField fx:id="searchBar" layoutX="11.0" layoutY="34.0" prefHeight="40.0" prefWidth="306.0" AnchorPane.leftAnchor="11.0" AnchorPane.topAnchor="34.0" />
+      <Button fx:id="findButton" layoutX="317.0" layoutY="34.0" mnemonicParsing="false" onAction="#handleSearchButton" prefHeight="40.0" prefWidth="75.0" text="Find" AnchorPane.leftAnchor="317.0" AnchorPane.topAnchor="34.0" />
+      <Button fx:id="exportAllVcard" layoutX="446.0" layoutY="88.0" mnemonicParsing="false" onAction="#handleVcardExport" prefHeight="40.0" prefWidth="139.0" text="Export Contact" />
+      <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="700.0" AnchorPane.topAnchor="2.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Vcard Options">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#handleImportButton" text="Import all Vcard" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleExportAllButton" text="Export all Vcard" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
    </children>
 </AnchorPane>

@@ -30,10 +30,10 @@ public class CVOnClickController {
 	private Text detailedViewGroup;
 	
 	@FXML
-	private Text detailedViewAddress;
+	private Label detailedViewAddress;
 	
 	@FXML
-	private Text detailedViewNotes;
+	private Label detailedViewNotes;
 	
 	private Contact detailedContact;
 	
@@ -52,6 +52,7 @@ public class CVOnClickController {
 		detailedViewEmail.setText(contact.getMail()==null?"":contact.getMail());
 		detailedViewGroup.setText(contact.getCategory().getName()==null?"":contact.getCategory().getName());
 		detailedViewNotes.setText(contact.getNotes()==null?"":contact.getNotes());
+
 		
 		if (contact.getAddress()!=null) {
 			String address = contact.getAddress().replace("&&", " ");
@@ -60,11 +61,7 @@ public class CVOnClickController {
 		
 	}
 	
-	@FXML
-	private void handleVcardExport() throws IOException {
-		ContactVcard cVcard = new ContactVcard("../");
-		cVcard.exportContact(detailedContact);
-	}
+	
 	
 	
 	

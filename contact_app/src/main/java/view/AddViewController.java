@@ -20,12 +20,16 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 public class AddViewController {
 	@FXML
-	private TextField addNom, ville, cp, numRue, addPrenom, addNotes, addTelephone, addEmail, addSurnom, pays;
+	private TextField addNom, ville, cp, numRue, addPrenom, addTelephone, addEmail, addSurnom, pays;
+	
+	@FXML
+	private TextArea addNotes;
 	
 	@FXML
 	private ChoiceBox addGroupe;
@@ -57,7 +61,9 @@ public class AddViewController {
 		System.out.println(addNom);
 		addNom.setText(contact.getLastname()==null?"":contact.getLastname());
 		addPrenom.setText(contact.getFirstname()==null?"":contact.getFirstname());
-		addNotes.setText(contact.getNotes()==null?"":contact.getNotes());
+		System.out.println(contact.getNotes());
+//		addNotes.setText(contact.getNotes()==null?"":contact.getNotes());
+		addNotes.setText(contact.getNotes());
 		addTelephone.setText(contact.getPhone()==null?"":contact.getPhone());
 		addEmail.setText(contact.getMail()==null?"":contact.getMail());
 		addSurnom.setText(contact.getNickname()==null?"":contact.getNickname());
@@ -128,7 +134,8 @@ public class AddViewController {
 				
 			}
 			
-			String address = numRue.getText()+"&&"+cp.getText()+"&&"+ville.getText()+"&&"+pays.getText();
+			String address = numRue.getText()+"\n&&"+cp.getText()+"&&"+ville.getText()+"\n&&"+pays.getText()+"&&";
+			System.out.println(address);
 			//System.out.println(addBirthDate.getValue());
 			Contact contact = new Contact(addNom.getText(), addPrenom.getText(), addSurnom.getText(), address, addBirthDate.getValue(), category, addEmail.getText(), addTelephone.getText(), addNotes.getText()  );
 			//System.out.println(update);

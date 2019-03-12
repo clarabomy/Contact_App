@@ -81,6 +81,7 @@ public class GlobalVueController {
 
 	@FXML
 	public void initialize() {
+		
 		// TODO Auto-generated method stub
 		listView.setItems(observableContacts);
 		listView.setCellFactory(new Callback<ListView<Contact>, javafx.scene.control.ListCell<Contact>>()
@@ -140,8 +141,13 @@ public class GlobalVueController {
 		FXMLLoader loader = new  FXMLLoader();
 		loader.setLocation(ContactApp.class.getResource("/view/ContactViewOnClick.fxml"));
 		try {
-			ScrollPane pane = loader.load();
+			AnchorPane pane = loader.load();
 			detailedView.getChildren().add(pane);
+			AnchorPane.setBottomAnchor(pane, (double) 0);
+		    AnchorPane.setTopAnchor(pane, (double)0);
+		    AnchorPane.setLeftAnchor(pane, (double) 0);
+		    AnchorPane.setRightAnchor(pane, (double) 0);
+		    detailedView.getChildren().setAll(pane);
 			detailedView.setVisible(false);
 		}
 		catch (IOException e ) {
@@ -255,6 +261,13 @@ public class GlobalVueController {
 			e.printStackTrace();
 		}
 	 }
+	 
+	 
+	 @FXML
+		private void handleVcardExport() throws IOException {
+			ContactVcard cVcard = new ContactVcard("../");
+			cVcard.exportContact(contactClick);
+		}
 		
 	
 	

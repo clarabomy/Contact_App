@@ -90,7 +90,9 @@ public class ContactVcard {
 			br.write("CATEGORIES:" + contact.getCategory().getName() + "\n");
 			br.write("TEL;CELL:" + contact.getPhone() + "\n");
 			
-			if (!contact.getAddress().equals("&&&&&&") && !contact.getAddress().equals("")) {
+			
+			if (!contact.getAddress().equals("&&&&&&")) {
+				System.out.println(contact.getAddress());
 				String address = contact.getAddress() + "&&/";
 				String[] addressParts = address.split("&&");
 				String street = addressParts[0]; 
