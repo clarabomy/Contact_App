@@ -92,7 +92,6 @@ public class ContactVcard {
 			
 			
 			if (!contact.getAddress().equals("&&&&&&")) {
-				System.out.println(contact.getAddress());
 				String address = contact.getAddress() + "&&/";
 				String[] addressParts = address.split("&&");
 				String street = addressParts[0]; 
@@ -167,6 +166,7 @@ public class ContactVcard {
 			}
 			
 			if (fileContent.containsKey("ADR;HOME")) {
+				fileContent.put("ADR;HOME", fileContent.get("ADR;HOME") + " ;");
 				String[] fullAddress =  fileContent.get("ADR;HOME").split(";");
 				address = fullAddress[2] + "&&" + fullAddress[3] + "&&" + fullAddress[5] + "&&" + fullAddress[6]; 
 			}
