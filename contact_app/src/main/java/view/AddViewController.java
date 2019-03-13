@@ -24,6 +24,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 
 public class AddViewController {
 	@FXML
@@ -31,6 +32,9 @@ public class AddViewController {
 	
 	@FXML
 	private TextArea addNotes;
+	
+	@FXML
+	private Text nveauContact;
 	
 	@FXML
 	private ChoiceBox addGroupe;
@@ -60,6 +64,7 @@ public class AddViewController {
 	@FXML
 	public void setText(Contact contact) {
 //		System.out.println(addNom);
+		nveauContact.setText("Modification");
 		addNom.setText(contact.getLastname()==null?"":contact.getLastname());
 		addPrenom.setText(contact.getFirstname()==null?"":contact.getFirstname());
 //		System.out.println(contact.getNotes());

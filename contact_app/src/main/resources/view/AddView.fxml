@@ -105,7 +105,7 @@
       </ScrollPane>
       <Button fx:id="validateButton" layoutX="618.0" layoutY="6.0" mnemonicParsing="false" onAction="#handleValidateButton" prefHeight="38.0" prefWidth="68.0" text="Valider" />
       <Button fx:id="returnButton" layoutX="14.0" layoutY="6.0" mnemonicParsing="false" onAction="#handleReturnButton" prefHeight="38.0" prefWidth="68.0" text="Retour" />
-      <Text layoutX="257.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nouveau Contact">
+      <Text fx:id="nveauContact" layoutX="257.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nouveau Contact">
          <font>
             <Font name="Arial" size="24.0" />
          </font>

@@ -193,22 +193,24 @@ public class GlobalVueController {
 	 
 	 @FXML
 	 private void handleChangeButton() {
-		 FXMLLoader loader = new  FXMLLoader();
-		 loader.setLocation(ContactApp.class.getResource("/view/AddView.fxml"));
-		 
-		 
-			try {
-				homeScreenAnchorPane = loader.load();
-				Scene scene = new Scene(homeScreenAnchorPane);
-				StageService.getInstance().getPrimaryStage().setScene(scene);
-				StageService.getInstance().getPrimaryStage().show();
-				AddViewController controller = loader.getController();
-				controller.setText(contactClick);
-					
-			}
-			catch (IOException e ) {
-				e.printStackTrace();
-			}
+		 if (!listView.getSelectionModel().isEmpty()) {
+			 FXMLLoader loader = new  FXMLLoader();
+			 loader.setLocation(ContactApp.class.getResource("/view/AddView.fxml"));
+			 
+			 
+				try {
+					homeScreenAnchorPane = loader.load();
+					Scene scene = new Scene(homeScreenAnchorPane);
+					StageService.getInstance().getPrimaryStage().setScene(scene);
+					StageService.getInstance().getPrimaryStage().show();
+					AddViewController controller = loader.getController();
+					controller.setText(contactClick);
+						
+				}
+				catch (IOException e ) {
+					e.printStackTrace();
+				}
+		 }
 	 }
 	 
 	 @FXML
