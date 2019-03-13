@@ -134,8 +134,8 @@ public class AddViewController {
 				
 			}
 			
-			String address = numRue.getText()+"\n&&"+cp.getText()+"&&"+ville.getText()+"\n&&"+pays.getText()+"&&";
-			System.out.println(address);
+			String address = numRue.getText()+"&&"+cp.getText()+"&&"+ville.getText()+"&&"+pays.getText();
+			//System.out.println(address);
 			//System.out.println(addBirthDate.getValue());
 			Contact contact = new Contact(addNom.getText(), addPrenom.getText(), addSurnom.getText(), address, addBirthDate.getValue(), category, addEmail.getText(), addTelephone.getText(), addNotes.getText()  );
 			//System.out.println(update);
