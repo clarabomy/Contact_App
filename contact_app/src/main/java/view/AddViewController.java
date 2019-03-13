@@ -2,6 +2,7 @@ package view;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 import isen.java2.app.ContactApp;
 import isen.java2.model.db.daos.CategoryDao;
@@ -58,10 +59,10 @@ public class AddViewController {
 	
 	@FXML
 	public void setText(Contact contact) {
-		System.out.println(addNom);
+//		System.out.println(addNom);
 		addNom.setText(contact.getLastname()==null?"":contact.getLastname());
 		addPrenom.setText(contact.getFirstname()==null?"":contact.getFirstname());
-		System.out.println(contact.getNotes());
+//		System.out.println(contact.getNotes());
 //		addNotes.setText(contact.getNotes()==null?"":contact.getNotes());
 		addNotes.setText(contact.getNotes());
 		addTelephone.setText(contact.getPhone()==null?"":contact.getPhone());
@@ -69,13 +70,13 @@ public class AddViewController {
 		addSurnom.setText(contact.getNickname()==null?"":contact.getNickname());
 		addGroupe.getSelectionModel().select(contact.getCategory().getId()-1);
 		addBirthDate.setValue(contact.getBirthdate());
-		System.out.println(contact.getAddress());
+//		System.out.println(contact.getAddress());
 		if (contact.getAddress()!= null && contact.getAddress()!= "") {
 			String[] address = contact.getAddress().split("&&");
 			ArrayList<TextField> addressTF = new ArrayList<TextField>();
 			addressTF.add(numRue);
-			addressTF.add(ville);
 			addressTF.add(cp);
+			addressTF.add(ville);
 			addressTF.add(pays);
 			for (int i =0; i<address.length; i++) {
 				addressTF.get(i).setText(address[i]);
@@ -115,7 +116,43 @@ public class AddViewController {
 			alert.show();
 			formulaireValide=false;
 		}
-		else{try {
+		else if(cp.getText()!=null && !cp.getText().equals("")) {
+			try {
+				int num = Integer.parseInt(cp.getText());
+//				System.out.println(num);
+				
+			}catch(NumberFormatException e){
+				alert.setTitle("Formulaire mal rempli");
+				alert.setContentText("Vous devez remplir un code postal valide.");
+				alert.setHeaderText(null);
+				alert.show();
+				formulaireValide=false;
+			}
+		}
+		if(!ville.getText().equals("")) {
+			String s=ville.getText().replaceAll("[^0-9]", "");
+			if (s.length()>0 && Pattern.matches("[a-zA-Z]+",ville.getText())) {
+				alert.setTitle("Formulaire mal rempli");
+				alert.setContentText("Vous devez remplir un nom de ville valide.");
+				alert.setHeaderText(null);
+				alert.show();
+				formulaireValide=false;
+			}
+			
+		}
+		if(!pays.getText().equals("")) {
+			String s=pays.getText().replaceAll("[^0-9]", "");
+			System.out.println(s);
+			if (s.length()>0) {
+				alert.setTitle("Formulaire mal rempli");
+				alert.setContentText("Vous devez remplir un pays valide.");
+				alert.setHeaderText(null);
+				alert.show();
+				formulaireValide=false;
+			}
+			
+		}
+		try {
 			int num = Integer.parseInt(addTelephone.getText());
 			
 		}catch(NumberFormatException e){
@@ -124,7 +161,7 @@ public class AddViewController {
 			alert.setHeaderText(null);
 			alert.show();
 			formulaireValide=false;
-		}}
+		}
 		
 		if(formulaireValide) {
 			CategoryDao cdao = new CategoryDao();
@@ -135,7 +172,7 @@ public class AddViewController {
 			}
 			
 			String address = numRue.getText()+"\n&&"+cp.getText()+"&&"+ville.getText()+"\n&&"+pays.getText()+"&&";
-			System.out.println(address);
+//			System.out.println(address);
 			//System.out.println(addBirthDate.getValue());
 			Contact contact = new Contact(addNom.getText(), addPrenom.getText(), addSurnom.getText(), address, addBirthDate.getValue(), category, addEmail.getText(), addTelephone.getText(), addNotes.getText()  );
 			//System.out.println(update);
