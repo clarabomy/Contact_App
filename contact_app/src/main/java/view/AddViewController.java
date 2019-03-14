@@ -136,7 +136,7 @@ public class AddViewController {
 		}
 		if(!ville.getText().equals("")) {
 			String s=ville.getText().replaceAll("[^0-9]", "");
-			if (s.length()>0 && Pattern.matches("[a-zA-Z]+",ville.getText())) {
+			if (s.length()>0 && Pattern.matches("[a-zA-Z]-?'?",ville.getText())) {
 				alert.setTitle("Formulaire mal rempli");
 				alert.setContentText("Vous devez remplir un nom de ville valide.");
 				alert.setHeaderText(null);
