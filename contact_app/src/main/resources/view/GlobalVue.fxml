@@ -14,8 +14,8 @@
 
 <AnchorPane fx:id="homeScreenAnchorPane" prefHeight="571.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GlobalVueController">
    <children>
-      <Button fx:id="addButtonHS" layoutX="515.0" layoutY="34.0" mnemonicParsing="false" onAction="#handleNewButton" prefHeight="40.0" prefWidth="75.0" text="Add" AnchorPane.leftAnchor="515.0" AnchorPane.topAnchor="34.0" />
-      <Button fx:id="supprButtonHS" layoutX="615.0" layoutY="34.0" mnemonicParsing="false" onAction="#handleSupprButton" prefHeight="40.0" prefWidth="75.0" text="Suppr" AnchorPane.leftAnchor="615.0" AnchorPane.topAnchor="34.0" />
+      <Button fx:id="addButtonHS" layoutX="516.0" layoutY="34.0" mnemonicParsing="false" onAction="#handleNewButton" prefHeight="40.0" prefWidth="75.0" text="Ajouter" AnchorPane.leftAnchor="516.0" AnchorPane.topAnchor="34.0" />
+      <Button fx:id="supprButtonHS" layoutX="611.0" layoutY="34.0" mnemonicParsing="false" onAction="#handleSupprButton" prefHeight="40.0" prefWidth="75.0" text="Supprimer" AnchorPane.leftAnchor="611.0" AnchorPane.topAnchor="34.0" />
       <Label layoutX="16.0" layoutY="94.0" text="Flitrer par groupe :" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="94.0">
          <font>
             <Font size="18.0" />
@@ -32,21 +32,21 @@
           <AnchorPane fx:id="detailedView" />
         </items>
       </SplitPane>
-      <Button fx:id="changeButtonHS" layoutX="418.0" layoutY="34.0" mnemonicParsing="false" onAction="#handleChangeButton" prefHeight="40.0" prefWidth="75.0" text="Change" AnchorPane.leftAnchor="418.0" AnchorPane.topAnchor="34.0" />
+      <Button fx:id="changeButtonHS" layoutX="420.0" layoutY="34.0" mnemonicParsing="false" onAction="#handleChangeButton" prefHeight="40.0" prefWidth="75.0" text="Modifier" AnchorPane.leftAnchor="420.0" AnchorPane.topAnchor="34.0" />
       <TextField fx:id="searchBar" layoutX="11.0" layoutY="34.0" prefHeight="40.0" prefWidth="306.0" AnchorPane.leftAnchor="11.0" AnchorPane.topAnchor="34.0" />
-      <Button fx:id="findButton" layoutX="317.0" layoutY="34.0" mnemonicParsing="false" onAction="#handleSearchButton" prefHeight="40.0" prefWidth="75.0" text="Find" AnchorPane.leftAnchor="317.0" AnchorPane.topAnchor="34.0" />
-      <Button fx:id="exportAllVcard" layoutX="446.0" layoutY="88.0" mnemonicParsing="false" onAction="#handleVcardExport" prefHeight="40.0" prefWidth="139.0" text="Export Contact" />
+      <Button fx:id="findButton" layoutX="317.0" layoutY="34.0" mnemonicParsing="false" onAction="#handleSearchButton" prefHeight="40.0" prefWidth="86.0" text="Rechercher" AnchorPane.leftAnchor="317.0" AnchorPane.topAnchor="34.0" />
+      <Button fx:id="exportAllVcard" layoutX="446.0" layoutY="88.0" mnemonicParsing="false" onAction="#handleVcardExport" prefHeight="40.0" prefWidth="139.0" text="Exporter un contact" />
       <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="700.0" AnchorPane.topAnchor="2.0">
         <menus>
           <Menu mnemonicParsing="false" text="Vcard Options">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#handleImportButton" text="Import all Vcard" />
-                  <MenuItem mnemonicParsing="false" onAction="#handleExportAllButton" text="Export all Vcard" />
+              <MenuItem mnemonicParsing="false" onAction="#handleImportButton" text="Importer tous les Vcard" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleExportAllButton" text="Exporter tous les Vcard" />
             </items>
           </Menu>
-            <Menu mnemonicParsing="false" text="Category Options">
+            <Menu mnemonicParsing="false" text="Catégories Options">
               <items>
-                <MenuItem mnemonicParsing="false" onAction="#handleNewCat" text="Add a Category" />
+                <MenuItem mnemonicParsing="false" onAction="#handleNewCat" text="Ajouter une nouvelle catégorie" />
               </items>
             </Menu>
         </menus>
