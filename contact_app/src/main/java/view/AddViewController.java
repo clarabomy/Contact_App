@@ -129,7 +129,7 @@ public class AddViewController {
 			formulaireValide=false;
 		}
 		else if(cp.getText()!=null && !cp.getText().equals("")) {
-			if (numRue.getText().contains("\"")||numRue.getText().contains("&")||numRue.getText().contains("'")) {
+			if (numRue.getText().contains("\"")||numRue.getText().contains("&")||numRue.getText().contains(";")) {
 				alert.setTitle("Formulaire mal rempli");
 				alert.setContentText("Vous devez remplir un numéro et une rue valides.");
 				alert.setHeaderText(null);
@@ -147,7 +147,6 @@ public class AddViewController {
 			}
 		}
 		if(!ville.getText().equals("")) {
-//			String s=ville.getText().replaceAll("[^0-9]", "");
 			boolean match = Pattern.matches("[a-zA-Z\u00C0-\u017F]+-?'?[a-zA-Z\u00C0-\u017F]*-?'?[a-zA-Z\u00C0-\u017F]*-?'?[a-zA-Z\u00C0-\u017F]*-?'?[a-zA-Z\u00C0-\u017F]*",ville.getText());
 			if (!match) {
 				alert.setTitle("Formulaire mal rempli");
@@ -159,7 +158,7 @@ public class AddViewController {
 			
 		}
 		if(!pays.getText().equals("")) {
-			if (!Pattern.matches("[a-zA-Z]+", pays.getText())) {
+			if (!Pattern.matches("[a-zA-Z\u00C0-\u017F]+", pays.getText())) {
 				alert.setTitle("Formulaire mal rempli");
 				alert.setContentText("Vous devez remplir un pays valide.");
 				alert.setHeaderText(null);
@@ -169,7 +168,7 @@ public class AddViewController {
 			
 		}
 		if(!numRue.getText().equals("")) {
-			if (numRue.getText().contains("\"")||numRue.getText().contains("&")) {
+			if (numRue.getText().contains("\"")||numRue.getText().contains("&")||numRue.getText().contains(";")) {
 				alert.setTitle("Formulaire mal rempli");
 				alert.setContentText("Vous devez remplir un numéro et une rue valides.");
 				alert.setHeaderText(null);
@@ -177,7 +176,27 @@ public class AddViewController {
 				formulaireValide=false;
 			}
 		}
-		
+		if(addNom.getText().contains("\"")||addNom.getText().contains("&")||addNom.getText().contains(";")) {
+			alert.setTitle("Formulaire mal rempli");
+			alert.setContentText("Vous devez remplir un nom valide.");
+			alert.setHeaderText(null);
+			alert.show();
+			formulaireValide=false;
+		}
+		if(addPrenom.getText().contains("\"")||addPrenom.getText().contains("&")||addPrenom.getText().contains(";")) {
+			alert.setTitle("Formulaire mal rempli");
+			alert.setContentText("Vous devez remplir un prénom valide.");
+			alert.setHeaderText(null);
+			alert.show();
+			formulaireValide=false;
+		}
+		if(addSurnom.getText().contains("\"")||addSurnom.getText().contains("&")||addSurnom.getText().contains(";")) {
+			alert.setTitle("Formulaire mal rempli");
+			alert.setContentText("Vous devez remplir un surnom valide.");
+			alert.setHeaderText(null);
+			alert.show();
+			formulaireValide=false;
+		}
 		
 		if(formulaireValide) {
 			CategoryDao cdao = new CategoryDao();
@@ -188,18 +207,23 @@ public class AddViewController {
 			}
 			
 			String address = numRue.getText()+"&&"+cp.getText()+"&&"+ville.getText()+"&&"+pays.getText();
-			//System.out.println(address);
-			//System.out.println(addBirthDate.getValue());
 			Contact contact = new Contact(addNom.getText(), addPrenom.getText(), addSurnom.getText(), address, addBirthDate.getValue(), category, addEmail.getText(), addTelephone.getText(), addNotes.getText()  );
-			//System.out.println(update);
 			if((!this.update) && (contDao.existContact(contact)==0)) {
 				contDao.addContact(contact);
+				handleReturnButton();
 			}
-			else  {
+			else if(this.update && contDao.existContact(contact)!=0)  {
 				contact.setId(previousContact.getId());
 				contDao.updateContact(contact);
+				handleReturnButton();
 			}
-			handleReturnButton();
+			else if(!this.update && contDao.existContact(contact)!=0) {
+				alert.setTitle("Contact déjà existant");
+				alert.setContentText("Vous ne pouvez pas ajouter 2 contacts déjà existants. Veuillez sortir de la fenêtre d'ajout de contact et cliquer sur le bouton 'change'.");
+				alert.setHeaderText(null);
+				alert.show();
+			}
+			
 			
 		}
 		
