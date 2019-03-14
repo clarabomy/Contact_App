@@ -10,7 +10,7 @@ public class DataSourceFactory {
 		if (dataSource == null) {
 			dataSource = new MysqlDataSource();
 			dataSource.setServerName("localhost");
-			dataSource.setPort(3307);
+			dataSource.setPort(3306);
 			dataSource.setDatabaseName("contact_app");
 			dataSource.setUser("root");
 			dataSource.setPassword("");

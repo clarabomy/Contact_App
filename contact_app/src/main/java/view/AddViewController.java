@@ -129,7 +129,7 @@ public class AddViewController {
 			formulaireValide=false;
 		}
 		else if(cp.getText()!=null && !cp.getText().equals("")) {
-			if (numRue.getText().contains("\"")||numRue.getText().contains("&")||numRue.getText().contains(";")) {
+			if (cp.getText().contains("\"")||cp.getText().contains("&")||cp.getText().contains(";")) {
 				alert.setTitle("Formulaire mal rempli");
 				alert.setContentText("Vous devez remplir un numéro et une rue valides.");
 				alert.setHeaderText(null);
@@ -205,19 +205,19 @@ public class AddViewController {
 				category = cdao.getCategory(addGroupe.getValue().toString());
 				
 			}
-			
+			Contact existCont = new Contact(addNom.getText(), addPrenom.getText(), null, null);
 			String address = numRue.getText()+"&&"+cp.getText()+"&&"+ville.getText()+"&&"+pays.getText();
 			Contact contact = new Contact(addNom.getText(), addPrenom.getText(), addSurnom.getText(), address, addBirthDate.getValue(), category, addEmail.getText(), addTelephone.getText(), addNotes.getText()  );
 			if((!this.update) && (contDao.existContact(contact)==0)) {
 				contDao.addContact(contact);
 				handleReturnButton();
 			}
-			else if(this.update && contDao.existContact(contact)!=0)  {
+			else if(this.update)  {
 				contact.setId(previousContact.getId());
 				contDao.updateContact(contact);
 				handleReturnButton();
 			}
-			else if(!this.update && contDao.existContact(contact)!=0) {
+			else if(!this.update && contDao.existContact(existCont)!=0) {
 				alert.setTitle("Contact déjà existant");
 				alert.setContentText("Vous ne pouvez pas ajouter 2 contacts déjà existants. Veuillez sortir de la fenêtre d'ajout de contact et cliquer sur le bouton 'change'.");
 				alert.setHeaderText(null);

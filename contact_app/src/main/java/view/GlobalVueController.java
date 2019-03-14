@@ -215,22 +215,24 @@ public class GlobalVueController {
 	 
 	 @FXML
 	 private void handleSupprButton() {
-		 
-		 dao.deleteContact(contactClick.getId());
-		 listView.getItems().remove(listView.getSelectionModel().getSelectedIndex());
-		 System.out.println(listView.getItems());
-		 this.listView.refresh();
-		 listView.getSelectionModel().clearSelection();
-		 
+		 if (!listView.getSelectionModel().isEmpty()) {
+			 dao.deleteContact(contactClick.getId());
+			 listView.getItems().remove(listView.getSelectionModel().getSelectedIndex());
+			 System.out.println(listView.getItems());
+			 this.listView.refresh();
+			 listView.getSelectionModel().clearSelection();
+		 }
 	 }
 	 
 	 
 	 @FXML
 	 private void handleSearchButton() {
-		 listView.getSelectionModel().clearSelection();
-		 listView.getItems().removeAll(observableContacts);
-		 listView.getItems().addAll(dao.searchContact(this.searchBar.getText()));
-		 listView.refresh();
+		 if (!listView.getSelectionModel().isEmpty()) {
+			 listView.getSelectionModel().clearSelection();
+			 listView.getItems().removeAll(observableContacts);
+			 listView.getItems().addAll(dao.searchContact(this.searchBar.getText()));
+			 listView.refresh();
+		 }
 	 }
 
 	 @FXML
@@ -264,9 +266,30 @@ public class GlobalVueController {
 	 
 	 @FXML
 		private void handleVcardExport() throws IOException {
+		 if (!listView.getSelectionModel().isEmpty()) {
 			ContactVcard cVcard = new ContactVcard("../");
 			cVcard.exportContact(contactClick);
+		 }
 		}
+	 
+	 @FXML
+	 private void handleNewCat() {
+		 FXMLLoader loader = new  FXMLLoader();
+		 loader.setLocation(ContactApp.class.getResource("/view/AddCategoryView.fxml"));
+	 
+		 try {
+				homeScreenAnchorPane = loader.load();
+				Scene scene = new Scene(homeScreenAnchorPane);
+				StageService.getInstance().getPrimaryStage().setScene(scene);
+				StageService.getInstance().getPrimaryStage().show();
+//				AddViewController controller = loader.getController();
+					
+			}
+			catch (IOException e ) {
+				e.printStackTrace();
+			}
+			
+	 }
 		
 	
 	

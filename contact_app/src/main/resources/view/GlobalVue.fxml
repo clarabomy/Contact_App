@@ -44,6 +44,11 @@
                   <MenuItem mnemonicParsing="false" onAction="#handleExportAllButton" text="Export all Vcard" />
             </items>
           </Menu>
+            <Menu mnemonicParsing="false" text="Category Options">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#handleNewCat" text="Add a Category" />
+              </items>
+            </Menu>
         </menus>
       </MenuBar>
    </children>
