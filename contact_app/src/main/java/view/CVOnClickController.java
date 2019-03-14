@@ -55,7 +55,8 @@ public class CVOnClickController {
 
 		
 		if (contact.getAddress()!=null) {
-			String address = contact.getAddress().replace("&&", " ");
+			//String address = contact.getAddress().replace("&&", " ");
+			String address = contact.getAddress().replaceFirst("&&", "\n").replaceFirst("&&", " ").replaceFirst("&&", " - ");
 			detailedViewAddress.setText(address);
 		}
 		
