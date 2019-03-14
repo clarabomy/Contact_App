@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import isen.java2.model.db.entities.Category;
+import isen.java2.model.db.entities.Contact;
 
 public class CategoryDao {
 	
@@ -35,9 +36,8 @@ public class CategoryDao {
 	
 	public int getIdCategory(String name) {
 		try (Connection connection = DataSourceFactory.getDataSource().getConnection()) {
-			try (PreparedStatement statement = connection.prepareStatement(
-					"SELECT * FROM category WHERE name=?")) {
-				statement.setString(1, name);
+			try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM category WHERE LOWER(name)=?")) {
+				statement.setString(1, name.toLowerCase());
 				try (ResultSet results = statement.executeQuery()) {
 					if (results.next()) {
 						return results.getInt("id");
@@ -91,4 +91,5 @@ public class CategoryDao {
 		}
 		return 0;
 	}
+
 }
