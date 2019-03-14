@@ -131,7 +131,7 @@ public class AddViewController {
 		else if(cp.getText()!=null && !cp.getText().equals("")) {
 			if (cp.getText().contains("\"")||cp.getText().contains("&")||cp.getText().contains(";")) {
 				alert.setTitle("Formulaire mal rempli");
-				alert.setContentText("Vous devez remplir un numéro et une rue valides.");
+				alert.setContentText("Vous devez remplir un code postal valide.");
 				alert.setHeaderText(null);
 				alert.show();
 				formulaireValide=false;
