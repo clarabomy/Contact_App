@@ -36,8 +36,7 @@ public class CategoryDao {
 	
 	public int getIdCategory(String name) {
 		try (Connection connection = DataSourceFactory.getDataSource().getConnection()) {
-			try (PreparedStatement statement = connection.prepareStatement(
-					"SELECT * FROM category WHERE LOWER(name)=?")) {
+			try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM category WHERE LOWER(name)=?")) {
 				statement.setString(1, name.toLowerCase());
 				try (ResultSet results = statement.executeQuery()) {
 					if (results.next()) {
