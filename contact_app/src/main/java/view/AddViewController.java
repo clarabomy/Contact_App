@@ -207,7 +207,7 @@ public class AddViewController {
 			}
 			Contact existCont = new Contact(addNom.getText(), addPrenom.getText(), null, null);
 			String address = numRue.getText()+"&&"+cp.getText()+"&&"+ville.getText()+"&&"+pays.getText();
-			Contact contact = new Contact(addNom.getText(), addPrenom.getText(), addSurnom.getText(), address, addBirthDate.getValue(), category, addEmail.getText(), addTelephone.getText(), addNotes.getText()  );
+			Contact contact = new Contact(capitalize(addNom.getText()), capitalize(addPrenom.getText()), capitalize(addSurnom.getText()), address, addBirthDate.getValue(), category, addEmail.getText(), addTelephone.getText(), addNotes.getText()  );
 			if((!this.update) && (contDao.existContact(contact)==0)) {
 				contDao.addContact(contact);
 				handleReturnButton();
@@ -243,6 +243,11 @@ public class AddViewController {
 		catch (IOException e ) {
 			e.printStackTrace();
 		}
+	}
+	
+	public String capitalize(String str)
+	{
+	    return str.substring(0, 1).toUpperCase() + str.substring(1);
 	}
 	
 	
