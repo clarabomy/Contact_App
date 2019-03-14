@@ -109,7 +109,8 @@ public class ContactVcard {
 			}
 			
 			if (!contact.getNotes().equals("")) {
-				br.write("NOTE:" + contact.getNotes() + "\n");
+				String notes = contact.getNotes().replace("\n", "\\n");
+				br.write("NOTE:" + notes + "\n");
 			}
 			
 			br.write("END:VCARD\n");
@@ -178,7 +179,7 @@ public class ContactVcard {
 			}
 			
 			if (fileContent.containsKey("NOTE")) {
-				notes = fileContent.get("NOTE");
+				notes = fileContent.get("NOTE").replace("\\n", "\n");
 			}
 			
 			Contact importedContact = new Contact(lastname, firstname, nickname, address, birthdate, category, mail, phone, notes);
