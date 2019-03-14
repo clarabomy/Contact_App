@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.List;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -105,6 +106,33 @@ public class ContactDaoTestCase {
 			tuple(1, "Bomy", "Clara", "Clawawa", "Loos", LocalDate.of(1997, Month.SEPTEMBER, 13), 2, "clara.bomy@isen.yncrea.fr", "0642398475", "aime les IA"));
 	 }	
 	 
+	 @Test
+	 public void shouldTellThatContactNotAlreadyExists() {
+		// WHEN
+		Contact contact = new Contact("Sardou", "Michel", new Category(0, "Sans catégorie"), "0609888888");
+		Integer result = contactDao.existContact(contact);
+		
+		assertThat(result).isEqualTo(0);		
+	 }
+	 
+	 @Test
+	 public void shouldTellThatContactAlreadyExistsAndIsDifferent() {
+		// WHEN
+		Contact contact = new Contact("Bomy", "Clara", new Category(0, "Sans catégorie"), "0648457658");
+		Integer result = contactDao.existContact(contact);
+		
+		assertThat(result).isNotEqualTo(contact.getId());		
+	 }
+	 
+	 @Test
+	 public void shouldTellThatContactAlreadyExistsAndIsTheSame() {
+		// WHEN
+		Contact contact = new Contact(1, "Bomy", "Clara", new Category(0, "Sans catégorie"), "0648457658");
+		Integer result = contactDao.existContact(contact);
+		
+		assertThat(result).isEqualTo(contact.getId());		
+	 }
+
 
 	@Test
 	 public void shouldAddContact() throws Exception {
@@ -180,6 +208,15 @@ public class ContactDaoTestCase {
 		statement.close();
 		connection.close();
 
+	 }
+	 
+	 @After
+	 public void cleanDb() throws Exception {
+		Connection connection = DataSourceFactory.getDataSource().getConnection();
+		Statement stmt = connection.createStatement();
+		stmt.executeUpdate("DELETE FROM contact");
+		stmt.close();
+		connection.close();
 	 }
 		 
 }

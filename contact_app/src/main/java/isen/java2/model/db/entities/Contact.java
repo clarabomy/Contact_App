@@ -31,6 +31,11 @@ public class Contact {
 		this.id = -1;
 	}
 	
+	public Contact(int id, String lastname, String firstname, Category category, String phone) {
+		this(lastname, firstname, category, phone);
+		this.id = id;
+	}
+	
 	public Contact(String lastname, String firstname, String nickname, String address, LocalDate birthdate,
 			Category category, String mail, String phone, String notes) {
 		this(lastname, firstname, category, phone);
