@@ -121,22 +121,35 @@ public class AddViewController {
 			alert.show();
 			formulaireValide=false;
 		}
+		else if(!Pattern.matches("0[1-9][1-9]?([0-9]){8}", addTelephone.getText())) {
+			alert.setTitle("Formulaire mal rempli");
+			alert.setContentText("Vous devez entrer un numéro de téléphone valide.");
+			alert.setHeaderText(null);
+			alert.show();
+			formulaireValide=false;
+		}
 		else if(cp.getText()!=null && !cp.getText().equals("")) {
-			try {
-				int num = Integer.parseInt(cp.getText());
-//				System.out.println(num);
-				
-			}catch(NumberFormatException e){
+			if (numRue.getText().contains("\"")||numRue.getText().contains("&")||numRue.getText().contains("'")) {
 				alert.setTitle("Formulaire mal rempli");
-				alert.setContentText("Vous devez remplir un code postal valide.");
+				alert.setContentText("Vous devez remplir un numéro et une rue valides.");
+				alert.setHeaderText(null);
+				alert.show();
+				formulaireValide=false;
+			}
+		}
+		if(!addEmail.getText().equals("")) {
+			if(!Pattern.matches("[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]{2,}\\.[a-z]{2,5}", addEmail.getText())) {
+				alert.setTitle("Formulaire mal rempli");
+				alert.setContentText("Vous devez remplir une adresse email valide.");
 				alert.setHeaderText(null);
 				alert.show();
 				formulaireValide=false;
 			}
 		}
 		if(!ville.getText().equals("")) {
-			String s=ville.getText().replaceAll("[^0-9]", "");
-			if (s.length()>0 && Pattern.matches("[a-zA-Z]-?'?",ville.getText())) {
+//			String s=ville.getText().replaceAll("[^0-9]", "");
+			boolean match = Pattern.matches("[a-zA-Z\u00C0-\u017F]+-?'?[a-zA-Z\u00C0-\u017F]*-?'?[a-zA-Z\u00C0-\u017F]*-?'?[a-zA-Z\u00C0-\u017F]*-?'?[a-zA-Z\u00C0-\u017F]*",ville.getText());
+			if (!match) {
 				alert.setTitle("Formulaire mal rempli");
 				alert.setContentText("Vous devez remplir un nom de ville valide.");
 				alert.setHeaderText(null);
@@ -146,9 +159,7 @@ public class AddViewController {
 			
 		}
 		if(!pays.getText().equals("")) {
-			String s=pays.getText().replaceAll("[^0-9]", "");
-			System.out.println(s);
-			if (s.length()>0) {
+			if (!Pattern.matches("[a-zA-Z]+", pays.getText())) {
 				alert.setTitle("Formulaire mal rempli");
 				alert.setContentText("Vous devez remplir un pays valide.");
 				alert.setHeaderText(null);
@@ -157,16 +168,16 @@ public class AddViewController {
 			}
 			
 		}
-		try {
-			int num = Integer.parseInt(addTelephone.getText());
-			
-		}catch(NumberFormatException e){
-			alert.setTitle("Formulaire mal rempli");
-			alert.setContentText("Vous devez remplir un numéro de téléphone valide.");
-			alert.setHeaderText(null);
-			alert.show();
-			formulaireValide=false;
+		if(!numRue.getText().equals("")) {
+			if (numRue.getText().contains("\"")||numRue.getText().contains("&")) {
+				alert.setTitle("Formulaire mal rempli");
+				alert.setContentText("Vous devez remplir un numéro et une rue valides.");
+				alert.setHeaderText(null);
+				alert.show();
+				formulaireValide=false;
+			}
 		}
+		
 		
 		if(formulaireValide) {
 			CategoryDao cdao = new CategoryDao();

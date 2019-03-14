@@ -221,9 +221,6 @@ public class GlobalVueController {
 		 System.out.println(listView.getItems());
 		 this.listView.refresh();
 		 listView.getSelectionModel().clearSelection();
-//		 forceRefresh(listView);
-		 
-//		 this.listView.refresh();
 		 
 	 }
 	 
