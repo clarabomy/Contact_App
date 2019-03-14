@@ -45,7 +45,7 @@ public class AddCategoryController {
 		}
 		else {
 			if (catDao.getCategory(newCat.getText())==null) {
-				catDao.addCategory(newCat.getText());
+				catDao.addCategory(capitalize(newCat.getText()));
 				handleReturnButton();
 			}
 			else {
@@ -56,5 +56,10 @@ public class AddCategoryController {
 			}
 		}
 		
+	}
+	
+	public String capitalize(String str)
+	{
+	    return str.substring(0, 1).toUpperCase() + str.substring(1);
 	}
 }
