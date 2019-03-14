@@ -219,7 +219,7 @@ public class AddViewController {
 			}
 			else if(!this.update && contDao.existContact(existCont)!=0) {
 				alert.setTitle("Contact déjà existant");
-				alert.setContentText("Vous ne pouvez pas ajouter 2 contacts déjà existants. Veuillez sortir de la fenêtre d'ajout de contact et cliquer sur le bouton 'change'.");
+				alert.setContentText("Vous ne pouvez pas ajouter un contact déjà existant. Veuillez sortir de la fenêtre d'ajout de contact et cliquer sur le bouton 'change'.");
 				alert.setHeaderText(null);
 				alert.show();
 			}

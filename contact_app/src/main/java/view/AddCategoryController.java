@@ -50,7 +50,7 @@ public class AddCategoryController {
 			}
 			else {
 				alert.setTitle("Catégorie déjà existante");
-				alert.setContentText("Vous ne pouvez pas ajouter 2 catégories déjà existantes.");
+				alert.setContentText("Vous ne pouvez pas ajouter une catégorie déjà existante.");
 				alert.setHeaderText(null);
 				alert.show();
 			}
