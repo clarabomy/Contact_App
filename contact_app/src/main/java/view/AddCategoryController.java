@@ -41,33 +41,33 @@ public class AddCategoryController {
 	private ObservableList<String> obsvCat;
 	private Alert alert = new Alert(Alert.AlertType.INFORMATION);
 	private Alert confirmer = new Alert(Alert.AlertType.CONFIRMATION);
-	/**
-	 * The constructor that initialize the comboBox
-	 */
-	public AddCategoryController() {
-		obsvCat = FXCollections.observableArrayList();
-		catDao.getCategoryList().forEach(e -> obsvCat.add(e.getName()));
-	}
+//	/** not implemented
+//	 * The constructor that initialize the comboBox
+//	 */
+//	public AddCategoryController() {
+//		obsvCat = FXCollections.observableArrayList();
+//		catDao.getCategoryList().forEach(e -> obsvCat.add(e.getName()));
+//	}
 	
-	/**
-	 * The initialization of the view
-	 */
-	@FXML
-	private void initialize() {
-		boxCat.getItems().addAll(obsvCat);
-		boxCat.setEditable(true);
-		boxCat.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-
-			@Override
-			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-				if(catDao.getCategory(newValue)!=null) {
-					id=catDao.getCategory(newValue).getId();
-				}
-			}
-			
-		}
-		);
-	}
+//	/**
+//	 * The initialization of the view not implemented
+//	 */
+//	@FXML
+//	private void initialize() {
+//		boxCat.getItems().addAll(obsvCat);
+//		boxCat.setEditable(true);
+//		boxCat.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+//
+//			@Override
+//			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+//				if(catDao.getCategory(newValue)!=null) {
+//					id=catDao.getCategory(newValue).getId();
+//				}
+//			}
+//			
+//		}
+//		);
+//	}
 	
 	/**
 	 * Same thing than for the AddView
@@ -118,33 +118,33 @@ public class AddCategoryController {
 	}
 	
 	/**
-	 * Take the changes that the user made on the current selected item 
+	 * Take the changes that the user made on the current selected item (not implemented)
 	 */
-	@FXML
-	public void handleChangeButton() {
-		if(boxCat.getSelectionModel().getSelectedItem().equals("")) {
-			alert.setTitle("Nom de catégorie vide");
-			alert.setContentText("Veuillez entrer un nom pour la catégorie.");
-			alert.setHeaderText(null);
-			alert.show();
-		}
-		else {
-			confirmer.setTitle("Attention : changement du nom d'un catégorie");
-			confirmer.setContentText("Vous êtes sur le point de modifier le nom d'une catégorie. Ce changement implique que TOUS les contacts qui font partis de cette catégorie chnageront également de catégorie. Êtes-vous sûr de vouloir continuer ?");
-			confirmer.setHeaderText(null);
-			Optional<ButtonType> result= confirmer.showAndWait();
-			if (result.get()==ButtonType.OK) {
-				catDao.updateCategory(new Category(id,boxCat.getSelectionModel().getSelectedItem()));
-				handleReturnButton();
-			}
-			else {
-				boxCat.getItems().clear();
-				boxCat.getItems().addAll(obsvCat);
-			}
-		}
-		
-		
-	}
+//	@FXML
+//	public void handleChangeButton() {
+//		if(boxCat.getSelectionModel().getSelectedItem().equals("")) {
+//			alert.setTitle("Nom de catégorie vide");
+//			alert.setContentText("Veuillez entrer un nom pour la catégorie.");
+//			alert.setHeaderText(null);
+//			alert.show();
+//		}
+//		else {
+//			confirmer.setTitle("Attention : changement du nom d'un catégorie");
+//			confirmer.setContentText("Vous êtes sur le point de modifier le nom d'une catégorie. Ce changement implique que TOUS les contacts qui font partis de cette catégorie chnageront également de catégorie. Êtes-vous sûr de vouloir continuer ?");
+//			confirmer.setHeaderText(null);
+//			Optional<ButtonType> result= confirmer.showAndWait();
+//			if (result.get()==ButtonType.OK) {
+//				catDao.updateCategory(new Category(id,boxCat.getSelectionModel().getSelectedItem()));
+//				handleReturnButton();
+//			}
+//			else {
+//				boxCat.getItems().clear();
+//				boxCat.getItems().addAll(obsvCat);
+//			}
+//		}
+//		
+//		
+//	}
 	
 	/**
 	 * Code that permits to make the first letter upper case and the other lower 
