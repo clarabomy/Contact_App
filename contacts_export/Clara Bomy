@@ -2,6 +2,10 @@ BEGIN:VCARD
 VERSION:2.1
 FN:Clara Bomy
 N:Bomy;Clara;;;
-NICKNAME:Clawawa
-CATEGORIES:Amis
-TEL;CELL:0642398475
+CATEGORIES:Pro
+TEL;CELL:0987654321
+ADR;HOME:;;5 rue au hasard;Loos;;59000;France
+EMAIL;INTERNET:clara.bomy@isen.yncrea.fr
+BDAY:1997-09-13
+NOTE:Quelques notes\nDiverses\nEt variées
+END:VCARD
