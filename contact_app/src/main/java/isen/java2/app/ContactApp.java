@@ -33,7 +33,7 @@ public class ContactApp extends Application
 	
 	public void showHomeScreen() {
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(ContactApp.class.getResource("/view/GlobalVue.fxml"));
+		loader.setLocation(ContactApp.class.getResource("/view/GlobalView.fxml"));
 		try {
 			AnchorPane rootLayout = loader.load();
 			Scene scene = new Scene(rootLayout);

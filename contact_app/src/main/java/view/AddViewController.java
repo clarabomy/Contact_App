@@ -26,6 +26,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
+/***
+ * 
+ * @author Mathilde
+ * The class that controls the add/change a contact View
+ *
+ */
+
 public class AddViewController {
 	@FXML
 	private TextField addNom, ville, cp, numRue, addPrenom, addTelephone, addEmail, addSurnom, pays;
@@ -247,7 +254,7 @@ public class AddViewController {
 		 * Basic function that permits to return to the global view when we click on "retour" or when the form is valid and you clicked on "valider".
 		 */
 		FXMLLoader loader = new  FXMLLoader();
-		loader.setLocation(ContactApp.class.getResource("/view/GlobalVue.fxml"));
+		loader.setLocation(ContactApp.class.getResource("/view/GlobalView.fxml"));
 		try {
 			AnchorPane homeScreenAnchorPane = loader.load();
 			Scene scene = new Scene(homeScreenAnchorPane);

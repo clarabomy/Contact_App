@@ -8,6 +8,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.text.Text;
+/***
+ * 
+ * @author Mathilde
+ * The class that controls the detailed view of the contacts
+ */
 
 public class CVOnClickController {
 	

@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="homeScreenAnchorPane" prefHeight="571.0" prefWidth="700.0" stylesheets="@blueStyle.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GlobalVueController">
+<AnchorPane fx:id="homeScreenAnchorPane" prefHeight="571.0" prefWidth="700.0" stylesheets="@blueStyle.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GlobalViewController">
    <children>
       <MenuBar layoutY="-2.0" prefHeight="29.0" prefWidth="700.0" AnchorPane.topAnchor="-2.0">
         <menus>

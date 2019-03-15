@@ -3,7 +3,6 @@ package view;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import javafx.util.Callback;
 import isen.java2.app.ContactApp;
 import isen.java2.model.db.daos.CategoryDao;
@@ -29,7 +28,12 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
-public class GlobalVueController {
+/***
+ * 
+ * @author Mathilde
+ * The class that controls the GlobalView of our application
+ */
+public class GlobalViewController {
 	@FXML
 	private AnchorPane homeScreenAnchorPane;
 	
@@ -63,7 +67,7 @@ public class GlobalVueController {
 	private ContactDao dao = new ContactDao();
 	private CategoryDao catDao = new CategoryDao();
 	
-	public GlobalVueController() {
+	public GlobalViewController() {
 		/***
 		 * Initialize the class by creating the observaleArrayLists that will populate the ListView (list of contacts from database) and the choiceBox (list of categories from the database)
 		 * We also add an non existing category "tout afficher" to display every contact

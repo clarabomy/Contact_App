@@ -1,7 +1,6 @@
 package view;
 
 import java.io.IOException;
-
 import isen.java2.app.ContactApp;
 import isen.java2.model.db.entities.Contact;
 import javafx.fxml.FXML;
@@ -9,6 +8,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.layout.GridPane;
+
+/***
+ * 
+ * @author Mathilde
+ * The class that controls the cells of the LsitView of the globalView
+ *
+ */
 
 public class ContactViewController extends ListCell<Contact> {
 	@FXML
