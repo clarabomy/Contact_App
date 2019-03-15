@@ -24,31 +24,35 @@ import isen.java2.model.db.entities.Contact;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TestContactVcard {
+	private static String rootDir = "C:\\tmp\\java2\\testVcard\\";
 
 	@BeforeClass
 	public static void init() throws IOException {
-		Files.createDirectory(Paths.get("D:\\tmp1"));
-		Files.createDirectory(Paths.get("D:\\tmp2"));
-		Files.createDirectory(Paths.get("D:\\tmp2\\contacts_export"));
-		Files.createDirectory(Paths.get("D:\\tmp3"));
-		Files.createDirectory(Paths.get("D:\\tmp3\\contacts_import"));
+		Files.createDirectory(Paths.get("C:\\tmp"));
+		Files.createDirectory(Paths.get("C:\\tmp\\java2"));
+		Files.createDirectory(Paths.get("C:\\tmp\\java2\\testVcard"));
+		Files.createDirectory(Paths.get(rootDir+"tmp1"));
+		Files.createDirectory(Paths.get(rootDir+"tmp2"));
+		Files.createDirectory(Paths.get(rootDir+"tmp2\\contacts_export"));
+		Files.createDirectory(Paths.get(rootDir+"tmp3"));
+		Files.createDirectory(Paths.get(rootDir+"tmp3\\contacts_import"));
 	}
 	
 	@Test
 	public void simpleTestContactVcard() throws IOException {
-		String root1 = "D:\\tmp1";
+		String root1 = rootDir+"tmp1";
 		ContactVcard vcard1 = new ContactVcard(root1);
 		assertThat(vcard1.root.toString()).isEqualTo(root1);
 		assertThat(vcard1.contactsExportDir).exists();
 		assertThat(vcard1.contactsImportDir).exists();
 		
-		String root2 = "D:\\tmp2";
+		String root2 = rootDir+"tmp2";
 		ContactVcard vcard2 = new ContactVcard(root2);
 		assertThat(vcard2.root.toString()).isEqualTo(root2);
 		assertThat(vcard2.contactsExportDir).exists();
 		assertThat(vcard2.contactsImportDir).exists();
 		
-		String root3 = "D:\\tmp3";
+		String root3 = rootDir+"tmp3";
 		ContactVcard vcard3 = new ContactVcard(root3);
 		assertThat(vcard3.root.toString()).isEqualTo(root3);
 		assertThat(vcard3.contactsExportDir).exists();
@@ -63,13 +67,13 @@ public class TestContactVcard {
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testContactVcardWithRooThatDoesNotExist() throws IOException {
-		String root = "D:\\WrongDirectory";
+		String root = rootDir+"WrongDirectory";
 		ContactVcard vcard = new ContactVcard(root);
 	}
 	
 	@Test
 	public void testExportContact() throws IOException {
-		String root = "D:\\tmp1";
+		String root = rootDir+"tmp1";
 		ContactVcard vcard = new ContactVcard(root);
 		Category category = new Category(1,"name");
 		Contact contact = new Contact(1,"Jarosset","Corentin","cocobergine","digue&&lille&&59800&&france",LocalDate.of(1997, Month.NOVEMBER, 4), category,"cocobergine@nulos.fr","0655447788","commentaire");
@@ -92,7 +96,7 @@ public class TestContactVcard {
 	
 	@Test(expected = ArrayIndexOutOfBoundsException.class)
 	public void testExportContactWithWrongAdress() throws IOException {
-		String root = "D:\\tmp2";
+		String root = rootDir+"tmp2";
 		ContactVcard vcard = new ContactVcard(root);
 		Category category = new Category(1,"name");
 		Contact contact = new Contact(1,"Christiaens","Mathilde","titilde","madeleine",LocalDate.of(1997, Month.MAY, 5), category,"titilde@nulos.fr","0655447788","commentaire");
@@ -101,7 +105,7 @@ public class TestContactVcard {
 	
 	@Test
 	public void testExportContactWithVariableEqualToNull() throws IOException {
-		String root = "D:\\tmp3";
+		String root = rootDir+"tmp3";
 		ContactVcard vcard = new ContactVcard(root);
 		Category category = new Category(1,"name");
 		Contact contact1 = new Contact(1,"Christiaens1","Mathilde","","madeleine&&lille&&59800&&france",LocalDate.of(1997, Month.MAY, 5), category,"titilde@nulos.fr","0655447788","commentaire");
@@ -154,13 +158,13 @@ public class TestContactVcard {
 	
 	@AfterClass
 	public static void destroy() throws IOException {
-		Files.delete(Paths.get("D:\\tmp1\\contacts_export\\Corentin Jarosset"));
-		FileUtils.deleteDirectory(new File("D:\\tmp1"));
-		Files.delete(Paths.get("D:\\tmp2\\contacts_export\\Mathilde Christiaens"));
-		FileUtils.deleteDirectory(new File("D:\\tmp2"));
-		Files.delete(Paths.get("D:\\tmp3\\contacts_export\\Mathilde Christiaens1"));
-		Files.delete(Paths.get("D:\\tmp3\\contacts_export\\Mathilde Christiaens2"));
-		Files.delete(Paths.get("D:\\tmp3\\contacts_export\\Mathilde Christiaens3"));
-		FileUtils.deleteDirectory(new File("D:\\tmp3"));
+		Files.delete(Paths.get(rootDir+"tmp1\\contacts_export\\Corentin Jarosset"));
+		FileUtils.deleteDirectory(new File(rootDir+"tmp1"));
+		Files.delete(Paths.get(rootDir+"tmp2\\contacts_export\\Mathilde Christiaens"));
+		FileUtils.deleteDirectory(new File(rootDir+"tmp2"));
+		Files.delete(Paths.get(rootDir+"tmp3\\contacts_export\\Mathilde Christiaens1"));
+		Files.delete(Paths.get(rootDir+"tmp3\\contacts_export\\Mathilde Christiaens2"));
+		Files.delete(Paths.get(rootDir+"tmp3\\contacts_export\\Mathilde Christiaens3"));
+		FileUtils.deleteDirectory(new File(rootDir+"tmp3"));
 	}
 }
