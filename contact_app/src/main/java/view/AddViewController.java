@@ -56,12 +56,11 @@ public class AddViewController {
 	private boolean update = false;
 	private Contact previousContact;
 	
+	/**
+	 * Initialize the view by adding the database and listing the categories for them to be in the choicebox.
+	 */
 	@FXML
-	public void initialize() {
-		/***
-		 * Initialize the view by adding the database and listing the categories for them to be in the choicebox.
-		 */
-		
+	public void initialize() {		
 		CategoryDao catd = new CategoryDao();
 		obsvList = FXCollections.observableArrayList();
 		catd.getCategoryList().forEach(e ->{obsvList.add(e.getName());});
@@ -69,13 +68,14 @@ public class AddViewController {
 		addGroupe.getSelectionModel().select(0);
 	}
 	
+	/**
+	 * Function that permits to initialize the view with the valid informations when you want to change a contact. 
+	 * It's only called by the GlobalView controller and only when you click on the button change.
+	 * It also sets the update boolean to true so you the validate function knows if you're updating an existing contact or creating a new one.
+	 * @param contact
+	 */
 	@FXML
 	public void setText(Contact contact) {
-		/***
-		 * Function that permits to initialize the view with the valid informations when you want to change a contact. 
-		 * It's only called by the GlobalView controller and only when you click on the button change.
-		 * It also sets the update boolean to true so you the validate function knows if you're updating an existing contact or creating a new one.
-		 */
 		nveauContact.setText("Modification");
 		addNom.setText(contact.getLastname()==null?"":contact.getLastname());
 		addPrenom.setText(contact.getFirstname()==null?"":contact.getFirstname());
@@ -103,15 +103,15 @@ public class AddViewController {
 	}
 	
 	
+	/**
+	 * Function that permits to handle the "valider" button. 
+	 * First, it checks if the form is accurate or not. If it's not the function will do nothing. If it is it will do as follow:
+	 * If the view was load because you wanted to change a contact, the function will update the contact in the database.
+	 * If the view was load to create a new contact, the function will create the contact in the database. But only if the contact doesn't already exist.
+	 * At the end, if the form is valid it will return to the global view of the contacts.
+	 */
 	@FXML
 	private void handleValidateButton() {
-		/***
-		 * Function that permits to handle the "valider" button. 
-		 * First, it checks if the form is accurate or not. If it's not the function will do nothing. If it is it will do as follow:
-		 * If the view was load because you wanted to change a contact, the function will update the contact in the database.
-		 * If the view was load to create a new contact, the function will create the contact in the database. But only if the contact doesn't already exist.
-		 * At the end, if the form is valid it will return to the global view of the contacts.
-		 */
 		ContactDao contDao = new ContactDao();
 		boolean formulaireValide = true;
 		Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -246,11 +246,11 @@ public class AddViewController {
 		
 	}
 	
+	/**
+	 * Basic function that permits to return to the global view when we click on "retour" or when the form is valid and you clicked on "valider".
+	 */
 	@FXML
 	private void handleReturnButton() {
-		/***
-		 * Basic function that permits to return to the global view when we click on "retour" or when the form is valid and you clicked on "valider".
-		 */
 		FXMLLoader loader = new  FXMLLoader();
 		loader.setLocation(ContactApp.class.getResource("/view/GlobalView.fxml"));
 		try {

@@ -42,11 +42,12 @@ public class CVOnClickController {
 	
 	private Contact detailedContact;
 	
+	/**
+	 * Set the text of the detailed view so the selected contact is shown
+	 * @param contact
+	 */
 	@FXML
 	public void setText(Contact contact) {
-		/***
-		 * Set the text of the detailed view so the selected contact is shown
-		 */
 		detailedContact = contact;
 		if(contact.getNickname()==null||contact.getNickname()=="") {
 			title.setText(contact.getLastname().toUpperCase()+ " "+ contact.getFirstname());
