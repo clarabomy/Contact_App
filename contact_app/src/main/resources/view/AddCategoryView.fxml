@@ -14,12 +14,17 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Label layoutX="42.0" layoutY="272.0" text="Nom de la nouvelle catégorie :">
+      <Label layoutX="64.0" layoutY="272.0" text="Nom de la nouvelle catégorie">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="newCat" layoutX="303.0" layoutY="273.0" prefHeight="25.0" prefWidth="227.0" />
-      <Button layoutX="587.0" layoutY="14.0" mnemonicParsing="false" onAction="#hanldeValidateButton" prefHeight="40.0" prefWidth="99.0" text="Valider" AnchorPane.rightAnchor="14.0" />
+      <TextField fx:id="newCat" layoutX="324.0" layoutY="273.0" prefHeight="25.0" prefWidth="227.0" />
+      <Button layoutX="261.0" layoutY="368.0" mnemonicParsing="false" onAction="#hanldeValidateButton" prefHeight="40.0" prefWidth="207.0" text="Créer une catégorie" AnchorPane.rightAnchor="231.66666666666663" />
+      <Label layoutX="80.0" layoutY="110.0" prefHeight="131.0" prefWidth="570.0" text="Ici, vous pouvez ajouter des catégories. Mais attention, sachez qu'une fois créées, vous ne pourrez ni les modifier, ni les supprimer ;)" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

@@ -104,7 +104,7 @@ public class AddCategoryController {
 		}
 		else if(newCat.getText().contains(";")||newCat.getText().contains("&")||newCat.getText().contains("\"")) {
 			alert.setTitle("Nom de catégorie invalide");
-			alert.setContentText("Veuillez entrer un nom valide de catgéorie.");
+			alert.setContentText("Veuillez entrer un nom valide de catégorie.");
 			alert.setHeaderText(null);
 			alert.show();
 		}
