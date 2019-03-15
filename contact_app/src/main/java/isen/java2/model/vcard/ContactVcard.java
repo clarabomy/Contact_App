@@ -31,7 +31,7 @@ public class ContactVcard {
 
 	public ContactVcard(String root) throws IOException {
 
-		if (root == null) {
+		if (root == null || !Files.exists(Paths.get(root))) {
 			throw new IllegalArgumentException("You have to provide a root directory to process");
 		}
 		
