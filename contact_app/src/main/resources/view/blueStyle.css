@@ -28,7 +28,7 @@ SplitPane {
 
 #listView .list-cell:selected {
 	-fx-background-color : #A9CCE3;
-	-fx-font-size : 15;
+	-fx-font-size : 18;
 }
 
 #listView .list-cell:selected .label {
