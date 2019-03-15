@@ -39,7 +39,7 @@ SplitPane {
 
 /*Sizes*/
 #addCategoryBar {
-	-fx-border-width : 80px 0px 0px 0px;
+	-fx-border-width : 70px 0px 0px 0px;
 }
 
 MenuBar {

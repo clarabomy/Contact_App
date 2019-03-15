@@ -10,31 +10,37 @@
 
 <AnchorPane id="addCategoryBar" prefHeight="571.0" prefWidth="700.0" stylesheets="@blueStyle.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.AddCategoryController">
    <children>
-      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleReturnButton" prefHeight="40.0" prefWidth="99.0" text="Retour" AnchorPane.leftAnchor="12.0" />
-      <Button layoutX="482.0" layoutY="138.0" mnemonicParsing="false" onAction="#hanldeValidateButton" prefHeight="35.0" prefWidth="194.0" text="Valider la nouvelle catégorie" AnchorPane.rightAnchor="24.0" />
-      <Label alignment="CENTER" layoutX="122.0" layoutY="37.0" prefHeight="17.0" prefWidth="458.0" text="Nouvelle Catégorie" AnchorPane.leftAnchor="122.0" AnchorPane.rightAnchor="120.0">
+      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleReturnButton" prefHeight="40.0" prefWidth="99.0" text="Retour" AnchorPane.leftAnchor="14.0" />
+      <Button layoutX="397.0" layoutY="205.0" mnemonicParsing="false" onAction="#hanldeValidateButton" prefHeight="35.0" prefWidth="194.0" text="Valider la nouvelle catégorie" AnchorPane.rightAnchor="110.0" />
+      <Label alignment="CENTER" layoutX="19.0" layoutY="133.0" prefHeight="72.0" prefWidth="212.0" text="Nouvelle Catégorie" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="19.0" AnchorPane.rightAnchor="470.0">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Label layoutX="211.0" layoutY="142.0" text="Nom :">
+      <Label layoutX="299.0" layoutY="142.0" text="Nom de la catégorie">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="newCat" layoutX="276.0" layoutY="143.0" />
+      <TextField fx:id="newCat" layoutX="483.0" layoutY="143.0" prefHeight="25.0" prefWidth="194.0" />
       <Separator layoutX="1.0" layoutY="272.0" prefHeight="27.0" prefWidth="700.0" />
-      <Label alignment="CENTER" layoutX="121.0" layoutY="311.0" prefHeight="17.0" prefWidth="458.0" text="Modifier une catégorie déjà existante">
+      <Label alignment="CENTER" layoutX="33.0" layoutY="368.0" prefHeight="83.0" prefWidth="184.0" text="Modifier une catégorie" textAlignment="CENTER" wrapText="true">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Label layoutX="14.0" layoutY="432.0" text="Modifier la catégorie :">
+      <Label layoutX="298.0" layoutY="346.0" text="Catégorie à modifier">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <ComboBox fx:id="boxCat" layoutX="201.0" layoutY="433.0" prefHeight="25.0" prefWidth="204.0" />
-      <Button layoutX="483.0" layoutY="428.0" mnemonicParsing="false" onAction="#handleChangeButton" prefHeight="35.0" prefWidth="194.0" text="Valider le changement en cours" />
+      <ComboBox fx:id="boxCat" layoutX="478.0" layoutY="347.0" prefHeight="25.0" prefWidth="204.0" />
+      <Button layoutX="397.0" layoutY="472.0" mnemonicParsing="false" onAction="#handleChangeButton" prefHeight="35.0" prefWidth="194.0" text="Valider le changement en cours" />
+      <Label layoutX="323.0" layoutY="410.0" text="Nouveau nom">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="newCat1" layoutX="483.0" layoutY="411.0" prefHeight="25.0" prefWidth="194.0" />
    </children>
 </AnchorPane>
