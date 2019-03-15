@@ -67,11 +67,11 @@ public class GlobalViewController {
 	private ContactDao dao = new ContactDao();
 	private CategoryDao catDao = new CategoryDao();
 	
+	/**
+	 * Initialize the class by creating the observaleArrayLists that will populate the ListView (list of contacts from database) and the choiceBox (list of categories from the database)
+	 * We also add an non existing category "tout afficher" to display every contact
+	 */
 	public GlobalViewController() {
-		/***
-		 * Initialize the class by creating the observaleArrayLists that will populate the ListView (list of contacts from database) and the choiceBox (list of categories from the database)
-		 * We also add an non existing category "tout afficher" to display every contact
-		 */
 		observableContacts = FXCollections.observableArrayList();
 		dao.listAllContacts().forEach( e-> observableContacts.add(e));
 		try {
@@ -86,18 +86,17 @@ public class GlobalViewController {
 	}
 
 
+	/**
+	 * Initialize all the elements in the view :
+	 * Set the items of the database with the observablaeArrayList and set the cells with a CellFactory by calling the ContactViewController
+	 * Set the items of the choicebox with the other observableArrayList
+	 * Set a Listener on the selected item of the ListView so it launches the showContactDetails and change the value of the contactClick by the value of the selectionned contact
+	 * Set a Listener to the searchbar so when the text chnages the search is launched instantly
+	 * Set a Listener to the choicebox so when you click on it and changes its value it displays only the contacts filtered by the categroy you chose ("tout afficher" displays every contacts)
+	 * Also add the detailedView of the contacts on the children of the anchor pane so it is on the right of the split pane
+	 */
 	@FXML
 	public void initialize() {
-		/***
-		 * Initialize all the elements in the view :
-		 * Set the items of the database with the observablaeArrayList and set the cells with a CellFactory by calling the ContactViewController
-		 * Set the items of the choicebox with the other observableArrayList
-		 * Set a Listener on the selected item of the ListView so it launches the showContactDetails and change the value of the contactClick by the value of the selectionned contact
-		 * Set a Listener to the searchbar so when the text chnages the search is launched instantly
-		 * Set a Listener to the choicebox so when you click on it and changes its value it displays only the contacts filtered by the categroy you chose ("tout afficher" displays every contacts)
-		 * Also add the detailedView of the contacts on the children of the anchor pane so it is on the right of the split pane
-		 */
-		
 		listView.setItems(observableContacts);
 		listView.setCellFactory(new Callback<ListView<Contact>, javafx.scene.control.ListCell<Contact>>()
         {
@@ -173,12 +172,13 @@ public class GlobalViewController {
 		
 	}
 	
+	/**
+	 * Sets the visibility to false of the detailed view if there is no selectionned contact
+	 * Otherwise sets it to true and calls the method setText of the controller of the detailedView
+	 * @param contact
+	 */
 	@FXML
 	private void showContactDetails(Contact contact) {
-		/***
-		 * Sets the visibility to false of the detailed view if there is no selectionned contact
-		 * Otherwise sets it to true and calls the method setText of the controller of the detailedView
-		 */
 		if (contact==null) {
 			detailedView.setVisible(false);
 		}
@@ -189,11 +189,11 @@ public class GlobalViewController {
 	}
 	
 	
-	 @FXML
+	 /**
+	 * Loads the Add view if someone clicks on add (without any parameter for the controller)
+	 */
+	@FXML
 	    private void handleNewButton() {
-		 /***
-		  * Loads the Add view if someone clicks on add (without any parameter for the controller)
-		  */
 		 	FXMLLoader loader = new  FXMLLoader();
 			loader.setLocation(ContactApp.class.getResource("/view/AddView.fxml"));
 			try {
@@ -209,12 +209,12 @@ public class GlobalViewController {
 	    }
 	 
 	 
-	 @FXML
+	 /**
+	 * If a contact is selected load the addView with the setText method of its controller so it appears as a modification view
+	 * Otherwise does nothing
+	 */
+	@FXML
 	 private void handleChangeButton() {
-		 /***
-		  * If a contact is selected load the addView with the setText method of its controller so it appears as a modification view
-		  * Otherwise does nothing
-		  */
 		 if (!listView.getSelectionModel().isEmpty()) {
 			 FXMLLoader loader = new  FXMLLoader();
 			 loader.setLocation(ContactApp.class.getResource("/view/AddView.fxml"));
@@ -235,12 +235,12 @@ public class GlobalViewController {
 		 }
 	 }
 	 
-	 @FXML
+	 /**
+	 * If a contact is selected, deletes it from the database and refresh the listView. 
+	 * Otherwise does nothing.
+	 */
+	@FXML
 	 private void handleSupprButton() {
-		 /***
-		  * If a contact is selected, deletes it from the database and refresh the listView. 
-		  * Otherwise does nothing.
-		  */
 		 if (!listView.getSelectionModel().isEmpty()) {
 			 dao.deleteContact(contactClick.getId());
 			 listView.getItems().remove(listView.getSelectionModel().getSelectedIndex());
@@ -251,24 +251,23 @@ public class GlobalViewController {
 	 }
 	 
 	 
-	 @FXML
+	 /**
+	 * Launches the search from the button and is also called when the textfield from the searchbar changes. 
+	 * It removes every contacts from the ListView and adds only the ones with that are returned by the search.
+	 */
+	@FXML
 	 private void handleSearchButton() {
-		 /***
-		  * Launches the search from the button and is also called when the textfield from the searchbar changes. 
-		  * It removes every contacts from the ListView and adds only the ones with that are returned by the search.
-		  */
 		 listView.getSelectionModel().clearSelection();
 		 listView.getItems().removeAll(observableContacts);
 		 listView.getItems().addAll(dao.searchContact(this.searchBar.getText()));
 		 listView.refresh();
 	 }
 
-	 @FXML
+	 /**
+	 * When you click on the Vcard options, import all vCard, import all contacts from the appropriate folder and refreshes the view right after. 
+	 */
+	@FXML
 		private void handleImportButton(){
-		 /***
-		  * When you click on the Vcard options, import all vCard, import all contacts from the appropriate folder and refreshes the view right after. 
-		  */
-			
 			try {
 				cVcard.importAllContacts();
 			} catch (NotEnoughDataException e) {
@@ -284,11 +283,12 @@ public class GlobalViewController {
 			listView.refresh();
 		}
 	 
-	 @FXML
+	
+	 /**
+	 * When you click on the Vcard options, export all vCard, export all contacts from the appropriate folder and refreshes the view right after. 
+	 */
+	@FXML
 	 private void handleExportAllButton() {
-		 /***
-		  * When you click on the Vcard options, export all vCard, export all contacts from the appropriate folder and refreshes the view right after. 
-		  */
 		 try {
 			cVcard.exportAllContacts(observableContacts);
 		} catch (IOException e) {
@@ -298,22 +298,23 @@ public class GlobalViewController {
 	 }
 	 
 	 
+	/**
+	 * Export the selected contact only if there is a selected contact.
+	 * @throws IOException
+	 */
 	@FXML
 	private void handleVcardExport() throws IOException {
-		/***
-		 * Export the selected contact only if there is a selected contact.
-		 */
 		 if (!listView.getSelectionModel().isEmpty()) {
 			ContactVcardManager cVcard = new ContactVcardManager("../");
 			cVcard.exportContact(contactClick);
 		 }
 	}
 	 
-	 @FXML
+	 /**
+	 * When you click on Category options, "ajouter une nouvelle catégorie", loads the addCategory view.
+	 */
+	@FXML
 	 private void handleNewCat() {
-		 /***
-		  * When you click on Category options, "ajouter une nouvelle catégorie", loads the addCategory view.
-		  */
 		 FXMLLoader loader = new  FXMLLoader();
 		 loader.setLocation(ContactApp.class.getResource("/view/AddCategoryView.fxml"));
 	 
