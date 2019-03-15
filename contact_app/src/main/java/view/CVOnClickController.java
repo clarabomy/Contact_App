@@ -3,7 +3,7 @@ package view;
 import java.io.IOException;
 
 import isen.java2.model.db.entities.Contact;
-import isen.java2.model.vcard.ContactVcard;
+import isen.java2.model.vcard.ContactVcardManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;

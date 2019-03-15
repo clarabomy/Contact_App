@@ -19,10 +19,24 @@ import isen.java2.model.db.daos.DataSourceFactory;
 import isen.java2.model.db.entities.Category;
 import isen.java2.model.db.entities.Contact;
 
+
+/**
+ * @author Clara Bomy
+ * 
+ *         Test class used to test the behavior of the ContactDao Class. This
+ *         class replaces the application class we used before, and becomes our
+ *         entrypoint into the program
+ */
 public class ContactDaoTestCase {
 	
 	private ContactDao contactDao = new ContactDao();
 
+	/**
+	 * Method used to create our controlled environment, called
+	 * every time a test runs
+	 * 
+	 * @throws Exception
+	 */
 	@Before
 	public void initDb() throws Exception {
 		Connection connection = DataSourceFactory.getDataSource().getConnection();
@@ -41,12 +55,18 @@ public class ContactDaoTestCase {
 		connection.close();
 	}	
 	
+	
+	 /**
+	 * Method used to restore the DB after the tests
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	 public void shouldListContacts() {
-		// WHEN
+		// WHEN - we call our DAO to get films
 		List<Contact> contacts = contactDao.listAllContacts();
 			
-		// THEN
+		// THEN - our list should contains the 5 following items
 		assertThat(contacts).hasSize(5);
 		assertThat(contacts).extracting("id", "lastname", "firstname", "nickname", "address", "birthdate", "category.id", "mail", "phone", "notes").containsExactly(
 			tuple(1, "Bomy", "Clara", "Clawa", "Loos", LocalDate.of(1997, Month.SEPTEMBER, 13), 2, "clara.bomy@isen.yncrea.fr", "0642398475", "aime les IA"),
@@ -59,10 +79,10 @@ public class ContactDaoTestCase {
 	 
 	 @Test
 	 public void shouldListContactsByGenre() {
-		// WHEN
+		// WHEN - we call our DAO to get films with the "Amis" category
 		List<Contact> contacts = contactDao.listContactsByCategory("Amis");
 
-		// THEN
+		// THEN - our list should contains 3 items of category "Amis"
 		assertThat(contacts).hasSize(3);
 		assertThat(contacts).extracting("id", "lastname", "firstname", "nickname", "address", "birthdate", "category.id", "mail", "phone", "notes").containsExactly(
 			tuple(1, "Bomy", "Clara", "Clawa", "Loos", LocalDate.of(1997, Month.SEPTEMBER, 13), 2, "clara.bomy@isen.yncrea.fr", "0642398475", "aime les IA"),
@@ -72,10 +92,10 @@ public class ContactDaoTestCase {
 	 
 	 @Test
 	 public void shouldSearchByPhone() {
-		// WHEN
+		// WHEN - we call our DAO to search contacts whose phone contains "06"
 		List<Contact> resultSearch = contactDao.searchContact("06");
 		
-		// THEN
+		// THEN - our list should contains the 2 following items
 		assertThat(resultSearch).hasSize(2);
 		assertThat(resultSearch).extracting("id", "lastname", "firstname", "nickname", "address", "birthdate", "category.id", "mail", "phone", "notes").containsOnly(
 			tuple(2, "Juzeau", "Thibaut", "Thichef", "Lille", LocalDate.of(1998, Month.AUGUST, 31), 2, "thibaut.juzeau@isen.yncrea.fr", "0623405698", null),	
@@ -84,10 +104,10 @@ public class ContactDaoTestCase {
 	 
 	 @Test
 	 public void shouldSearchByCategoryNames() {
-		// WHEN
+		// WHEN - we call our DAO to search contacts whose phone contains "06"
 		List<Contact> resultSearch = contactDao.searchContact("ami");
 		
-		// THEN
+		// THEN - our list should contains the 3 following items
 		assertThat(resultSearch).hasSize(3);
 		assertThat(resultSearch).extracting("id", "lastname", "firstname", "nickname", "address", "birthdate", "category.id", "mail", "phone", "notes").containsOnly(
 			tuple(4, "Bomy", "Corinne", null, null, null, 2, null, "0732129467", null),
@@ -97,10 +117,10 @@ public class ContactDaoTestCase {
 	 
 	 @Test
 	 public void shouldSearchByDate() {
-		// WHEN
+		// WHEN - we call our DAO to search contacts whose birthdate is in 1997, September
 		List<Contact> resultSearch = contactDao.searchContact("1997-09");
 		
-		// THEN
+		// THEN - our list should contains this following item
 		assertThat(resultSearch).hasSize(1);
 		assertThat(resultSearch).extracting("id", "lastname", "firstname", "nickname", "address", "birthdate", "category.id", "mail", "phone", "notes").containsOnly(
 			tuple(1, "Bomy", "Clara", "Clawa", "Loos", LocalDate.of(1997, Month.SEPTEMBER, 13), 2, "clara.bomy@isen.yncrea.fr", "0642398475", "aime les IA"));
@@ -108,16 +128,16 @@ public class ContactDaoTestCase {
 	 
 	 @Test
 	 public void shouldTellThatContactNotAlreadyExists() {
-		// WHEN
+		// WHEN - we call our DAO to tell us if "Michel Sardou" is already in the DB
 		Contact contact = new Contact("Sardou", "Michel", new Category(0, "Sans catégorie"), "0609888888");
 		Integer result = contactDao.existContact(contact);
 		
+		// THEN - As "Michel Sardou" is not in the DB, it should return 0.
 		assertThat(result).isEqualTo(0);		
 	 }
 	 
 	 @Test
 	 public void shouldTellThatContactAlreadyExistsAndIsDifferent() {
-		// WHEN
 		Contact contact = new Contact("Bomy", "Clara", new Category(0, "Sans catégorie"), "0648457658");
 		Integer result = contactDao.existContact(contact);
 		
@@ -126,10 +146,11 @@ public class ContactDaoTestCase {
 	 
 	 @Test
 	 public void shouldTellThatContactAlreadyExistsAndIsTheSame() {
-		// WHEN
+		// WHEN - - we try to add a new contact "Clara Bomy" but this contact is already in the DB
 		Contact contact = new Contact(1, "Bomy", "Clara", new Category(0, "Sans catégorie"), "0648457658");
 		Integer result = contactDao.existContact(contact);
 		
+		// THEN - As "Clara Bomy" is already in the DB, it should not return the id of the contact.
 		assertThat(result).isEqualTo(contact.getId());		
 	 }
 
@@ -138,8 +159,8 @@ public class ContactDaoTestCase {
 	 public void shouldAddContact() throws Exception {
 		
 		 // WHEN 
-		Contact contact = new Contact("Dary", "Laure", new Category(3, "Pro"), "0687981727");
-		contactDao.addContact(contact);
+		Contact contactToAdd = new Contact("Dary", "Laure", new Category(3, "Pro"), "0687981727");
+		Contact newContact = contactDao.addContact(contactToAdd);
 		
 		// THEN
 		Connection connection = DataSourceFactory.getDataSource().getConnection();
@@ -151,11 +172,23 @@ public class ContactDaoTestCase {
 		assertThat(resultSet.getString("lastname")).isEqualTo("Dary");
 		assertThat(resultSet.getString("firstname")).isEqualTo("Laure");
 		assertThat(resultSet.getInt("id_category")).isEqualTo(3);
+		assertThat(resultSet.getString("phone")).isEqualTo("0687981727");
 		assertThat(resultSet.next()).isFalse();
 
+		assertThat(resultSet.next()).isFalse(); // only one contact persisted in DB
 		resultSet.close();
 		statement.close();
 		connection.close();
+		
+		// Now check the contact that we got back
+		assertThat(newContact).isNotNull(); // We got a contact
+		assertThat(newContact.getId()).isNotNull(); // the contact has an id
+		
+		// the contact that we got back is the same that the one we stored
+		assertThat(newContact.getLastname()).isEqualTo(contactToAdd.getLastname());
+		assertThat(newContact.getFirstname()).isEqualTo(contactToAdd.getFirstname());
+		assertThat(newContact.getCategory().getId()).isEqualTo(contactToAdd.getCategory().getId());
+		assertThat(newContact.getPhone()).isEqualTo(contactToAdd.getPhone());
 
 	 }
 	 

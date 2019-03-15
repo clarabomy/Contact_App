@@ -8,12 +8,17 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="402.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.CVOnClickController">
+<AnchorPane id="detailedView" prefHeight="402.0" prefWidth="450.0" stylesheets="@blueStyle.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.CVOnClickController">
    <children>
-      <GridPane layoutX="6.0" layoutY="-6.0" prefHeight="267.0" prefWidth="444.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="85.0">
+      <Label fx:id="title" alignment="CENTER" layoutX="180.0" layoutY="25.0" prefHeight="27.0" prefWidth="204.0" text="NOM Prénom (Surnom)" textAlignment="RIGHT" underline="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <GridPane layoutX="11.0" layoutY="84.0" prefHeight="268.0" prefWidth="439.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="84.0">
         <columnConstraints>
-          <ColumnConstraints fillWidth="false" hgrow="NEVER" maxWidth="1.7976931348623157E308" minWidth="141.0" />
-          <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
+          <ColumnConstraints fillWidth="false" hgrow="NEVER" maxWidth="1.7976931348623157E308" minWidth="139.80001220703124" prefWidth="139.80001220703124" />
+          <ColumnConstraints hgrow="ALWAYS" maxWidth="298.6000122070312" minWidth="10.0" prefWidth="280.5999877929687" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="30.0" vgrow="SOMETIMES" />
@@ -24,12 +29,12 @@
             <RowConstraints fillHeight="false" minHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label prefHeight="24.0" prefWidth="150.0" text="Numéro">
+            <Label prefHeight="24.0" prefWidth="136.0" text="Numéro">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Text fx:id="detailedViewNumber" strokeType="OUTSIDE" strokeWidth="0.0" text="0644876612" wrappingWidth="477.99998211860657" GridPane.columnIndex="1">
+            <Text fx:id="detailedViewNumber" strokeType="OUTSIDE" strokeWidth="0.0" text="0644876612" wrappingWidth="300.0" GridPane.columnIndex="1">
                <font>
                   <Font size="18.0" />
                </font>
@@ -39,7 +44,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Text fx:id="detailedViewEmail" strokeType="OUTSIDE" strokeWidth="0.0" text="blallala@gmail.com" wrappingWidth="466.99998211860657" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Text fx:id="detailedViewEmail" strokeType="OUTSIDE" strokeWidth="0.0" text="blallala@gmail.com" wrappingWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
                   <Font size="18.0" />
                </font>
@@ -49,7 +54,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Text fx:id="detailedViewBirthDate" strokeType="OUTSIDE" strokeWidth="0.0" text="04/12/2010" wrappingWidth="244.99998211860657" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Text fx:id="detailedViewBirthDate" strokeType="OUTSIDE" strokeWidth="0.0" text="04/12/2010" wrappingWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <font>
                   <Font size="18.0" />
                </font>
@@ -59,7 +64,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Text fx:id="detailedViewGroup" strokeType="OUTSIDE" strokeWidth="0.0" text="Amis etc" wrappingWidth="244.99998211860657" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <Text fx:id="detailedViewGroup" strokeType="OUTSIDE" strokeWidth="0.0" text="Amis etc" wrappingWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <font>
                   <Font size="18.0" />
                </font>
@@ -69,27 +74,22 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label prefHeight="24.0" prefWidth="150.0" text="Notes" GridPane.rowIndex="5">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Label>
             <Label fx:id="detailedViewAddress" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label fx:id="detailedViewNotes" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5">
+            <Label prefHeight="24.0" prefWidth="150.0" text="Notes" GridPane.rowIndex="5">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label id="notes" fx:id="detailedViewNotes" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
          </children>
       </GridPane>
-      <Label fx:id="title" alignment="CENTER" layoutX="180.0" layoutY="25.0" prefHeight="27.0" prefWidth="204.0" text="NOM Prénom (Surnom)" textAlignment="RIGHT" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
    </children>
 </AnchorPane>

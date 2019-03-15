@@ -12,31 +12,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="homeScreenAnchorPane" prefHeight="571.0" prefWidth="700.0" styleClass="Background" stylesheets="@GlobalVue.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GlobalVueController">
+<AnchorPane fx:id="homeScreenAnchorPane" prefHeight="571.0" prefWidth="700.0" stylesheets="@blueStyle.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GlobalVueController">
    <children>
-      <Button fx:id="addButtonHS" layoutX="14.0" layoutY="34.0" mnemonicParsing="false" onAction="#handleNewButton" prefHeight="40.0" prefWidth="86.0" styleClass="Button" text="Ajouter" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="34.0" />
-      <Button fx:id="supprButtonHS" layoutX="217.0" layoutY="34.0" mnemonicParsing="false" onAction="#handleSupprButton" prefHeight="40.0" prefWidth="86.0" styleClass="Button" text="Supprimer" AnchorPane.leftAnchor="217.0" AnchorPane.topAnchor="34.0" />
-      <Label layoutX="350.0" layoutY="91.0" styleClass="Text" text="Flitrer par groupe" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="91.0">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Label>
-      <ChoiceBox fx:id="groupFilter" layoutX="497.0" layoutY="89.0" prefHeight="29.0" prefWidth="125.0" styleClass="Button" AnchorPane.leftAnchor="497.0" AnchorPane.topAnchor="89.0" />
-      <SplitPane dividerPositions="0.44142857142857145" layoutY="137.0" styleClass="Separator" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="137.0">
-        <items>
-          <AnchorPane>
-               <children>
-                  <ListView fx:id="listView" minWidth="250.0" styleClass="ListPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-               </children>
-            </AnchorPane>
-          <AnchorPane fx:id="detailedView" styleClass="ContactPane" />
-        </items>
-      </SplitPane>
-      <Button fx:id="changeButtonHS" layoutX="116.0" layoutY="34.0" mnemonicParsing="false" onAction="#handleChangeButton" prefHeight="40.0" prefWidth="86.0" styleClass="Button" text="Modifier" AnchorPane.leftAnchor="116.0" AnchorPane.topAnchor="34.0" />
-      <TextField fx:id="searchBar" layoutX="337.0" layoutY="34.0" prefHeight="40.0" prefWidth="254.0" AnchorPane.leftAnchor="337.0" AnchorPane.topAnchor="34.0" />
-      <Button fx:id="findButton" layoutX="591.0" layoutY="34.0" mnemonicParsing="false" onAction="#handleSearchButton" prefHeight="40.0" prefWidth="86.0" styleClass="Button" text="Rechercher" AnchorPane.leftAnchor="591.0" AnchorPane.topAnchor="34.0" />
-      <Button fx:id="exportAllVcard" layoutX="89.0" layoutY="84.0" mnemonicParsing="false" onAction="#handleVcardExport" prefHeight="40.0" prefWidth="139.0" styleClass="Button" text="Exporter un contact" />
-      <MenuBar layoutY="-2.0" prefHeight="29.0" prefWidth="700.0" styleClass="BarreMenu" AnchorPane.topAnchor="-2.0">
+      <MenuBar layoutY="-2.0" prefHeight="29.0" prefWidth="700.0" AnchorPane.topAnchor="-2.0">
         <menus>
           <Menu mnemonicParsing="false" text="Vcard Options">
             <items>
@@ -44,12 +22,34 @@
                   <MenuItem mnemonicParsing="false" onAction="#handleExportAllButton" text="Exporter tous les Vcard" />
             </items>
           </Menu>
-            <Menu mnemonicParsing="false" styleClass="BarreMenuButton" text="Catégories Options">
+            <Menu mnemonicParsing="false" text="Catégories Options">
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#handleNewCat" text="Ajouter une nouvelle catégorie" />
               </items>
             </Menu>
         </menus>
       </MenuBar>
+      <Button fx:id="addButtonHS" layoutX="14.0" layoutY="34.0" mnemonicParsing="false" onAction="#handleNewButton" prefHeight="40.0" prefWidth="86.0" text="Ajouter" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="34.0" />
+      <Button fx:id="changeButtonHS" layoutX="116.0" layoutY="34.0" mnemonicParsing="false" onAction="#handleChangeButton" prefHeight="40.0" prefWidth="86.0" text="Modifier" AnchorPane.leftAnchor="116.0" AnchorPane.topAnchor="34.0" />
+      <Button fx:id="supprButtonHS" layoutX="217.0" layoutY="34.0" mnemonicParsing="false" onAction="#handleSupprButton" prefHeight="40.0" prefWidth="86.0" text="Supprimer" AnchorPane.leftAnchor="217.0" AnchorPane.topAnchor="34.0" />
+      <Button fx:id="exportAllVcard" layoutX="89.0" layoutY="84.0" mnemonicParsing="false" onAction="#handleVcardExport" prefHeight="40.0" prefWidth="139.0" text="Exporter un contact" />
+      <TextField fx:id="searchBar" layoutX="337.0" layoutY="34.0" prefHeight="40.0" prefWidth="254.0" AnchorPane.leftAnchor="337.0" AnchorPane.topAnchor="34.0" />
+      <Button fx:id="findButton" layoutX="591.0" layoutY="34.0" mnemonicParsing="false" onAction="#handleSearchButton" prefHeight="40.0" prefWidth="86.0" text="Rechercher" AnchorPane.leftAnchor="591.0" AnchorPane.topAnchor="34.0" />
+      <Label layoutX="350.0" layoutY="91.0" styleClass="filtreLabel" text="Filtrer par groupe" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="91.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <ChoiceBox fx:id="groupFilter" layoutX="497.0" layoutY="89.0" prefHeight="29.0" prefWidth="125.0" AnchorPane.leftAnchor="497.0" AnchorPane.topAnchor="89.0" />
+      <SplitPane dividerPositions="0.44142857142857145" layoutY="137.0" styleClass="Separator" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="137.0">
+        <items>
+          <AnchorPane>
+               <children>
+                  <ListView fx:id="listView" minWidth="250.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+               </children>
+            </AnchorPane>
+          <AnchorPane fx:id="detailedView" />
+        </items>
+      </SplitPane>
    </children>
 </AnchorPane>

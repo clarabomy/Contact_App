@@ -1,0 +1,65 @@
+/*Font*/
+#homeScreenAnchorPane, #label1, #label2, #AddContactMainAnchorPane, #AddContactSecondAnchorPane {
+    -fx-font-family : "Segoe UI Semibold";
+}
+
+/*Color*/
+MenuBar {
+    -fx-background-color: #2471A3;
+    -fx-border-color : #D4E6F1;
+}
+
+#homeScreenAnchorPane, #AddContactMainAnchorPane {
+	-fx-background-color : #5499C7;
+}
+
+SplitPane {
+	-fx-color : #5499C7;
+}
+
+#listView, #listView .list-cell:even, #AddContactSecondAnchorPane {
+	-fx-background-color : #EBF5FB;
+}
+
+#listView .list-cell:odd {
+    -fx-background-color: #D6EAF8;
+}
+
+#detailedView {
+	-fx-background-color : #FAFAFA;
+}
+
+/*Sizes*/
+MenuBar {
+    -fx-border-width : 0px 0px 2px 0px;
+}
+
+#label1, #label2 {
+    -fx-label-padding: 0px 0px 0px 5px;
+}
+
+/*Specific*/
+.menu-button .label {
+    -fx-text-fill: white;
+    -fx-font-weight : bold;
+}
+
+.button {
+	-fx-background-color : #F5F5F5;
+	-fx-border-color: #85C1E9;
+    -fx-border-width: 2;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+}
+
+.filtreLabel {
+	-fx-text-fill: #F5F5F5;
+    -fx-font-weight : bold;
+}
+
+#notes {/*tester*/
+    -fx-wrap-text: True;
+    -fx-text-overrun: clip;
+    -fx-overflow-x: hidden;/*utile?*/
+    -fx-overflow-y: hidden;
+}

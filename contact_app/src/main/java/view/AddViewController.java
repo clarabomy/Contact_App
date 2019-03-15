@@ -10,7 +10,7 @@ import isen.java2.model.db.daos.ContactDao;
 import isen.java2.model.db.entities.Category;
 import isen.java2.model.db.entities.Contact;
 import isen.java2.model.services.StageService;
-import isen.java2.model.vcard.ContactVcard;
+import isen.java2.model.vcard.ContactVcardManager;
 import isen.java2.model.vcard.NotEnoughDataException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

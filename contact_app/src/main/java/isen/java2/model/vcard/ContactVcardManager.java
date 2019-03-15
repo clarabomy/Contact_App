@@ -18,30 +18,51 @@ import isen.java2.model.db.daos.ContactDao;
 import isen.java2.model.db.entities.Category;
 import isen.java2.model.db.entities.Contact;
 
+/**
+ * @author Clara Bomy
+ *
+ *         This class implements a contact vcard manager, which allows us 
+ *         to export or import our contacts
+ *         
+ */
+public class ContactVcardManager {
 
-public class ContactVcard {
-
-	private static final String CONTACT_EXPORT = "contacts_export";
-	private static final String CONTACT_IMPORT = "contacts_import";	
+	private static final String CONTACT_EXPORT = "contacts_export"; //name of the directory where will be stored exported contacts
+	private static final String CONTACT_IMPORT = "contacts_import";	//name of the directory where will be stored imported contacts
 	private ContactDao contactDao = new ContactDao();
 	
 	protected Path root;
 	protected Path contactsExportDir;
 	protected Path contactsImportDir;
 
-	public ContactVcard(String root) throws IOException {
-
+	
+	/**
+	 * Main constructor. We deal with all the directory creations here, not in
+	 * the setters. Thus, when the constructor returns, we are sure that the
+	 * object is usable
+	 * 
+	 * @param root
+	 * @throws IOException
+	 */
+	public ContactVcardManager(String root) throws IOException {
+		// This is a simple example of nullsafe processing : check that your
+		// public interface is called with legit arguments
 		if (root == null || !Files.exists(Paths.get(root))) {
+			// this exception has many advantages : it is runtime, thus the
+			// caller does not have to explicitly deal with it (no useless
+			// try/catch to implement), it is meaningful just by it's name (far
+			// more than inadvertently throwing NPE), and with a simple message,
+			// it can tell exactly what argument is bad and why.
 			throw new IllegalArgumentException("You have to provide a root directory to process");
 		}
 		
 		this.root = Paths.get(root); 
-		this.contactsExportDir = this.root.resolve(ContactVcard.CONTACT_EXPORT);
+		this.contactsExportDir = this.root.resolve(ContactVcardManager.CONTACT_EXPORT);
 		if (Files.notExists(this.contactsExportDir )) {
 			this.prepareDirectory("", this.contactsExportDir);
 		}
 		
-		this.contactsImportDir = this.root.resolve(ContactVcard.CONTACT_IMPORT);
+		this.contactsImportDir = this.root.resolve(ContactVcardManager.CONTACT_IMPORT);
 		if (Files.notExists(this.contactsImportDir )) {
 			this.prepareDirectory("", this.contactsImportDir);
 		}
@@ -67,16 +88,19 @@ public class ContactVcard {
 		return newPath;
 	}
 	
-	/*public void moveFileToArchive(Path entry) throws IOException {
-		Path target = this.contactsArchive.resolve(entry.getFileName());
-		Files.move(entry, target, StandardCopyOption.REPLACE_EXISTING);
-	}*/
 	
+	/**
+	 * This method is used to export a contact
+	 * 
+	 * @param contact
+	 * @throws IOException
+	 */
 	public void exportContact(Contact contact) throws IOException {
 		
 		String filename = contact.getFirstname() + " " + contact.getLastname();
 		
-				
+		//We write the information of the contact in the vcard file. Depending of the information provided, 
+		//the content of the file will be different
 		try (BufferedWriter br = Files.newBufferedWriter(this.contactsExportDir.resolve(filename), StandardCharsets.UTF_8);) {
 			br.write("BEGIN:VCARD\nVERSION:2.1\n");
 			br.write("FN:" + filename + "\n");
@@ -89,6 +113,7 @@ public class ContactVcard {
 			br.write("CATEGORIES:" + contact.getCategory().getName() + "\n");
 			br.write("TEL;CELL:" + contact.getPhone() + "\n");
 			
+			//Each element of the address is separed with '&&' caracter 
 			if (!contact.getAddress().equals("&&&&&&") && !contact.getAddress().equals("")) {
 				String address = contact.getAddress() + "&&/";
 				String[] addressParts = address.split("&&");
@@ -117,6 +142,12 @@ public class ContactVcard {
 		}
 	}
 	
+	/**
+	 * This method is used to export all the contacts 
+	 * 
+	 * @param contactsToExport
+	 * @throws IOException
+	 */
 	public void exportAllContacts(List<Contact> contactsToExport) throws IOException {
 		contactsToExport =  this.contactDao.listAllContacts();
 		
@@ -125,6 +156,13 @@ public class ContactVcard {
 		}
 	}
 	
+	/**
+	 * This method is used to import a contact 
+	 * 
+	 * @param filename
+	 * @throws IOException
+	 * @throws NotEnoughDataException (if there is no lastname, firstname or phone in the vcard file)
+	 */
 	private void importContact(String filename) throws IOException, NotEnoughDataException {
 		String firstname = "";
 		String lastname = "";
@@ -136,7 +174,7 @@ public class ContactVcard {
 		String phone = "";
 		String notes = "";
 		
-		
+		// We create a map to store all the information of the contact to import 
 		Map<String, String> fileContent = new HashMap<>();
 		try (BufferedReader br = Files.newBufferedReader(this.contactsImportDir.resolve(filename), StandardCharsets.UTF_8);) {
 			String line;
@@ -182,18 +220,28 @@ public class ContactVcard {
 				notes = fileContent.get("NOTE").replace("\\n", "\n");
 			}
 			
+			// With all these information, we create a new contact and add it in the DB
 			Contact importedContact = new Contact(lastname, firstname, nickname, address, birthdate, category, mail, phone, notes);
 			this.contactDao.addContact(importedContact);
 			
 		}
 	}
 	
+	/**
+	 * This method is used to import all the vcard files present in the directory where will be stored imported contacts
+	 * 
+	 * @throws IOException
+	 * @throws NotEnoughDataException
+	 */
 	public void importAllContacts() throws IOException, NotEnoughDataException {
 		try (DirectoryStream<Path> contactsToImport = Files.newDirectoryStream(this.contactsImportDir)) {
+			
+			// We go throw the directory and import the contacts one by one
 			for(Path contact : contactsToImport) {
 				String filename = contact.getFileName().toString();
-				System.out.println(filename.toString());
 				importContact(filename);
+				
+				// Once the contact is imported, we deleted the considered vcard file
 				Files.delete(contact);
 			}
 		}	

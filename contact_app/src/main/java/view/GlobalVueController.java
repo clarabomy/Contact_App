@@ -11,7 +11,7 @@ import isen.java2.model.db.daos.ContactDao;
 import isen.java2.model.db.entities.Category;
 import isen.java2.model.db.entities.Contact;
 import isen.java2.model.services.StageService;
-import isen.java2.model.vcard.ContactVcard;
+import isen.java2.model.vcard.ContactVcardManager;
 import isen.java2.model.vcard.NotEnoughDataException;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -55,7 +55,7 @@ public class GlobalVueController {
 	private Button findButton;
 	
 	
-	private ContactVcard cVcard;
+	private ContactVcardManager cVcard;
 	private ObservableList<Contact> observableContacts;
 	private ObservableList<String> obsvCat;
 	private CVOnClickController controllerOnClick;
@@ -71,7 +71,7 @@ public class GlobalVueController {
 		observableContacts = FXCollections.observableArrayList();
 		dao.listAllContacts().forEach( e-> observableContacts.add(e));
 		try {
-			cVcard = new ContactVcard("../");
+			cVcard = new ContactVcardManager("../");
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -300,7 +300,7 @@ public class GlobalVueController {
 		 * Export the selected contact only if there is a selected contact.
 		 */
 		 if (!listView.getSelectionModel().isEmpty()) {
-			ContactVcard cVcard = new ContactVcard("../");
+			ContactVcardManager cVcard = new ContactVcardManager("../");
 			cVcard.exportContact(contactClick);
 		 }
 	}

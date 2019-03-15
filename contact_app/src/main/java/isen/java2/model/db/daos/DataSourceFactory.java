@@ -3,6 +3,11 @@ package isen.java2.model.db.daos;
 import javax.sql.DataSource;
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 
+/**
+ * @author Clara Bomy
+ *
+ *         this class allows us to connect to the DB
+ */
 public class DataSourceFactory {
 	private static MysqlDataSource dataSource;
 

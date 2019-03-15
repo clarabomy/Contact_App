@@ -16,10 +16,23 @@ import isen.java2.model.db.daos.CategoryDao;
 import isen.java2.model.db.daos.DataSourceFactory;
 import isen.java2.model.db.entities.Category;
 
+/**
+ * @author Clara Bomy
+ * 
+ *         Test class used to test the behavior of the CategoryDao Class. This
+ *         class replaces the application class we used before, and becomes our
+ *         entrypoint into the program
+ */
 public class CategoryDaoTestCase {
 	
 	private CategoryDao categoryDao = new CategoryDao(); 
 	
+	/**
+	 * Method used to create our controlled environment, called
+	 * every time a test runs
+	 * 
+	 * @throws Exception
+	 */
 	@Before
 	public void initDatabase() throws Exception {
 		Connection connection = DataSourceFactory.getDataSource().getConnection();
@@ -32,7 +45,12 @@ public class CategoryDaoTestCase {
 		connection.close();
 	}
 	
-	 @After
+	 /**
+	 * Method used to restore the DB after the tests
+	 * 
+	 * @throws Exception
+	 */
+	@After
 	 public void cleanDb() throws Exception {
 		Connection connection = DataSourceFactory.getDataSource().getConnection();
 		Statement stmt = connection.createStatement();
