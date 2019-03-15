@@ -49,6 +49,9 @@ public class AddCategoryController {
 		catDao.getCategoryList().forEach(e -> obsvCat.add(e.getName()));
 	}
 	
+	/**
+	 * The initialization of the view
+	 */
 	@FXML
 	private void initialize() {
 		boxCat.getItems().addAll(obsvCat);

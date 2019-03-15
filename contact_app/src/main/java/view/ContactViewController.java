@@ -28,13 +28,15 @@ public class ContactViewController extends ListCell<Contact> {
 	
 	public FXMLLoader loader;
 	
+	/* 
+	 * Void that update the items of the listView in the GlobalView. 
+	 * If the contact is null then it sets the text of the two labels at ""
+	 * and if the contact exists it sets the labels at the value LastName and FirstName
+	 * (non-Javadoc)
+	 * @see javafx.scene.control.Cell#updateItem(java.lang.Object, boolean)
+	 */
 	@Override
 	protected void updateItem(Contact contact, boolean empty) {
-		/***
-		 * Void that update the items of the listView in the GlobalView. 
-		 * If the contact is null then it sets the text of the two labels at ""
-		 * and if the contact exists it sets the labels at the value LastName and FirstName
-		 */
 		super.updateItem(contact, empty);
 		
 		if (contact!=null){
