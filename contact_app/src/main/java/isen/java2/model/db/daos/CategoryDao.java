@@ -134,43 +134,4 @@ public class CategoryDao {
 		return 0;
 	}
 	
-
-	/**
-	 * Updates a category (get back category with new name and old id)
-	 * 
-	 * @param name
-	 * @return the updated category with its new id (or null if something went wrong)
-	 */
-	public Category updateCategory(Category category) {
-		// if the category does not exist, we create a new category	
-		int newId = getIdCategory(category.getName());
-		if (newId == 0) {
-			newId = addCategory(category.getName());
-		}
-
-		// replace id category in the relevant contacts
-		try (Connection connection = DataSourceFactory.getDataSource().getConnection()) {
-			String sqlQuery = "UPDATE contact SET id_category=? WHERE id_category=?";
-			try (PreparedStatement contactStmt = connection.prepareStatement(sqlQuery)) {
-				contactStmt.setInt(1, category.getId());//old id
-				contactStmt.setInt(2, newId);//new id
-				contactStmt.executeUpdate();
-
-				//delete old category
-				try (PreparedStatement statement = connection.prepareStatement("DELETE FROM category WHERE id = ?")) {
-					statement.setInt(1, category.getId());//old id
-					statement.executeUpdate();
-
-					category.setId(newId);
-					return category; 
-				}
-			}
-		}
-		
-		catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
 }
