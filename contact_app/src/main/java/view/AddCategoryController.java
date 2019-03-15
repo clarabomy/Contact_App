@@ -102,6 +102,12 @@ public class AddCategoryController {
 			alert.setHeaderText(null);
 			alert.show();
 		}
+		else if(newCat.getText().contains(";")||newCat.getText().contains("&")||newCat.getText().contains("\"")) {
+			alert.setTitle("Nom de catégorie invalide");
+			alert.setContentText("Veuillez entrer un nom valide de catgéorie.");
+			alert.setHeaderText(null);
+			alert.show();
+		}
 		else {
 			if (catDao.getCategory(newCat.getText())==null) {
 				catDao.addCategory(capitalize(newCat.getText()));
