@@ -23,7 +23,14 @@ import isen.java2.model.db.entities.Contact;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class TestContactVcard {
+/**
+ * @author Corentin Jarosset
+ * 
+ *         Test class used to test the behavior of the ContactVcardManager Class. This
+ *         class replaces the application class we used before, and becomes our
+ *         entry point into the program
+ */
+public class ContactVcarManagerTestCase {
 	private static String rootDir = "C:\\tmp\\java2\\testVcard\\"; 
 
 	@BeforeClass
@@ -39,42 +46,42 @@ public class TestContactVcard {
 	}
 	
 	@Test
-	public void simpleTestContactVcard() throws IOException {
+	public void simpleTestContactVcardManager() throws IOException {
 		String root1 = rootDir+"tmp1";
-		ContactVcard vcard1 = new ContactVcard(root1);
+		ContactVcardManager vcard1 = new ContactVcardManager(root1);
 		assertThat(vcard1.root.toString()).isEqualTo(root1);
 		assertThat(vcard1.contactsExportDir).exists();
 		assertThat(vcard1.contactsImportDir).exists();
 		
 		String root2 = rootDir+"tmp2";
-		ContactVcard vcard2 = new ContactVcard(root2);
+		ContactVcardManager vcard2 = new ContactVcardManager(root2);
 		assertThat(vcard2.root.toString()).isEqualTo(root2);
 		assertThat(vcard2.contactsExportDir).exists();
 		assertThat(vcard2.contactsImportDir).exists();
 		
 		String root3 = rootDir+"tmp3";
-		ContactVcard vcard3 = new ContactVcard(root3);
+		ContactVcardManager vcard3 = new ContactVcardManager(root3);
 		assertThat(vcard3.root.toString()).isEqualTo(root3);
 		assertThat(vcard3.contactsExportDir).exists();
 		assertThat(vcard3.contactsImportDir).exists();
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
-	public void testContactVcardWithRootNull() throws IOException {
+	public void testContactVcardManagerWithRootNull() throws IOException {
 		String root = null;
-		ContactVcard vcard = new ContactVcard(root);
+		ContactVcardManager vcard = new ContactVcardManager(root);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
-	public void testContactVcardWithRooThatDoesNotExist() throws IOException {
+	public void testContactVcardManagerWithRooThatDoesNotExist() throws IOException {
 		String root = rootDir+"WrongDirectory";
-		ContactVcard vcard = new ContactVcard(root);
+		ContactVcardManager vcard = new ContactVcardManager(root);
 	}
 	
 	@Test
 	public void testExportContact() throws IOException {
 		String root = rootDir+"tmp1";
-		ContactVcard vcard = new ContactVcard(root);
+		ContactVcardManager vcard = new ContactVcardManager(root);
 		Category category = new Category(1,"name");
 		Contact contact = new Contact(1,"Jarosset","Corentin","cocobergine","digue&&lille&&59800&&france",LocalDate.of(1997, Month.NOVEMBER, 4), category,"cocobergine@nulos.fr","0655447788","commentaire");
 		vcard.exportContact(contact);
@@ -97,7 +104,7 @@ public class TestContactVcard {
 	@Test(expected = ArrayIndexOutOfBoundsException.class)
 	public void testExportContactWithWrongAdress() throws IOException {
 		String root = rootDir+"tmp2";
-		ContactVcard vcard = new ContactVcard(root);
+		ContactVcardManager vcard = new ContactVcardManager(root);
 		Category category = new Category(1,"name");
 		Contact contact = new Contact(1,"Christiaens","Mathilde","titilde","madeleine",LocalDate.of(1997, Month.MAY, 5), category,"titilde@nulos.fr","0655447788","commentaire");
 		vcard.exportContact(contact);
@@ -106,7 +113,7 @@ public class TestContactVcard {
 	@Test
 	public void testExportContactWithVariableEqualToNull() throws IOException {
 		String root = rootDir+"tmp3";
-		ContactVcard vcard = new ContactVcard(root);
+		ContactVcardManager vcard = new ContactVcardManager(root);
 		Category category = new Category(1,"name");
 		Contact contact1 = new Contact(1,"Christiaens1","Mathilde","","madeleine&&lille&&59800&&france",LocalDate.of(1997, Month.MAY, 5), category,"titilde@nulos.fr","0655447788","commentaire");
 		vcard.exportContact(contact1);

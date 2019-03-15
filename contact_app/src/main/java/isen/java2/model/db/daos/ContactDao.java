@@ -147,7 +147,7 @@ public class ContactDao {
 		try (Connection connection = DataSourceFactory.getDataSource().getConnection()) {
 			
 			//The research is made in all the data of the DB
-			String sqlQuery = "SELECT * FROM contact JOIN category ON contact.id_category = category.id WHERE LOWER(lastname) LIKE ? OR LOWER(firstname) LIKE ? OR LOWER(nickname) LIKE ? OR LOWER(phone) LIKE ? OR LOWER(category.name) LIKE ? OR LOWER(email) LIKE ? OR LOWER(address) LIKE ? OR birthday LIKE ? OR LOWER(notes) LIKE ?";
+			String sqlQuery = "SELECT * FROM contact JOIN category ON contact.id_category = category.id WHERE LOWER(lastname) LIKE ? OR LOWER(firstname) LIKE ? OR LOWER(nickname) LIKE ? OR LOWER(phone) LIKE ? OR LOWER(category.name) LIKE ? OR LOWER(email) LIKE ? OR LOWER(address) LIKE ? OR birthday LIKE ? OR LOWER(notes) LIKE ? ORDER BY lastname";
 			
 			//We use a prepared statement 
 			try (PreparedStatement statement = connection.prepareStatement(sqlQuery)) {

@@ -17,12 +17,8 @@ SplitPane {
 	-fx-color : #5499C7;
 }
 
-#listView, #listView .list-cell:even, #AddContactSecondAnchorPane {
+#listView, #listView .list-cell, #AddContactSecondAnchorPane {
 	-fx-background-color : #EBF5FB;
-}
-
-#listView .list-cell:odd {
-    -fx-background-color: #D6EAF8;
 }
 
 #detailedView {

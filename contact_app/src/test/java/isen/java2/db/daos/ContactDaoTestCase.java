@@ -138,19 +138,21 @@ public class ContactDaoTestCase {
 	 
 	 @Test
 	 public void shouldTellThatContactAlreadyExistsAndIsDifferent() {
+		// WHEN
 		Contact contact = new Contact("Bomy", "Clara", new Category(0, "Sans catégorie"), "0648457658");
 		Integer result = contactDao.existContact(contact);
 		
+		// THEN - As "Clara Bomy" is already in the DB, it should return the id of the existing contact.
 		assertThat(result).isNotEqualTo(contact.getId());		
 	 }
 	 
 	 @Test
 	 public void shouldTellThatContactAlreadyExistsAndIsTheSame() {
-		// WHEN - - we try to add a new contact "Clara Bomy" but this contact is already in the DB
+		// WHEN -  we try to add a new contact "Clara Bomy" but this contact is already in the DB
 		Contact contact = new Contact(1, "Bomy", "Clara", new Category(0, "Sans catégorie"), "0648457658");
 		Integer result = contactDao.existContact(contact);
 		
-		// THEN - As "Clara Bomy" is already in the DB, it should not return the id of the contact.
+		// THEN - As "Clara Bomy" is already in the DB, it should return the id of the contact.
 		assertThat(result).isEqualTo(contact.getId());		
 	 }
 
