@@ -13,13 +13,17 @@ MenuBar {
 	-fx-background-color : #5499C7;
 }
 
+#addCategoryBar {
+	-fx-border-color : #5499C7;
+}
+
 SplitPane {
 	-fx-color : #5499C7;
 }
 
 #listView, #listView .list-cell, #AddContactSecondAnchorPane {
 	-fx-background-color : #EBF5FB;
-	-fx-font-size : 15;
+	-fx-font-size : 18;
 }
 
 #listView .list-cell:selected {
@@ -36,6 +40,10 @@ SplitPane {
 }
 
 /*Sizes*/
+#addCategoryBar {
+	-fx-border-width : 80px 0px 0px 0px;
+}
+
 MenuBar {
     -fx-border-width : 0px 0px 2px 0px;
 }
