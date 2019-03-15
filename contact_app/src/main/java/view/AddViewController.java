@@ -87,7 +87,11 @@ public class AddViewController {
 		addTelephone.setText(contact.getPhone()==null?"":contact.getPhone());
 		addEmail.setText(contact.getMail()==null?"":contact.getMail());
 		addSurnom.setText(contact.getNickname()==null?"":contact.getNickname());
-		addGroupe.getSelectionModel().select(contact.getCategory().getId()-1);
+		for (int i=0; i<addGroupe.getItems().size(); i++) {
+			if (addGroupe.getItems().get(i).equals(contact.getCategory().getName())) {
+				addGroupe.getSelectionModel().select(i);
+			}
+		}
 		addBirthDate.setValue(contact.getBirthdate());
 
 		if (contact.getAddress()!= null && contact.getAddress()!= "") {
