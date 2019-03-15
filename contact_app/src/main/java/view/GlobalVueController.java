@@ -1,14 +1,11 @@
 package view;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 import javafx.util.Callback;
 import isen.java2.app.ContactApp;
 import isen.java2.model.db.daos.CategoryDao;
 import isen.java2.model.db.daos.ContactDao;
-import isen.java2.model.db.entities.Category;
 import isen.java2.model.db.entities.Contact;
 import isen.java2.model.services.StageService;
 import isen.java2.model.vcard.ContactVcardManager;
@@ -19,13 +16,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
@@ -240,7 +235,7 @@ public class GlobalVueController {
 		 if (!listView.getSelectionModel().isEmpty()) {
 			 dao.deleteContact(contactClick.getId());
 			 listView.getItems().remove(listView.getSelectionModel().getSelectedIndex());
-			 System.out.println(listView.getItems());
+			 //System.out.println(listView.getItems());
 			 this.listView.refresh();
 			 listView.getSelectionModel().clearSelection();
 		 }

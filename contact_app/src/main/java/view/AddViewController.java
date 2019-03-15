@@ -57,9 +57,7 @@ public class AddViewController {
 		
 		CategoryDao catd = new CategoryDao();
 		obsvList = FXCollections.observableArrayList();
-		catd.getCategoryList().forEach(e ->{ 
-			obsvList.add(e.getName());
-			System.out.println(e.getName());});
+		catd.getCategoryList().forEach(e ->{obsvList.add(e.getName());});
 		addGroupe.getItems().addAll(obsvList);
 		addGroupe.getSelectionModel().select(0);
 	}

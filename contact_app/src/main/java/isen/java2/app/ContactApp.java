@@ -7,6 +7,7 @@ import isen.java2.model.services.StageService;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -27,6 +28,8 @@ public class ContactApp extends Application
 	public void start(Stage primaryStage) throws Exception {		
 		primaryStage.setTitle("Homescreen");
 		StageService.getInstance().setPrimaryStage(primaryStage);
+		primaryStage.getIcons().add(new Image("file:src/main/resources/images/icon.png"));
+
 		showHomeScreen();
 		
 	}

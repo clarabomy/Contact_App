@@ -23,12 +23,10 @@ SplitPane {
 
 #listView, #listView .list-cell, #AddContactSecondAnchorPane {
 	-fx-background-color : #EBF5FB;
-	-fx-font-size : 18;
 }
 
 #listView .list-cell:selected {
 	-fx-background-color : #A9CCE3;
-	-fx-font-size : 18;
 }
 
 #listView .list-cell:selected .label {
@@ -50,6 +48,10 @@ MenuBar {
 
 #label1, #label2 {
     -fx-label-padding: 0px 0px 0px 5px;
+}
+
+#listView .list-cell, #listView .list-cell:selected {
+	-fx-font-size : 18;
 }
 
 /*Specific*/
