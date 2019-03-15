@@ -13,6 +13,10 @@ MenuBar {
 	-fx-background-color : #5499C7;
 }
 
+#addCategoryBar {
+	-fx-border-color : #5499C7;
+}
+
 SplitPane {
 	-fx-color : #5499C7;
 }
@@ -21,11 +25,23 @@ SplitPane {
 	-fx-background-color : #EBF5FB;
 }
 
+#listView .list-cell:selected {
+	-fx-background-color : #A9CCE3;
+}
+
+#listView .list-cell:selected .label {
+	-fx-text-fill : #2E4053;
+}
+
 #detailedView {
 	-fx-background-color : #FAFAFA;
 }
 
 /*Sizes*/
+#addCategoryBar {
+	-fx-border-width : 80px 0px 0px 0px;
+}
+
 MenuBar {
     -fx-border-width : 0px 0px 2px 0px;
 }
@@ -34,8 +50,12 @@ MenuBar {
     -fx-label-padding: 0px 0px 0px 5px;
 }
 
+#listView .list-cell, #listView .list-cell:selected {
+	-fx-font-size : 18;
+}
+
 /*Specific*/
-.menu-button .label {
+.menu-button > .label {
     -fx-text-fill: white;
     -fx-font-weight : bold;
 }

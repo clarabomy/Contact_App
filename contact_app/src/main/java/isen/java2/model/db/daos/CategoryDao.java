@@ -32,7 +32,7 @@ public class CategoryDao {
 			// get a new statement
 			try (Statement statement = connection.createStatement()) {
 				// get a new resultset
-				try (ResultSet results = statement.executeQuery("SELECT * FROM category")) {
+				try (ResultSet results = statement.executeQuery("SELECT * FROM category ORDER BY name")) {
 					// we iterate on the resultset to create a new category
 					// from the resuultset values and put it into the list
 					while (results.next()) {
@@ -156,7 +156,7 @@ public class CategoryDao {
 				contactStmt.setInt(2, newId);//new id
 				contactStmt.executeUpdate();
 
-				//delete old categorie
+				//delete old category
 				try (PreparedStatement statement = connection.prepareStatement("DELETE FROM category WHERE id = ?")) {
 					statement.setInt(1, category.getId());//old id
 					statement.executeUpdate();
