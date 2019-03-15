@@ -19,7 +19,6 @@ import org.junit.Test;
 
 import isen.java2.model.db.entities.Category;
 import isen.java2.model.db.entities.Contact;
-import isen.java2.nio.sorter.FileSorter;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -27,7 +26,7 @@ public class ContactVcardTestCase {
 
 	private ContactVcard contactVcard;
 	// You can adapt the path on your filesystem here
-	private String rootDir = "/src/test/ressources/vvcardTest/";
+	private String rootDir = "/src/test/ressources/vcardTest/";
 	
 	@Before
 	public void init() throws IOException {		
@@ -35,6 +34,16 @@ public class ContactVcardTestCase {
 		Path rootDirPath = Paths.get(rootDir);
 		Files.createDirectories(rootDirPath);
 		contactVcard = new ContactVcard(rootDir);
+		Files.createDirectory(Paths.get("D:\\tmp2\\contacts_export")); 
+		Files.createDirectory(Paths.get("tmp3")); 
+		Files.createDirectory(Paths.get("D:\\tmp3\\contacts_import")); 
+		Files.createDirectory(Paths.get("D:\\tmp1e")); 
+		Files.createDirectory(Paths.get("D:\\tmp2e")); 
+		Files.createDirectory(Paths.get("D:\\tmp3e")); 
 	}
-
+	
+	@Test
+	public void simpleTestContactVcard() throws IOException {
+		int test = 1;
+	}
 }
