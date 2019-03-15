@@ -25,7 +25,7 @@ import isen.java2.model.db.entities.Contact;
  * 
  *         Test class used to test the behavior of the ContactDao Class. This
  *         class replaces the application class we used before, and becomes our
- *         entrypoint into the program
+ *         entry point into the program
  */
 public class ContactDaoTestCase {
 	
