@@ -24,7 +24,7 @@ import isen.java2.model.db.entities.Contact;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TestContactVcard {
-	private static String rootDir = "C:\\tmp\\java2\\testVcard\\";
+	private static String rootDir = "C:\\tmp\\java2\\testVcard\\"; 
 
 	@BeforeClass
 	public static void init() throws IOException {
