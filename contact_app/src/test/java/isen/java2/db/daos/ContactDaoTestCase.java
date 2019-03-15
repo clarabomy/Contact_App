@@ -32,11 +32,11 @@ public class ContactDaoTestCase {
 		stmt.executeUpdate("INSERT INTO category(id,name) VALUES (2,'Amis')");
 		stmt.executeUpdate("INSERT INTO category(id,name) VALUES (3,'Pro')");
 		stmt.executeUpdate("DELETE FROM contact");
-		stmt.executeUpdate("INSERT INTO contact(id,lastname,firstname,nickname,phone,id_category,email,address,birthday,notes) VALUES (1,'Bomy','Clara','Clawawa','0642398475',2,'clara.bomy@isen.yncrea.fr','Loos','1997-9-13','aime les IA')");
+		stmt.executeUpdate("INSERT INTO contact(id,lastname,firstname,nickname,phone,id_category,email,address,birthday,notes) VALUES (1,'Bomy','Clara','Clawa','0642398475',2,'clara.bomy@isen.yncrea.fr','Loos','1997-9-13','aime les IA')");
 		stmt.executeUpdate("INSERT INTO contact(id,lastname,firstname,nickname,phone,id_category,email,address, birthday) VALUES (2,'Juzeau','Thibaut','Thichef','0623405698',2,'thibaut.juzeau@isen.yncrea.fr','Lille','1998-8-31')");
-		stmt.executeUpdate("INSERT INTO contact(id,lastname,firstname,phone,id_category, email,address,notes) VALUES (3,'Christiaens','Mathilde','0943582113',1,'mathilde.christiaens@isen.yncrea.fr','LaMadeleine','chat addict')");
-		stmt.executeUpdate("INSERT INTO contact(id,lastname,firstname,phone,id_category) VALUES (4,'Bomy','Corinne','0432129467',2)");
-		stmt.executeUpdate("INSERT INTO contact(id,lastname,firstname,phone,id_category,email,notes) VALUES (5,'Jarosset','Corentin','0723435465',3,'coco_du_59@kikoo.fr','where is corentin?')");
+		stmt.executeUpdate("INSERT INTO contact(id,lastname,firstname,phone,id_category, email,address,notes) VALUES (3,'Christiaens','Mathilde','0943582113',1,'mathilde.christiaens@isen.yncrea.fr','La Madeleine','chat addict')");
+		stmt.executeUpdate("INSERT INTO contact(id,lastname,firstname,phone,id_category) VALUES (4,'Bomy','Corinne','0732129467',2)");
+		stmt.executeUpdate("INSERT INTO contact(id,lastname,firstname,phone,id_category,email,notes) VALUES (5,'Jarosset','Corentin','0723435465',3,'corentin.jarosset@isen.yncrea.fr','adore le JAVA')");
 		stmt.close();
 		connection.close();
 	}	
@@ -49,10 +49,10 @@ public class ContactDaoTestCase {
 		// THEN
 		assertThat(contacts).hasSize(5);
 		assertThat(contacts).extracting("id", "lastname", "firstname", "nickname", "address", "birthdate", "category.id", "mail", "phone", "notes").containsExactly(
-			tuple(1, "Bomy", "Clara", "Clawawa", "Loos", LocalDate.of(1997, Month.SEPTEMBER, 13), 2, "clara.bomy@isen.yncrea.fr", "0642398475", "aime les IA"),
-			tuple(4, "Bomy", "Corinne", null, null, null, 2, null, "0432129467", null),
-			tuple(3, "Christiaens", "Mathilde", null, "LaMadeleine",  null, 1, "mathilde.christiaens@isen.yncrea.fr", "0943582113", "chat addict"),
-			tuple(5, "Jarosset", "Corentin", null, null, null, 3, "coco_du_59@kikoo.fr", "0723435465", "where is corentin?"),
+			tuple(1, "Bomy", "Clara", "Clawa", "Loos", LocalDate.of(1997, Month.SEPTEMBER, 13), 2, "clara.bomy@isen.yncrea.fr", "0642398475", "aime les IA"),
+			tuple(4, "Bomy", "Corinne", null, null, null, 2, null, "0732129467", null),
+			tuple(3, "Christiaens", "Mathilde", null, "La Madeleine",  null, 1, "mathilde.christiaens@isen.yncrea.fr", "0943582113", "chat addict"),
+			tuple(5, "Jarosset", "Corentin", null, null, null, 3, "corentin.jarosset@isen.yncrea.fr", "0723435465", "adore le JAVA"),
 			tuple(2, "Juzeau", "Thibaut", "Thichef", "Lille", LocalDate.of(1998, Month.AUGUST, 31), 2, "thibaut.juzeau@isen.yncrea.fr", "0623405698", null));
 
 	}
@@ -65,8 +65,8 @@ public class ContactDaoTestCase {
 		// THEN
 		assertThat(contacts).hasSize(3);
 		assertThat(contacts).extracting("id", "lastname", "firstname", "nickname", "address", "birthdate", "category.id", "mail", "phone", "notes").containsExactly(
-			tuple(1, "Bomy", "Clara", "Clawawa", "Loos", LocalDate.of(1997, Month.SEPTEMBER, 13), 2, "clara.bomy@isen.yncrea.fr", "0642398475", "aime les IA"),
-			tuple(4, "Bomy", "Corinne", null, null, null, 2, null, "0432129467", null),
+			tuple(1, "Bomy", "Clara", "Clawa", "Loos", LocalDate.of(1997, Month.SEPTEMBER, 13), 2, "clara.bomy@isen.yncrea.fr", "0642398475", "aime les IA"),
+			tuple(4, "Bomy", "Corinne", null, null, null, 2, null, "0732129467", null),
 			tuple(2, "Juzeau", "Thibaut", "Thichef", "Lille", LocalDate.of(1998, Month.AUGUST, 31), 2, "thibaut.juzeau@isen.yncrea.fr", "0623405698", null));	
 	 }
 	 
@@ -79,7 +79,7 @@ public class ContactDaoTestCase {
 		assertThat(resultSearch).hasSize(2);
 		assertThat(resultSearch).extracting("id", "lastname", "firstname", "nickname", "address", "birthdate", "category.id", "mail", "phone", "notes").containsOnly(
 			tuple(2, "Juzeau", "Thibaut", "Thichef", "Lille", LocalDate.of(1998, Month.AUGUST, 31), 2, "thibaut.juzeau@isen.yncrea.fr", "0623405698", null),	
-			tuple(1, "Bomy", "Clara", "Clawawa", "Loos", LocalDate.of(1997, Month.SEPTEMBER, 13), 2, "clara.bomy@isen.yncrea.fr", "0642398475", "aime les IA"));
+			tuple(1, "Bomy", "Clara", "Clawa", "Loos", LocalDate.of(1997, Month.SEPTEMBER, 13), 2, "clara.bomy@isen.yncrea.fr", "0642398475", "aime les IA"));
 	 }	
 	 
 	 @Test
@@ -90,9 +90,9 @@ public class ContactDaoTestCase {
 		// THEN
 		assertThat(resultSearch).hasSize(3);
 		assertThat(resultSearch).extracting("id", "lastname", "firstname", "nickname", "address", "birthdate", "category.id", "mail", "phone", "notes").containsOnly(
-			tuple(4, "Bomy", "Corinne", null, null, null, 2, null, "0432129467", null),
+			tuple(4, "Bomy", "Corinne", null, null, null, 2, null, "0732129467", null),
 			tuple(2, "Juzeau", "Thibaut", "Thichef", "Lille", LocalDate.of(1998, Month.AUGUST, 31), 2, "thibaut.juzeau@isen.yncrea.fr", "0623405698", null),	
-			tuple(1, "Bomy", "Clara", "Clawawa", "Loos", LocalDate.of(1997, Month.SEPTEMBER, 13), 2, "clara.bomy@isen.yncrea.fr", "0642398475", "aime les IA"));
+			tuple(1, "Bomy", "Clara", "Clawa", "Loos", LocalDate.of(1997, Month.SEPTEMBER, 13), 2, "clara.bomy@isen.yncrea.fr", "0642398475", "aime les IA"));
 	 }	
 	 
 	 @Test
@@ -103,7 +103,7 @@ public class ContactDaoTestCase {
 		// THEN
 		assertThat(resultSearch).hasSize(1);
 		assertThat(resultSearch).extracting("id", "lastname", "firstname", "nickname", "address", "birthdate", "category.id", "mail", "phone", "notes").containsOnly(
-			tuple(1, "Bomy", "Clara", "Clawawa", "Loos", LocalDate.of(1997, Month.SEPTEMBER, 13), 2, "clara.bomy@isen.yncrea.fr", "0642398475", "aime les IA"));
+			tuple(1, "Bomy", "Clara", "Clawa", "Loos", LocalDate.of(1997, Month.SEPTEMBER, 13), 2, "clara.bomy@isen.yncrea.fr", "0642398475", "aime les IA"));
 	 }	
 	 
 	 @Test
@@ -183,7 +183,7 @@ public class ContactDaoTestCase {
 	 public void shouldUpdateContact() throws Exception {
 		
 		 // WHEN 
-		Contact contact = new Contact(5, "Jarosset", "Corentin", "", "Lille", LocalDate.of(1998, Month.FEBRUARY, 18), new Category(2, "Ami"), "coco_du_59@kikoo.fr", "0723435465", "He is here !");
+		Contact contact = new Contact(5, "Jarosset", "Corentin", "", "Lille", LocalDate.of(1998, Month.FEBRUARY, 18), new Category(2, "Ami"), "corentin.jarosset@isen.yncrea.fr", "0723435465", "Adore le JAVA (?)");
 		contactDao.updateContact(contact);
 
 		// THEN
@@ -200,8 +200,8 @@ public class ContactDaoTestCase {
 		assertThat(resultSet.getDate("birthday").toLocalDate()).isEqualTo(LocalDate.of(1998, Month.FEBRUARY, 18));
 		assertThat(resultSet.getInt("id_category")).isEqualTo(2);
 		assertThat(resultSet.getString("phone")).isEqualTo("0723435465");
-		assertThat(resultSet.getString("email")).isEqualTo("coco_du_59@kikoo.fr");
-		assertThat(resultSet.getString("notes")).isEqualTo("He is here !");
+		assertThat(resultSet.getString("email")).isEqualTo("corentin.jarosset@isen.yncrea.fr");
+		assertThat(resultSet.getString("notes")).isEqualTo("Adore le JAVA (?)");
 		assertThat(resultSet.next()).isFalse();
 
 		resultSet.close();
@@ -215,6 +215,11 @@ public class ContactDaoTestCase {
 		Connection connection = DataSourceFactory.getDataSource().getConnection();
 		Statement stmt = connection.createStatement();
 		stmt.executeUpdate("DELETE FROM contact");
+		stmt.executeUpdate("DELETE FROM category");
+		stmt.executeUpdate("INSERT INTO category(id,name) VALUES (1,'Sans catégorie')");
+		stmt.executeUpdate("INSERT INTO category(id,name) VALUES (2,'Amis')");
+		stmt.executeUpdate("INSERT INTO category(id,name) VALUES (3,'Pro')");
+		stmt.executeUpdate("INSERT INTO category(id,name) VALUES (4,'Famille')");
 		stmt.close();
 		connection.close();
 	 }

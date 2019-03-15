@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.List;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -30,6 +31,21 @@ public class CategoryDaoTestCase {
 		stmt.close();
 		connection.close();
 	}
+	
+	 @After
+	 public void cleanDb() throws Exception {
+		Connection connection = DataSourceFactory.getDataSource().getConnection();
+		Statement stmt = connection.createStatement();
+		stmt.executeUpdate("DELETE FROM category");
+		stmt.executeUpdate("INSERT INTO category(id,name) VALUES (1,'Sans catégorie')");
+		stmt.executeUpdate("INSERT INTO category(id,name) VALUES (2,'Amis')");
+		stmt.executeUpdate("INSERT INTO category(id,name) VALUES (3,'Pro')");
+		stmt.executeUpdate("INSERT INTO category(id,name) VALUES (4,'Famille')");
+		stmt.close();
+		connection.close();
+	 }
+	
+	
 	
 	@Test 
 	public void shouldListCategories() {

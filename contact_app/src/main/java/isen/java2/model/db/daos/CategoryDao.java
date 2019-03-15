@@ -91,5 +91,38 @@ public class CategoryDao {
 		}
 		return 0;
 	}
+	
+
+	public Category updateCategory(Category category) {//récupère catégorie avec nouveau nom et ancien id
+		//si n'existe pas, crée nouvelle catégorie
+		int newId = getIdCategory(category.getName());
+		if (newId == 0) {
+			newId = addCategory(category.getName());
+		}
+
+		//remplacer id catégorie dans les contacts concernés
+		try (Connection connection = DataSourceFactory.getDataSource().getConnection()) {
+			String sqlQuery = "UPDATE contact SET id_category=? WHERE id_category=?";
+			try (PreparedStatement contactStmt = connection.prepareStatement(sqlQuery)) {
+				contactStmt.setInt(1, category.getId());//ancienne clé
+				contactStmt.setInt(2, newId);//nouvelle clé
+				contactStmt.executeUpdate();
+
+				//supprimer ancienne catégorie
+				try (PreparedStatement statement = connection.prepareStatement("DELETE FROM category WHERE id = ?")) {
+					statement.setInt(1, category.getId());//ancienne clé
+					statement.executeUpdate();
+
+					category.setId(newId);
+					return category; //retourne catégorie avec sa nouvelle id
+				}
+			}
+		}
+		
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 }
