@@ -51,6 +51,9 @@ public class AddViewController {
 	
 	@FXML
 	public void initialize() {
+		/***
+		 * Initialize the view by adding the database and listing the categories for them to be in the choicebox.
+		 */
 		
 		CategoryDao catd = new CategoryDao();
 		obsvList = FXCollections.observableArrayList();
@@ -63,19 +66,21 @@ public class AddViewController {
 	
 	@FXML
 	public void setText(Contact contact) {
-//		System.out.println(addNom);
+		/***
+		 * Function that permits to initialize the view with the valid informations when you want to change a contact. 
+		 * It's only called by the GlobalView controller and only when you click on the button change.
+		 * It also sets the update boolean to true so you the validate function knows if you're updating an existing contact or creating a new one.
+		 */
 		nveauContact.setText("Modification");
 		addNom.setText(contact.getLastname()==null?"":contact.getLastname());
 		addPrenom.setText(contact.getFirstname()==null?"":contact.getFirstname());
-//		System.out.println(contact.getNotes());
-//		addNotes.setText(contact.getNotes()==null?"":contact.getNotes());
 		addNotes.setText(contact.getNotes());
 		addTelephone.setText(contact.getPhone()==null?"":contact.getPhone());
 		addEmail.setText(contact.getMail()==null?"":contact.getMail());
 		addSurnom.setText(contact.getNickname()==null?"":contact.getNickname());
 		addGroupe.getSelectionModel().select(contact.getCategory().getId()-1);
 		addBirthDate.setValue(contact.getBirthdate());
-//		System.out.println(contact.getAddress());
+
 		if (contact.getAddress()!= null && contact.getAddress()!= "") {
 			String[] address = contact.getAddress().split("&&");
 			ArrayList<TextField> addressTF = new ArrayList<TextField>();
@@ -90,11 +95,18 @@ public class AddViewController {
 		update=true;
 		previousContact=contact;
 		
-		
 	}
+	
 	
 	@FXML
 	private void handleValidateButton() {
+		/***
+		 * Function that permits to handle the "valider" button. 
+		 * First, it checks if the form is accurate or not. If it's not the function will do nothing. If it is it will do as follow:
+		 * If the view was load because you wanted to change a contact, the function will update the contact in the database.
+		 * If the view was load to create a new contact, the function will create the contact in the database. But only if the contact doesn't already exist.
+		 * At the end, if the form is valid it will return to the global view of the contacts.
+		 */
 		ContactDao contDao = new ContactDao();
 		boolean formulaireValide = true;
 		Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -207,7 +219,7 @@ public class AddViewController {
 			}
 			Contact existCont = new Contact(addNom.getText(), addPrenom.getText(), null, null);
 			String address = numRue.getText()+"&&"+cp.getText()+"&&"+ville.getText()+"&&"+pays.getText();
-			Contact contact = new Contact(capitalize(addNom.getText()), capitalize(addPrenom.getText()), capitalize(addSurnom.getText()), address, addBirthDate.getValue(), category, addEmail.getText(), addTelephone.getText(), addNotes.getText()  );
+			Contact contact = new Contact(capitalize(addNom.getText()), capitalize(addPrenom.getText()), addSurnom.getText().equals("")?addSurnom.getText():capitalize(addSurnom.getText()), address, addBirthDate.getValue(), category, addEmail.getText(), addTelephone.getText(), addNotes.getText()  );
 			if((!this.update) && (contDao.existContact(contact)==0)) {
 				contDao.addContact(contact);
 				handleReturnButton();
@@ -231,6 +243,9 @@ public class AddViewController {
 	
 	@FXML
 	private void handleReturnButton() {
+		/***
+		 * Basic function that permits to return to the global view when we click on "retour" or when the form is valid and you clicked on "valider".
+		 */
 		FXMLLoader loader = new  FXMLLoader();
 		loader.setLocation(ContactApp.class.getResource("/view/GlobalVue.fxml"));
 		try {

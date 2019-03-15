@@ -39,6 +39,9 @@ public class CVOnClickController {
 	
 	@FXML
 	public void setText(Contact contact) {
+		/***
+		 * Set the text of the detailed view so the selected contact is shown
+		 */
 		detailedContact = contact;
 		if(contact.getNickname()==null||contact.getNickname()=="") {
 			title.setText(contact.getLastname().toUpperCase()+ " "+ contact.getFirstname());
@@ -55,7 +58,6 @@ public class CVOnClickController {
 
 		
 		if (contact.getAddress()!=null) {
-			//String address = contact.getAddress().replace("&&", " ");
 			String address = contact.getAddress().replaceFirst("&&", "\n").replaceFirst("&&", " ").replaceFirst("&&", "\n");
 			detailedViewAddress.setText(address);
 		}

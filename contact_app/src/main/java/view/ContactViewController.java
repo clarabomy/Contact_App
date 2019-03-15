@@ -24,6 +24,11 @@ public class ContactViewController extends ListCell<Contact> {
 	
 	@Override
 	protected void updateItem(Contact contact, boolean empty) {
+		/***
+		 * Void that update the items of the listView in the GlobalView. 
+		 * If the contact is null then it sets the text of the two labels at ""
+		 * and if the contact exists it sets the labels at the value LastName and FirstName
+		 */
 		super.updateItem(contact, empty);
 		
 		if (contact!=null){
@@ -40,12 +45,9 @@ public class ContactViewController extends ListCell<Contact> {
 			}
 			
 			label2.setText(contact.getFirstname());
-//			System.out.println(label1);
 			label1.setText(contact.getLastname());
-//			number.setText(contact.getPhone());
 			setText(null);
 			setGraphic(gridPane);
-			
 			
 		}
 		else if(loader!=null) {

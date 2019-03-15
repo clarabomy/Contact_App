@@ -21,6 +21,10 @@ public class AddCategoryController {
 	
 	@FXML
 	private void handleReturnButton() {
+		/***
+		 * Same thing than for the AddView
+		 * If you click on the "retour" button it just loads the GlobalView
+		 */
 		FXMLLoader loader = new  FXMLLoader();
 		loader.setLocation(ContactApp.class.getResource("/view/GlobalVue.fxml"));
 		try {
@@ -37,6 +41,11 @@ public class AddCategoryController {
 	
 	@FXML
 	private void hanldeValidateButton() {
+		/**
+		 * If the text Field of the new Category is null : send an alert to the user
+		 * If the name chosen for the category already exists in the database : send an alert
+		 * Otherwise add the category after passing the text through capitalize and add the category to the database 
+		 */
 		if (newCat.getText().equals("") || newCat.getText()==null) {
 			alert.setTitle("Nom de catégorie vide");
 			alert.setContentText("Veuillez entrer un nom pour la catégorie.");
@@ -60,6 +69,9 @@ public class AddCategoryController {
 	
 	public String capitalize(String str)
 	{
+		/***
+		 * Code that permits to make the first letter upper case and the other lower 
+		 */
 	    return str.substring(0, 1).toUpperCase() + str.substring(1);
 	}
 }
