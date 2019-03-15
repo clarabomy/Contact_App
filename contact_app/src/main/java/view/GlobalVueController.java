@@ -227,12 +227,10 @@ public class GlobalVueController {
 	 
 	 @FXML
 	 private void handleSearchButton() {
-		 if (!listView.getSelectionModel().isEmpty()) {
-			 listView.getSelectionModel().clearSelection();
-			 listView.getItems().removeAll(observableContacts);
-			 listView.getItems().addAll(dao.searchContact(this.searchBar.getText()));
-			 listView.refresh();
-		 }
+		 listView.getSelectionModel().clearSelection();
+		 listView.getItems().removeAll(observableContacts);
+		 listView.getItems().addAll(dao.searchContact(this.searchBar.getText()));
+		 listView.refresh();
 	 }
 
 	 @FXML

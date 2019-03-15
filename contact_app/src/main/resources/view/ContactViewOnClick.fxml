@@ -10,7 +10,7 @@
 
 <AnchorPane prefHeight="402.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.CVOnClickController">
    <children>
-      <GridPane layoutY="-6.0" prefHeight="286.0" prefWidth="563.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="85.0">
+      <GridPane layoutX="6.0" layoutY="-6.0" prefHeight="267.0" prefWidth="444.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="85.0">
         <columnConstraints>
           <ColumnConstraints fillWidth="false" hgrow="NEVER" maxWidth="1.7976931348623157E308" minWidth="141.0" />
           <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
@@ -24,7 +24,7 @@
             <RowConstraints fillHeight="false" minHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label prefHeight="24.0" prefWidth="150.0" text="Numéro :">
+            <Label prefHeight="24.0" prefWidth="150.0" text="Numéro">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -34,7 +34,7 @@
                   <Font size="18.0" />
                </font>
             </Text>
-            <Label prefHeight="24.0" prefWidth="150.0" text="Email :" GridPane.rowIndex="1">
+            <Label prefHeight="24.0" prefWidth="150.0" text="Email" GridPane.rowIndex="1">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -44,7 +44,7 @@
                   <Font size="18.0" />
                </font>
             </Text>
-            <Label prefHeight="24.0" prefWidth="150.0" text="Anniversaire :" GridPane.rowIndex="2">
+            <Label prefHeight="24.0" prefWidth="150.0" text="Anniversaire" GridPane.rowIndex="2">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -54,7 +54,7 @@
                   <Font size="18.0" />
                </font>
             </Text>
-            <Label prefHeight="24.0" prefWidth="150.0" text="Groupe :" GridPane.rowIndex="3">
+            <Label prefHeight="24.0" prefWidth="150.0" text="Groupe" GridPane.rowIndex="3">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -64,12 +64,12 @@
                   <Font size="18.0" />
                </font>
             </Text>
-            <Label prefHeight="24.0" prefWidth="150.0" text="Adresse :" GridPane.rowIndex="4">
+            <Label prefHeight="24.0" prefWidth="150.0" text="Adresse" GridPane.rowIndex="4">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label prefHeight="24.0" prefWidth="150.0" text="Notes :" GridPane.rowIndex="5">
+            <Label prefHeight="24.0" prefWidth="150.0" text="Notes" GridPane.rowIndex="5">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
