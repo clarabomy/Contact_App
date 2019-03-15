@@ -65,7 +65,11 @@ public class AddViewController {
 		obsvList = FXCollections.observableArrayList();
 		catd.getCategoryList().forEach(e ->{obsvList.add(e.getName());});
 		addGroupe.getItems().addAll(obsvList);
-		addGroupe.getSelectionModel().select(0);
+		for (int i=0; i<addGroupe.getItems().size(); i++) {
+			if (addGroupe.getItems().get(i).equals("Sans catégorie")) {
+				addGroupe.getSelectionModel().select(i);
+			}
+		}
 	}
 	
 	/**
